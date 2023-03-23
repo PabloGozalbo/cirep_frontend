@@ -1,5 +1,6 @@
 package com.example.login.ui.login;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 
 import androidx.lifecycle.Observer;
@@ -15,13 +16,17 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.cirep_frontend.R;
 import com.example.cirep_frontend.databinding.ActivityLoginBinding;
 import com.example.login.ui.login.vm.LoginViewModel;
@@ -32,7 +37,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
+    private LottieAnimationView lottieAnimationView;
 
+    @SuppressLint("ResourceType")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
