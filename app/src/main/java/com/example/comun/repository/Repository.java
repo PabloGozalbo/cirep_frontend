@@ -18,17 +18,19 @@ public class Repository {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://127.0.0.1:8000/login/");
+                    URL url = new URL("http:/10.0.2.2:8000/accounts/login/");
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
                     conn.setRequestMethod("POST");
                     conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+                    conn.setRequestProperty("Accept", "application/json");
+
                     conn.setDoOutput(true);
 
                     //crear Json conn email y password
                     JSONObject json = new JSONObject();
-                    json.put("email", "pepemartinez@gmail.com");
-                    json.put("password", "12345");
+                    json.put("email", "juanmartinez@gmail.com");
+                    json.put("password", "123456789");
 
                     // Establecer el cuerpo de la solicitud como el objeto JSON
                     String jsonInputString = json.toString();

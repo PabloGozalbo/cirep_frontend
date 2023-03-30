@@ -1,20 +1,10 @@
 package com.example.login.ui.login;
 
 import android.app.Activity;
-
-import androidx.core.content.ContextCompat;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -27,9 +17,17 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.cirep_frontend.R;
 import com.example.cirep_frontend.databinding.ActivityLoginBinding;
+import com.example.comun.repository.Repository;
 import com.example.dashboard.DashboardActivity;
 import com.example.login.ui.login.vm.LoginViewModel;
 import com.example.login.ui.login.vm.LoginViewModelFactory;
@@ -139,7 +137,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                goToDashboard();
+                try {
+                    Repository.pruebaLoginBack();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //goToDashboard();
                 //TODO: cuando se cuadre con el backend descomentar para comprobar login
                 //loginViewModel.login(usernameEditText.getText().toString(),
                 //      passwordEditText.getText().toString());
