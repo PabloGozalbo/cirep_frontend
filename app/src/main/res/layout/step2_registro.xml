@@ -1,0 +1,124 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/nombrePregunta"
+        android:layout_width="247dp"
+        android:layout_height="36dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/nombre_registro"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.298"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.145" />
+
+    <EditText
+        android:id="@+id/campo_nombre"
+        android:layout_width="273dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="12dp"
+        android:hint="@string/nombre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.347"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nombrePregunta" />
+
+    <EditText
+        android:id="@+id/campo_apellidos"
+        android:layout_width="272dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="8dp"
+        android:hint="@string/apellidos"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.352"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/campo_nombre"
+        app:layout_constraintVertical_bias="0.012" />
+
+    <TextView
+        android:id="@+id/generoPregunta"
+        android:layout_width="247dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="52dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/genero_spinner"
+
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@+id/campo_email"
+        tools:layout_editor_absoluteX="49dp" />
+
+    <Spinner
+        android:id="@+id/spinner_gender"
+        android:layout_width="267dp"
+        android:layout_height="35dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.34"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/generoPregunta"
+        app:layout_constraintVertical_bias="0.033" />
+
+    <Button
+        android:id="@+id/step2button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
+        android:text="@string/siguiente"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_gender"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/atras_step2"
+        android:layout_width="27dp"
+        android:layout_height="26dp"
+        android:background="#00000000"
+        android:drawableStart="@drawable/atras_boton"
+        android:foreground="@drawable/atras_boton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.045" />
+
+    <TextView
+        android:id="@+id/emailPregunta"
+        android:layout_width="247dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="48dp"
+        android:fontFamily="sans-serif-medium"
+
+        android:text="@string/email_pregunta"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/campo_apellidos" />
+
+    <EditText
+        android:id="@+id/campo_email"
+        android:layout_width="279dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="12dp"
+        android:hint="@string/email"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.363"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailPregunta"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

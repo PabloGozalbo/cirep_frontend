@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_mapa"
+            android:icon="@drawable/icono_mapa_cirep"
+            android:title="@string/menu_mapa" />
+        <item
+            android:id="@+id/nav_perfil"
+            android:icon="@drawable/icono_perfil_cirep"
+            android:title="@string/menu_perfil" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/mis_incidencias_cirep"
+            android:title="@string/menu_mis_incidencias" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/cerrar_sesion_cirep"
+            android:title="@string/menu_logout"
+            android:orderInCategory="100"
+            />
+    </group>
+</menu>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">cirep_frontend</string>
+    <string name="app_name">CIREP</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -12,7 +12,24 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_register">Register</string>
+    <string name="espera_registro">Necesitamos que nos cuentes acerca de ti…</string>
+    <string name="siguiente">siguiente</string>
+    <string name="nombre_registro">¿Cómo te llamas?</string>
+    <string name="nombre">Nombre</string>
+    <string name="email_pregunta">¿Cuál es tu email?</string>
+    <string name="email">Email</string>
+
+    <string name="telefono">Teléfono</string>
+    <string name="contrasenya">Contraseña</string>
+    <string name="repite_contrasenya">Repite la contraseña</string>
+    <string name="apellidos">Apellidos</string>
+    <string name="genero_spinner">Selecciona tu género:</string>
+    <string name="telefono_registro">¿Cúal es tu número de teléfono?</string>
+    <string name="contrasenya_registro">Crea una contraseña</string>
+
+
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome!"</string>
     <string name="invalid_username">Not a valid username</string>
@@ -24,4 +41,23 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="loading">loading.json</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="titulo_incidencia_dialogo">¿Añadir incidencia aquí?</string>
+
+
+    <string name="menu_perfil">Mi Perfil</string>
+    <string name="menu_mapa">Mapa de incidencias</string>
+    <string name="menu_mis_incidencias">Mis incidencias</string>
+    <string name="menu_logout">Cerrar sesión</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
