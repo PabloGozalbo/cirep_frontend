@@ -1,4 +1,4 @@
-package com.example.register;
+package com.example.comun.result;
 
 import android.os.Bundle;
 
@@ -38,6 +38,8 @@ public class ResultOkFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_result_ok, container, false);
     }
+
+
 
 
 }

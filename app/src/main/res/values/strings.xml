@@ -20,6 +20,7 @@
     <string name="nombre">Nombre</string>
     <string name="email_pregunta">¿Cuál es tu email?</string>
     <string name="email">Email</string>
+    <string name="start">OK</string>
 
     <string name="telefono">Teléfono</string>
     <string name="contrasenya">Contraseña</string>

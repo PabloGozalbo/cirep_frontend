@@ -12,12 +12,11 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.cirep_frontend.R;
+import com.example.comun.result.ResultOkFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -107,7 +106,7 @@ public class Step3Fragment extends Fragment {
     private void goToStep4(){
         FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_out_right, R.anim.slide_out_left);
-        transaction.replace(R.id.registerFragmentContainerView, new Step4Fragment());
+        transaction.replace(R.id.registerFragmentContainerView, new ResultOkFragment());
         transaction.addToBackStack(null);
         transaction.commit();
 
