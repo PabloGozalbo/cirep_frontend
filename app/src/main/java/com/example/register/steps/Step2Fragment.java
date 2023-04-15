@@ -144,9 +144,20 @@ public class Step2Fragment extends Fragment {
     }
 
     private void goToStep3(){
+
+        Bundle bundle = new Bundle();
+        bundle.putString("nombre", String.valueOf(this.etNombre.getText()));
+        bundle.putString("apellido", String.valueOf(this.etApellido.getText()));
+        bundle.putString("email", String.valueOf(this.etEmail.getText()));
+        bundle.putString("genero", this.spinnerGenero.getSelectedItem().toString());
+
+        // Crear una instancia del nuevo fragmento y establecer el Bundle como su argumento
+        Step3Fragment fragment = new Step3Fragment();
+        fragment.setArguments(bundle);
+
         FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_out_right, R.anim.slide_out_left);
-        transaction.replace(R.id.registerFragmentContainerView, new Step3Fragment());
+        transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+        transaction.replace(R.id.registerFragmentContainerView, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
 

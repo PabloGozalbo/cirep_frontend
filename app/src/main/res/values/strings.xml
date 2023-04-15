@@ -20,7 +20,10 @@
     <string name="nombre">Nombre</string>
     <string name="email_pregunta">¿Cuál es tu email?</string>
     <string name="email">Email</string>
-    <string name="start">OK</string>
+    <string name="start">Empezar</string>
+    <string name="volver_intentar">Volver a intentarlo</string>
+    <string name="ko_message">"¡Ups, algo ha salido mal!"</string>
+    <string name="ok_message">"¡Genial, ya estás registrado!"</string>
 
     <string name="telefono">Teléfono</string>
     <string name="contrasenya">Contraseña</string>

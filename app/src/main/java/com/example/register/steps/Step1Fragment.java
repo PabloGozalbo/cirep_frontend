@@ -67,7 +67,7 @@ public class Step1Fragment extends Fragment {
 
     private void goToStep2(){
         FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_out_right, R.anim.slide_out_left);
+        transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
         transaction.replace(R.id.registerFragmentContainerView, new Step2Fragment());
         transaction.addToBackStack(null);
         transaction.commit();

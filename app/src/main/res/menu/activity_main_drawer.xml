@@ -5,13 +5,13 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_mapa"
-            android:icon="@drawable/icono_mapa_cirep"
-            android:title="@string/menu_mapa" />
-        <item
             android:id="@+id/nav_perfil"
             android:icon="@drawable/icono_perfil_cirep"
             android:title="@string/menu_perfil" />
+        <item
+            android:id="@+id/nav_mapa"
+            android:icon="@drawable/icono_mapa_cirep"
+            android:title="@string/menu_mapa" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/mis_incidencias_cirep"

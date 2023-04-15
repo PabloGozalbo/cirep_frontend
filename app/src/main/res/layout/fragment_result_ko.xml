@@ -18,17 +18,29 @@
         app:layout_constraintVertical_bias="0.39"
         app:lottie_autoPlay="true"
         app:lottie_fileName="result_ko.json"
-        app:lottie_loop="true" />
+        app:lottie_loop="false" />
 
     <Button
         android:id="@+id/resultKobutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/start"
+        android:text="@string/volver_intentar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resultKoAnimation"
         app:layout_constraintVertical_bias="0.724" />
+
+    <TextView
+        android:id="@+id/errorTextView"
+        android:layout_width="282dp"
+        android:layout_height="52dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/resultKobutton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resultKoAnimation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsuarioRegistrado {
+public class Usuario {
 
     @SerializedName("first_name")
     private String firstName;
@@ -32,14 +32,28 @@ public class UsuarioRegistrado {
     @SerializedName("genero")
     private Genero genero;
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @SerializedName("password")
+    private String password;
+
     enum Genero{
         HOMBRE,
         MUJER,
         NA
     }
 
+    public Usuario(){
+    }
+
     //Constructor al que se le pueda pasar o no sus incidencias
-    public UsuarioRegistrado(String firstName, String lastName, String email, String phoneNumber, boolean isStaff, boolean isSuperuser, List<Incidencia> incidencias, Genero genero) {
+    public Usuario(String firstName, String lastName, String email, String phoneNumber, boolean isStaff, boolean isSuperuser, List<Incidencia> incidencias, Genero genero) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -110,12 +124,20 @@ public class UsuarioRegistrado {
         this.incidencias = incidencias;
     }
 
-    public Genero getGenero() {
-        return genero;
+    public String getGenero() {
+        return genero.name();
     }
 
-    public void setGenero(Genero genero) {
-        this.genero = genero;
+    public void setGenero(String genero) {
+        if(genero.equalsIgnoreCase("hombre")){
+            this.genero = Genero.MUJER;
+        }
+        if(genero.equalsIgnoreCase("mujer")){
+            this.genero = Genero.HOMBRE;
+        }
+        else{
+            this.genero = Genero.NA;
+        }
     }
 
     public void addIncidencia(Incidencia incidencia){

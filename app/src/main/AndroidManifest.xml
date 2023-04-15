@@ -50,8 +50,7 @@
         <activity
             android:name="com.example.dashboard.DashboardActivity"
             android:exported="false"
-            android:label="@string/title_activity_dashboard"
-            android:theme="@style/Theme.Cirep" />
+            android:label="@string/title_activity_dashboard" />
         <activity
             android:name="com.example.splash.SplashActivity"
             android:exported="true">

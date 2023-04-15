@@ -138,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 try {
-                    Repository.pruebaLoginBack();
+                    goToDashboard();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

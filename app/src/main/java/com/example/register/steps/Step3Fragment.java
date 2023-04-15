@@ -16,7 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.cirep_frontend.R;
+import com.example.comun.model.user.Usuario;
 import com.example.comun.result.ResultOkFragment;
+import com.example.register.RegisterActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,8 +27,9 @@ import com.example.comun.result.ResultOkFragment;
  */
 public class Step3Fragment extends Fragment {
 
-    private EditText etTelefono;
+    private EditText etTelefono, contrasenya1, contrasenya2;
     private Button btnContinuar, atras;
+    private Usuario user;
 
 
     public Step3Fragment() {
@@ -34,13 +37,21 @@ public class Step3Fragment extends Fragment {
 
     //TODO ANTES DE IR AL STEP4 QUE LA INFORMACION SE GUARDE
 
-    public static Step2Fragment newInstance(String param1, String param2) {
-        return new Step2Fragment();
+    public static Step3Fragment newInstance() {
+        return new Step3Fragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.user = new Usuario();
+        Bundle bundle = getArguments();
+        // Obtener los valores de los tres strings del Bundle
+        this.user.setFirstName(bundle.getString("nombre"));
+        this.user.setLastName(bundle.getString("apellido"));
+        this.user.setEmail(bundle.getString("email"));
+        this.user.setGenero(bundle.getString("genero"));
     }
 
     @Override
@@ -49,6 +60,8 @@ public class Step3Fragment extends Fragment {
 
         View view=inflater.inflate(R.layout.step3_registro, container, false);
         this.etTelefono = view.findViewById(R.id.campo_telefono);
+        this.contrasenya1 = view.findViewById(R.id.campo_contrasenya1);
+        this.contrasenya2 = view.findViewById(R.id.campo_contrasenya2);
         this.atras = view.findViewById(R.id.atras_step3);
 
         this.btnContinuar = view.findViewById(R.id.step3button);
@@ -58,6 +71,7 @@ public class Step3Fragment extends Fragment {
     }
 
     private void initComponents(){
+       // btnContinuar.setEnabled(false);
 
         TextWatcher textWatcher = new TextWatcher() {
             @Override
@@ -65,8 +79,16 @@ public class Step3Fragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                boolean nombreValido = !TextUtils.isEmpty(etTelefono.getText());
-                btnContinuar.setEnabled(nombreValido);
+                boolean camposLlenos = !TextUtils.isEmpty(etTelefono.getText()) && !TextUtils.isEmpty(contrasenya1.getText()) && !TextUtils.isEmpty(contrasenya2.getText());
+                boolean validPasswd = contrasenya1.getText().equals(contrasenya2.getText());
+
+                if(camposLlenos && !validPasswd) {
+                    contrasenya2.setError("Las contraseñas deben coincidir");
+                } else if (validPasswd){
+                    contrasenya2.setError(null);
+                }
+
+                btnContinuar.setEnabled(camposLlenos && validPasswd);
             }
 
             @Override
@@ -74,12 +96,15 @@ public class Step3Fragment extends Fragment {
         };
 
         etTelefono.addTextChangedListener(textWatcher);
-
+        contrasenya1.addTextChangedListener(textWatcher);
+        contrasenya2.addTextChangedListener(textWatcher);
 
         btnContinuar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToStep4();
+                user.setPhoneNumber(String.valueOf(etTelefono.getText()));
+                user.setPassword(String.valueOf(contrasenya1.getText()));
+                ((RegisterActivity) getActivity()).registerUser(user);
             }
         });
 
@@ -101,15 +126,5 @@ public class Step3Fragment extends Fragment {
             // Si no hay fragments en la pila, cerrar la actividad actual
             getActivity().finish();
         }
-    }
-
-    private void goToStep4(){
-        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_out_right, R.anim.slide_out_left);
-        transaction.replace(R.id.registerFragmentContainerView, new ResultOkFragment());
-        transaction.addToBackStack(null);
-        transaction.commit();
-
-        // requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.registerFragmentContainerView, new Step2Fragment()).commit();
     }
 }
