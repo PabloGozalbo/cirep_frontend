@@ -1,11 +1,6 @@
 package com.example.register.steps;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -15,9 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.example.cirep_frontend.R;
 import com.example.comun.model.user.Usuario;
-import com.example.comun.result.ResultOkFragment;
 import com.example.register.RegisterActivity;
 
 /**
@@ -80,7 +77,7 @@ public class Step3Fragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 boolean camposLlenos = !TextUtils.isEmpty(etTelefono.getText()) && !TextUtils.isEmpty(contrasenya1.getText()) && !TextUtils.isEmpty(contrasenya2.getText());
-                boolean validPasswd = contrasenya1.getText().equals(contrasenya2.getText());
+                boolean validPasswd = contrasenya2.getText().toString().equals(contrasenya1.getText().toString());
 
                 if(camposLlenos && !validPasswd) {
                     contrasenya2.setError("Las contraseñas deben coincidir");
