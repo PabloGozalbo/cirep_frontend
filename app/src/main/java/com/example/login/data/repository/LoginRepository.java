@@ -1,5 +1,6 @@
 package com.example.login.data.repository;
 
+import com.example.comun.repository.Repository;
 import com.example.login.data.LoginDataSource;
 import com.example.login.data.Result;
 import com.example.login.data.model.UserLogged;
@@ -8,7 +9,7 @@ import com.example.login.data.model.UserLogged;
  * Class that requests authentication and user information from the remote data source and
  * maintains an in-memory cache of login status and user credentials information.
  */
-public class LoginRepository {
+public class LoginRepository extends Repository {
 
     private static volatile LoginRepository instance;
 
