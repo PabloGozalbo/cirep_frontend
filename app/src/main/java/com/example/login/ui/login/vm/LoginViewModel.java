@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.util.Patterns;
 
 import com.example.cirep_frontend.R;
+import com.example.comun.model.user.Usuario;
+import com.example.comun.repository.Repository;
 import com.example.dashboard.DashboardActivity;
 import com.example.login.data.repository.LoginRepository;
 import com.example.login.data.Result;
@@ -22,6 +24,7 @@ public class LoginViewModel extends ViewModel {
 
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
     private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
+    private MutableLiveData<Boolean> loginSuccess = new MutableLiveData<>();
     private LoginRepository loginRepository;
 
     public LoginViewModel(LoginRepository loginRepository) {
@@ -73,6 +76,21 @@ public class LoginViewModel extends ViewModel {
     // A placeholder password validation check
     private boolean isPasswordValid(String password) {
         return password != null && password.trim().length() > 5;
+    }
+
+    public void loginUser(String email, String psswd) {
+        // Llamar al método de registro de UserRepository
+        loginRepository.loginUser(email, psswd, new Repository.Callback() {
+            @Override
+            public void onSuccess() {
+                loginSuccess.postValue(true);
+            }
+
+            @Override
+            public void onFailure() {
+                loginSuccess.postValue(false);
+            }
+        });
     }
 
 }

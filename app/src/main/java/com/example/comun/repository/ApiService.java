@@ -12,6 +12,6 @@ public interface ApiService {
     Call<JsonObject> registerUser(@Body Usuario user);
 
     @POST("/accounts/login/")
-    Call<JsonObject> loginUser(@Body Usuario user);
+    Call<JsonObject> loginUser(@Body String email, String psswd);
 
 }

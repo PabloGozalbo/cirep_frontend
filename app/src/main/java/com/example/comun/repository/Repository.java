@@ -66,4 +66,31 @@ public class Repository {
         });
     }
 
+    public void loginUser(String email, String psswd, Callback callback) {
+        apiService.loginUser(email, psswd).enqueue(new retrofit2.Callback() {
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
+                if (response.isSuccessful()) {
+                    UserDataSession userDataSession = UserDataSession.getInstance();
+                    String jsonResponse = response.body().toString();
+                    JSONObject jsonObject = null;
+                    try {
+                        jsonObject = new JSONObject(jsonResponse);
+                        String tokenJWT = jsonObject.getString("token");
+                        userDataSession.setToken(tokenJWT);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(userDataSession.getToken());
+                    callback.onSuccess();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull Throwable t) {
+                callback.onFailure();
+            }
+        });
+    }
+
 }
