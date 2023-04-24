@@ -27,7 +27,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.cirep_frontend.R;
 import com.example.cirep_frontend.databinding.ActivityLoginBinding;
-import com.example.comun.repository.Repository;
+import com.example.comun.model.user.UsuarioLogin;
 import com.example.dashboard.DashboardActivity;
 import com.example.login.ui.login.vm.LoginViewModel;
 import com.example.login.ui.login.vm.LoginViewModelFactory;
@@ -138,15 +138,15 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 try {
-                    loginViewModel.loginUser(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+                    UsuarioLogin usuarioLogin = new UsuarioLogin(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+                    loginViewModel.loginUser(usuarioLogin);
                     goToDashboard();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                //goToDashboard();
-                //TODO: cuando se cuadre con el backend descomentar para comprobar login
-                //loginViewModel.login(usernameEditText.getText().toString(),
-                //      passwordEditText.getText().toString());
+                //todo tirar error
+                goToDashboard();
+
             }
         });
 

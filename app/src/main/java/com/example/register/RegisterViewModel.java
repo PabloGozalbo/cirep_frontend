@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.comun.model.user.Usuario;
 import com.example.comun.repository.Repository;
-import com.example.register.steps.OnRegistrationSuccessListener;
 
 public class RegisterViewModel {
 

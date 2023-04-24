@@ -35,7 +35,6 @@ public class LoginRepository extends Repository {
     }
 
     public void logout() {
-        user = null;
         dataSource.logout();
     }
 

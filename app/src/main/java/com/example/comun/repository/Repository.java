@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.comun.cache.UserDataSession;
 import com.example.comun.model.user.Usuario;
+import com.example.comun.model.user.UsuarioLogin;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -66,8 +67,8 @@ public class Repository {
         });
     }
 
-    public void loginUser(String email, String psswd, Callback callback) {
-        apiService.loginUser(email, psswd).enqueue(new retrofit2.Callback() {
+    public void loginUser(UsuarioLogin user, Callback callback) {
+        apiService.loginUser(user).enqueue(new retrofit2.Callback() {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) {
                 if (response.isSuccessful()) {
