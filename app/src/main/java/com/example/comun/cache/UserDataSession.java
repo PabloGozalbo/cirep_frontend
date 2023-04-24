@@ -24,6 +24,10 @@ public class UserDataSession {//objeto para guardar el token usando in singleton
         this.token = token;
     }
 
+    public void deleteToken() {
+        this.token = null;
+    }
+
     public boolean isSessionValid(){
         return this.token!=null && !this.token.isEmpty();
     }
