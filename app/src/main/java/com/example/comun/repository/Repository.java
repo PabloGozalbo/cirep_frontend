@@ -62,10 +62,6 @@ public class Repository {
     }
 
 
-
-
-
-
     public void registerUser(Usuario user, LoginCallback callback) {
         apiService.registerUser(user).enqueue(new retrofit2.Callback() {
             @Override

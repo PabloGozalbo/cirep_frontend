@@ -1,16 +1,25 @@
 package com.example.login.ui.login.vm;
 
+import android.util.Patterns;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+<<<<<<< HEAD
 import android.util.Patterns;
 
 import com.example.cirep_frontend.R;
 import com.example.comun.repository.Repository;
 import com.example.login.data.repository.LoginRepository;
+=======
+import com.example.cirep_frontend.R;
+import com.example.comun.model.user.UsuarioLogin;
+import com.example.comun.repository.Repository;
+>>>>>>> 6e62a6ec377fd8e4be624a4973478f2dc76b2f8a
 import com.example.login.data.Result;
 import com.example.login.data.model.UserLogged;
+import com.example.login.data.repository.LoginRepository;
 import com.example.login.ui.login.LoggedInUserView;
 import com.example.login.ui.login.LoginFormState;
 import com.example.login.ui.login.LoginResult;
@@ -74,9 +83,14 @@ public class LoginViewModel extends ViewModel {
         return password != null && password.trim().length() > 5;
     }
 
-    public void loginUser(String email, String psswd) {
+    public void loginUser(UsuarioLogin user) { // todo este el bueno
+
         // Llamar al método de registro de UserRepository
+<<<<<<< HEAD
         loginRepository.loginUser(email, psswd, new Repository.LoginCallback() {
+=======
+        loginRepository.loginUser(user, new Repository.Callback() {
+>>>>>>> 6e62a6ec377fd8e4be624a4973478f2dc76b2f8a
             @Override
             public void onSuccess() {
                 loginSuccess.postValue(true);
