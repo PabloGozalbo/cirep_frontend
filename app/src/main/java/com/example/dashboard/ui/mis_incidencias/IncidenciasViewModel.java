@@ -18,7 +18,7 @@ public class IncidenciasViewModel {
         this.repository = new Repository();
     }
 
-    public List<Incidencia> getIncidenciasUsuario(String email){
+    /*public List<Incidencia> getIncidenciasUsuario(String email){
         return this.repository.getIncidenciasUser(email, new Repository.getIncidenciasUserCallback() {
             @Override
             public void onSuccess(List<Incidencia> incidencias) {
@@ -30,7 +30,7 @@ public class IncidenciasViewModel {
 
             }
         });
-    }
+    }*/
 
     public LiveData<List<Incidencia>> getIncidenciasUserSuccess() {
         return incidenciasUserSuccess;

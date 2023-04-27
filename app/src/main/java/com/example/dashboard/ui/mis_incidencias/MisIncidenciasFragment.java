@@ -1,22 +1,9 @@
 package com.example.dashboard.ui.mis_incidencias;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.cirep_frontend.R;
 import com.example.cirep_frontend.databinding.FragmentIncidenciasBinding;
-import com.example.comun.cache.UserDataSession;
-
-import java.util.List;
 
 
 public class MisIncidenciasFragment extends Fragment {
@@ -26,7 +13,7 @@ public class MisIncidenciasFragment extends Fragment {
     private PostAdapter mPostAdapter;
     private IncidenciasViewModel viewModel;
 
-
+    /*
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         MisIncidenciasViewModel slideshowViewModel =
@@ -58,6 +45,7 @@ public class MisIncidenciasFragment extends Fragment {
 
         return rootView;
     }
+    */
 
     @Override
     public void onDestroyView() {

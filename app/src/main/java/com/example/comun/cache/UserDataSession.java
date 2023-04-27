@@ -1,7 +1,5 @@
 package com.example.comun.cache;
 
-import com.example.comun.model.user.Usuario;
-
 public class UserDataSession {//objeto para guardar el token usando in singleton
 
     private static UserDataSession instance;
@@ -28,10 +26,6 @@ public class UserDataSession {//objeto para guardar el token usando in singleton
 
     public void deleteToken() {
         token = null;
-    }
-
-    public void deleteToken() {
-        this.token = null;
     }
 
     public boolean isSessionValid(){

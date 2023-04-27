@@ -78,7 +78,7 @@ public class LoginViewModel extends ViewModel {
     public void loginUser(UsuarioLogin user) { // todo este el bueno
 
         // Llamar al método de registro de UserRepository
-        loginRepository.loginUser(user, new Repository.Callback() {
+        loginRepository.loginUser(user, new Repository.LoginCallback() {
             @Override
             public void onSuccess() {
                 loginSuccess.postValue(true);
