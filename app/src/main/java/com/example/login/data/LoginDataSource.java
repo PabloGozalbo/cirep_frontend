@@ -1,5 +1,6 @@
 package com.example.login.data;
 
+import com.example.comun.cache.UserDataSession;
 import com.example.login.data.model.UserLogged;
 
 import java.io.IOException;
@@ -24,6 +25,7 @@ public class LoginDataSource {
     }
 
     public void logout() {
-        // TODO: revoke authentication
+        UserDataSession userDataSession = UserDataSession.getInstance();
+        userDataSession.deleteToken();
     }
 }
