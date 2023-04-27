@@ -9,31 +9,71 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cirep_frontend.R;
 import com.example.cirep_frontend.databinding.FragmentIncidenciasBinding;
+import com.example.comun.cache.UserDataSession;
 
+import java.util.List;
 
 
 public class MisIncidenciasFragment extends Fragment {
 
     private FragmentIncidenciasBinding binding;
+    private RecyclerView mRecyclerView;
+    private PostAdapter mPostAdapter;
+    private IncidenciasViewModel viewModel;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         MisIncidenciasViewModel slideshowViewModel =
                 new ViewModelProvider(this).get(MisIncidenciasViewModel.class);
 
-        binding = FragmentIncidenciasBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        this.viewModel = new IncidenciasViewModel();
 
-        final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
+
+        binding = FragmentIncidenciasBinding.inflate(inflater, container, false);
+        View rootView = binding.getRoot();
+
+        // 1. Obtener la referencia al RecyclerView desde el layout
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+
+        // 2. Configurar el LayoutManager
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        // 3. Crear el adaptador y asignarlo al RecyclerView
+        mPostAdapter = new PostAdapter(this.getContext(), viewModel.getIncidenciasUsuario());
+        mRecyclerView.setAdapter(mPostAdapter);
+
+        // 4. Agregar un escuchador para el click en cada elemento
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                // Acción a realizar cuando se hace click en un elemento
+            }
+        }));
+
+        return rootView;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void observeRegistrationSuccess() {
+        viewModel.getIncidenciasUserSuccess().observe(this, registrationSuccess -> {
+
+            //TODO: cambiar para que se controle la logica
+            if (registrationSuccess == null) {
+
+            } else {
+
+            }
+        });
     }
 }

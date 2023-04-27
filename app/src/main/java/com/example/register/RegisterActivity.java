@@ -28,7 +28,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void observeRegistrationSuccess() {
         registerViewModel.getRegistrationSuccessLiveData().observe(this, registrationSuccess -> {
-            if (registrationSuccess) {
+
+            //TODO: cambiar para que si es nulo se Ko
+            if (registrationSuccess == null) {
                 goToResultOk();
             } else {
                 goToResultOk();

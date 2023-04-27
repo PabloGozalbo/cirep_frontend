@@ -4,18 +4,14 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import android.content.Intent;
 import android.util.Patterns;
 
 import com.example.cirep_frontend.R;
-import com.example.comun.model.user.Usuario;
 import com.example.comun.repository.Repository;
-import com.example.dashboard.DashboardActivity;
 import com.example.login.data.repository.LoginRepository;
 import com.example.login.data.Result;
 import com.example.login.data.model.UserLogged;
 import com.example.login.ui.login.LoggedInUserView;
-import com.example.login.ui.login.LoginActivity;
 import com.example.login.ui.login.LoginFormState;
 import com.example.login.ui.login.LoginResult;
 
@@ -80,7 +76,7 @@ public class LoginViewModel extends ViewModel {
 
     public void loginUser(String email, String psswd) {
         // Llamar al método de registro de UserRepository
-        loginRepository.loginUser(email, psswd, new Repository.Callback() {
+        loginRepository.loginUser(email, psswd, new Repository.LoginCallback() {
             @Override
             public void onSuccess() {
                 loginSuccess.postValue(true);

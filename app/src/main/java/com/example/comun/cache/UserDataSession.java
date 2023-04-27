@@ -1,12 +1,14 @@
 package com.example.comun.cache;
 
+import com.example.comun.model.user.Usuario;
+
 public class UserDataSession {//objeto para guardar el token usando in singleton
 
     private static UserDataSession instance;
-    private String token;
+    private static String token;
 
     private UserDataSession(String token){
-        this.token=token;
+        UserDataSession.token =token;
     }
 
     public static UserDataSession getInstance(){
@@ -21,10 +23,14 @@ public class UserDataSession {//objeto para guardar el token usando in singleton
     }
 
     public void setToken(String token) {
-        this.token = token;
+        UserDataSession.token = token;
+    }
+
+    public void deleteToken() {
+        token = null;
     }
 
     public boolean isSessionValid(){
-        return this.token!=null && !this.token.isEmpty();
+        return token!=null && !token.isEmpty();
     }
 }

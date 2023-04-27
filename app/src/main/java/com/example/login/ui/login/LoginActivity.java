@@ -145,8 +145,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 //goToDashboard();
                 //TODO: cuando se cuadre con el backend descomentar para comprobar login
-                //loginViewModel.login(usernameEditText.getText().toString(),
-                //      passwordEditText.getText().toString());
+                loginViewModel.login(usernameEditText.getText().toString(), passwordEditText.getText().toString());
             }
         });
 

@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.comun.model.user.Usuario;
 import com.example.comun.repository.Repository;
-import com.example.register.steps.OnRegistrationSuccessListener;
 
 public class RegisterViewModel {
 
@@ -19,7 +18,7 @@ public class RegisterViewModel {
 
     public void registerUser(Usuario user) {
         // Llamar al método de registro de UserRepository
-        repository.registerUser(user, new Repository.Callback() {
+        repository.registerUser(user, new Repository.LoginCallback() {
             @Override
             public void onSuccess() {
                 registrationSuccess.postValue(true);
