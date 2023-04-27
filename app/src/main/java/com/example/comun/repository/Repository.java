@@ -103,10 +103,12 @@ public class Repository {
                         String tokenJWT = jsonObject.getString("token");
                         userDataSession.setToken(tokenJWT);
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        callback.onFailure();
                     }
                     System.out.println(userDataSession.getToken());
                     callback.onSuccess();
+                }else{
+                    callback.onFailure();
                 }
             }
 

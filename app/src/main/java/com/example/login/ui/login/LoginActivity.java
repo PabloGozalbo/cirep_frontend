@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -56,9 +57,11 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
+        observeLoginSuccess();
         getComponents();
         initObservers();
         setTheme();
+
 
     }
 
@@ -140,13 +143,9 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     UsuarioLogin usuarioLogin = new UsuarioLogin(usernameEditText.getText().toString(), passwordEditText.getText().toString());
                     loginViewModel.loginUser(usuarioLogin);
-                    goToDashboard();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                //todo tirar error
-                goToDashboard();
-
             }
         });
 
@@ -154,6 +153,25 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 goToRegister();
+            }
+        });
+    }
+
+    private void observeLoginSuccess() {
+        loginViewModel.getLoginSuccess().observe(this, loginSuccess -> {
+
+            //TODO: cambiar para que se controle la logica
+            if (loginSuccess == null || !loginSuccess) {
+                passwordEditText.setError("asddsadsad");
+                loadingProgressBar.setVisibility(View.INVISIBLE);
+            } else {
+                loadingProgressBar.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        goToDashboard();
+                    }
+                }, 3000);
             }
         });
     }
@@ -202,5 +220,6 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
 
 }

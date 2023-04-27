@@ -91,4 +91,8 @@ public class LoginViewModel extends ViewModel {
         });
     }
 
+    public LiveData<Boolean> getLoginSuccess() {
+        return loginSuccess;
+    }
+
 }
