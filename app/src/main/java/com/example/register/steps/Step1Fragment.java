@@ -54,7 +54,7 @@ public class Step1Fragment extends Fragment {
         siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToStep2();
+                goToTypeStep();
             }
         });
         atras.setOnClickListener(new View.OnClickListener() {
@@ -65,10 +65,10 @@ public class Step1Fragment extends Fragment {
         });
     }
 
-    private void goToStep2(){
+    private void goToTypeStep(){
         FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
-        transaction.replace(R.id.registerFragmentContainerView, new Step2Fragment());
+        transaction.replace(R.id.registerFragmentContainerView, new StepTypeUserFragment());
         transaction.addToBackStack(null);
         transaction.commit();
         //requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.registerFragmentContainerView, new Step2Fragment()).commit();

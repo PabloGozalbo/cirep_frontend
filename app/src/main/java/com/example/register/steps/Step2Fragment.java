@@ -29,6 +29,7 @@ public class Step2Fragment extends Fragment {
 
     private Spinner spinnerGenero;
     private EditText etNombre, etApellido, etEmail;
+    private boolean isStaff;
     private Button btnContinuar, atras;
 
 
@@ -44,6 +45,8 @@ public class Step2Fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle bundle = getArguments();
+        this.isStaff = bundle.getBoolean("isStaff");
     }
 
     @Override
@@ -150,6 +153,7 @@ public class Step2Fragment extends Fragment {
         bundle.putString("apellido", String.valueOf(this.etApellido.getText()));
         bundle.putString("email", String.valueOf(this.etEmail.getText()));
         bundle.putString("genero", this.spinnerGenero.getSelectedItem().toString());
+        bundle.putBoolean("isStaff", this.isStaff);
 
         // Crear una instancia del nuevo fragmento y establecer el Bundle como su argumento
         Step3Fragment fragment = new Step3Fragment();

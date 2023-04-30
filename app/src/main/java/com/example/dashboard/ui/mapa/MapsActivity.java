@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ActivityMapsBinding binding;
     private MapaViewModel mapaViewModel;
     private static final int REQUEST_CODE_LOCATION = 1;
+    private LocationManager locationManager;
 
 
     @Override
@@ -46,6 +48,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(binding.getRoot());
 
         checkLocationPermission();
+
 
     }
 

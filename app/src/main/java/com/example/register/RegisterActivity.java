@@ -1,6 +1,7 @@
 package com.example.register;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
@@ -42,6 +43,10 @@ public class RegisterActivity extends AppCompatActivity {
         registerViewModel.registerUser(user);
     }
 
+    public RegisterViewModel getViewModel(){
+        return this.registerViewModel;
+    }
+
 
     private void goToFirstStep(){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -63,6 +68,16 @@ public class RegisterActivity extends AppCompatActivity {
         transaction.replace(R.id.registerFragmentContainerView, new ResultKoFragment());
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        getSupportFragmentManager().popBackStack();
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                .commit();
     }
 
 }

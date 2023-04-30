@@ -74,6 +74,29 @@ public class Repository {
                     try {
                         jsonObject = new JSONObject(jsonResponse);
                         String tokenJWT = jsonObject.getString("token");
+                        String nombre = jsonObject.getString("nombre");
+                        String apellidos = jsonObject.getString("apellidos");
+                        String telefono = jsonObject.getString("telefono");
+                        String email = jsonObject.getString("email");
+                        String genero = jsonObject.getString("genero");
+
+                        Usuario.Genero userGenero;
+
+                        switch (genero.charAt(0)){
+                            case 'm':
+                            case 'M':
+                                userGenero = Usuario.Genero.HOMBRE;
+                                break;
+                            case 'h':
+                            case 'H':
+                                userGenero = Usuario.Genero.MUJER;
+                                break;
+                            default:
+                                userGenero = Usuario.Genero.NA;
+                        }
+
+                        UserDataSession.getInstance().setUsuario(new Usuario(nombre, apellidos, email, telefono, false, false, null, userGenero));
+
                         userDataSession.setToken(tokenJWT);
                     } catch (JSONException e) {
                         e.printStackTrace();

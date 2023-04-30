@@ -1,5 +1,6 @@
 package com.example.dashboard.ui.perfil;
 
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,28 +11,46 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.cirep_frontend.R;
 import com.example.cirep_frontend.databinding.FragmentPerfilBinding;
+import com.example.comun.cache.UserDataSession;
 
 public class PerfilFragment extends Fragment {
 
-    private FragmentPerfilBinding binding;
+    TextView nombre, apellidos, email, telefono;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        PerfilViewModel galleryViewModel =
-                new ViewModelProvider(this).get(PerfilViewModel.class);
 
-        binding = FragmentPerfilBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        View view = FragmentPerfilBinding.inflate(inflater, container, false).getRoot();
+        getComponents(view);
+        initView();
+        return view;
 
-        final TextView textView = binding.textGallery;
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
     }
+
+    private void getComponents(View view){
+
+        //TextViews
+        this.nombre = view.findViewById(R.id.perfil_nombre);
+        this.apellidos = view.findViewById(R.id.perfil_apellidos);
+        this.email = view.findViewById(R.id.perfil_email);
+        this.telefono = view.findViewById(R.id.perfil_telefono);
+
+        //
+    }
+
+    private void initView(){
+        UserDataSession userDataSession = UserDataSession.getInstance();
+
+    }
+
+
+
+
 }

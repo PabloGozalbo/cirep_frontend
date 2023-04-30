@@ -15,11 +15,17 @@
     <string name="action_sign_in">Sign in</string>
     <string name="action_register">Register</string>
     <string name="espera_registro">Necesitamos que nos cuentes acerca de ti…</string>
+    <string name="type_user_title">Formo parte…</string>
+    <string name="location_step_title">¿Dónde vives?</string>
+
+    <string name="type_user_ayuntamiento">Del personal del ayuntamiento</string>
+    <string name="type_user_ciudadano">Soy un ciudadano</string>
     <string name="siguiente">siguiente</string>
     <string name="nombre_registro">¿Cómo te llamas?</string>
     <string name="nombre">Nombre</string>
     <string name="email_pregunta">¿Cuál es tu email?</string>
     <string name="email">Email</string>
+    <string name="direccion">Escribe tu dirección</string>
     <string name="start">Empezar</string>
     <string name="volver_intentar">Volver a intentarlo</string>
     <string name="ko_message">"¡Ups, algo ha salido mal!"</string>
@@ -55,6 +61,11 @@
     <string name="aceptar">Aceptar</string>
     <string name="cancelar">Cancelar</string>
     <string name="titulo_incidencia_dialogo">¿Añadir incidencia aquí?</string>
+
+
+    <string name="datos_personales">Datos Personales</string>
+
+    <string name="cargando">Cargando</string>
 
 
     <string name="menu_perfil">Mi Perfil</string>
