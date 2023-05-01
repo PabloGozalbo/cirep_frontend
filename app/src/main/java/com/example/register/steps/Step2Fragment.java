@@ -1,11 +1,6 @@
 package com.example.register.steps;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -17,6 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.cirep_frontend.R;
 
@@ -30,8 +29,8 @@ public class Step2Fragment extends Fragment {
     private Spinner spinnerGenero;
     private EditText etNombre, etApellido, etEmail;
     private boolean isStaff;
+    private String city;
     private Button btnContinuar, atras;
-
 
     public Step2Fragment() {
     }
@@ -47,6 +46,7 @@ public class Step2Fragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         this.isStaff = bundle.getBoolean("isStaff");
+        this.city = bundle.getString("city");
     }
 
     @Override
@@ -154,6 +154,7 @@ public class Step2Fragment extends Fragment {
         bundle.putString("email", String.valueOf(this.etEmail.getText()));
         bundle.putString("genero", this.spinnerGenero.getSelectedItem().toString());
         bundle.putBoolean("isStaff", this.isStaff);
+        bundle.putString("city", this.city);
 
         // Crear una instancia del nuevo fragmento y establecer el Bundle como su argumento
         Step3Fragment fragment = new Step3Fragment();

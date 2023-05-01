@@ -2,12 +2,6 @@ package com.example.register.steps;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -17,6 +11,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.cirep_frontend.R;
 import com.google.android.gms.common.api.Status;
@@ -24,7 +21,6 @@ import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
-
 
 import org.jetbrains.annotations.NotNull;
 
@@ -126,7 +122,9 @@ public class StepLocationFragment extends Fragment {
         builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                goToStep2();
+                Bundle bundle = new Bundle();
+                bundle.putString("city",direccion.getText().toString());
+                goToStep2(bundle);
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -139,11 +137,10 @@ public class StepLocationFragment extends Fragment {
     }
 
     //TODO: NO SE ESTA COGIENDO NI PASANDO LA ADDRESS
-    private void goToStep2(){
+    private void goToStep2(Bundle bundle){
 
         // Crear una instancia del nuevo fragmento y establecer el Bundle como su argumento
         Step2Fragment fragment = new Step2Fragment();
-        Bundle bundle = new Bundle();
         bundle.putBoolean("isStaff", this.isStaff);
         fragment.setArguments(bundle);
 

@@ -52,6 +52,7 @@ public class Step3Fragment extends Fragment {
         this.user.setLastName(bundle.getString("apellido"));
         this.user.setEmail(bundle.getString("email"));
         this.user.setStaff(bundle.getBoolean("isStaff"));
+        this.user.setCity(bundle.getString("city"));
     }
 
     @Override
@@ -152,7 +153,7 @@ public class Step3Fragment extends Fragment {
     }
 
     private void observeRegistrationSuccess() {
-        ((RegisterActivity) getActivity()).getViewModel().getRegistrationSuccessLiveData().observe(this, registrationSuccess -> {
+        ((RegisterActivity) getActivity()).getViewModel().getRegistrationSuccessLiveData().observe(getViewLifecycleOwner(), registrationSuccess -> {
             ocultarCarga();
         });
     }

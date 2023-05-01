@@ -74,13 +74,13 @@ public class Repository {
                     try {
                         jsonObject = new JSONObject(jsonResponse);
                         String tokenJWT = jsonObject.getString("token");
-                        String nombre = jsonObject.getString("nombre");
-                        String apellidos = jsonObject.getString("apellidos");
-                        String telefono = jsonObject.getString("telefono");
+                        String nombre = jsonObject.getString("first_name");
+                        String apellidos = jsonObject.getString("last_name");
+                        String telefono = jsonObject.getString("phone_number");
                         String email = jsonObject.getString("email");
-                        String ciudad = jsonObject.getString("ciudad");
+                        String ciudad = jsonObject.getString("city");
 
-                        UserDataSession.getInstance().setUsuario(new Usuario(nombre, apellidos, email, telefono, false, false, null, Usuario.CapitalesProvincias.valueOf(ciudad)));
+                        UserDataSession.getInstance().setUsuario(new Usuario(nombre, apellidos, email, telefono, false, false, null, ciudad));
 
                         userDataSession.setToken(tokenJWT);
                     } catch (JSONException e) {
@@ -116,7 +116,7 @@ public class Repository {
                         String tokenJWT = jsonObject.getString("token");
 
                         userDataSession.setToken(tokenJWT);
-                        userDataSession.setUsuario(new Usuario(firstName, lastName, email, phoneNumber, false, false, null, Usuario.CapitalesProvincias.valueOf(city)));
+                        userDataSession.setUsuario(new Usuario(firstName, lastName, email, phoneNumber, false, false, null, city));
                     } catch (JSONException e) {
                         callback.onFailure();
                     }

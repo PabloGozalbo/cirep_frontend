@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Ciudadano extends Usuario {
 
-    public Ciudadano(String firstName, String lastName, String email, String phoneNumber, boolean isStaff, boolean isSuperuser, List<Incidencia> incidencias, CapitalesProvincias ciudad) {
+    public Ciudadano(String firstName, String lastName, String email, String phoneNumber, boolean isStaff, boolean isSuperuser, List<Incidencia> incidencias, String ciudad) {
         super(firstName, lastName, email, phoneNumber, isStaff, isSuperuser, incidencias, ciudad);
     }
 }
