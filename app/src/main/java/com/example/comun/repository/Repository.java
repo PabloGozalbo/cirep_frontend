@@ -73,15 +73,31 @@ public class Repository {
                     JSONObject jsonObject = null;
                     try {
                         jsonObject = new JSONObject(jsonResponse);
-
-                        String firstName = jsonObject.getString("first_name");
-                        String lastName = jsonObject.getString("last_name");
-                        String email = jsonObject.getString("email");
-                        String phoneNumber = jsonObject.getString("phone_number");
-                        String city = jsonObject.getString("city");
                         String tokenJWT = jsonObject.getString("token");
+                        String nombre = jsonObject.getString("nombre");
+                        String apellidos = jsonObject.getString("apellidos");
+                        String telefono = jsonObject.getString("telefono");
+                        String email = jsonObject.getString("email");
+                        String genero = jsonObject.getString("genero");
 
-                        userDataSession.setData(firstName,lastName,email,phoneNumber, city,tokenJWT);
+                        Usuario.Genero userGenero;
+
+                        switch (genero.charAt(0)){
+                            case 'm':
+                            case 'M':
+                                userGenero = Usuario.Genero.HOMBRE;
+                                break;
+                            case 'h':
+                            case 'H':
+                                userGenero = Usuario.Genero.MUJER;
+                                break;
+                            default:
+                                userGenero = Usuario.Genero.NA;
+                        }
+
+                        UserDataSession.getInstance().setUsuario(new Usuario(nombre, apellidos, email, telefono, false, false, null, userGenero));
+
+                        userDataSession.setToken(tokenJWT);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -107,15 +123,8 @@ public class Repository {
                     JSONObject jsonObject = null;
                     try {
                         jsonObject = new JSONObject(jsonResponse);
-
-                        String firstName = jsonObject.getString("first_name");
-                        String lastName = jsonObject.getString("last_name");
-                        String email = jsonObject.getString("email");
-                        String phoneNumber = jsonObject.getString("phone_number");
-                        String city = jsonObject.getString("city");
                         String tokenJWT = jsonObject.getString("token");
-
-                        userDataSession.setData(firstName,lastName,email,phoneNumber, city,tokenJWT);
+                        userDataSession.setToken(tokenJWT);
                     } catch (JSONException e) {
                         callback.onFailure();
                     }

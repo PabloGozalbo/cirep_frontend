@@ -1,6 +1,7 @@
 package com.example.login.ui.login;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -46,6 +47,8 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressBar loadingProgressBar;
     private ImageView loginImageView;
     private Button registerButton;
+    private Dialog dialogoCarga;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -139,10 +142,11 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
+                mostrarCarga();
                 try {
                     UsuarioLogin usuarioLogin = new UsuarioLogin(usernameEditText.getText().toString(), passwordEditText.getText().toString());
-                    loginViewModel.loginUser(usuarioLogin);
+                    //loginViewModel.loginUser(usuarioLogin);
+                    goToDashboard();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -162,10 +166,10 @@ public class LoginActivity extends AppCompatActivity {
 
             //TODO: cambiar para que se controle la logica
             if (loginSuccess == null || !loginSuccess) {
-                passwordEditText.setError("asddsadsad");
-                loadingProgressBar.setVisibility(View.INVISIBLE);
+                passwordEditText.setError("Email o contraseña incorrectos");
+                ocultarCarga();
             } else {
-                loadingProgressBar.setVisibility(View.VISIBLE);
+                mostrarCarga();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -219,6 +223,22 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void mostrarCarga() {
+        if (dialogoCarga == null) {
+            dialogoCarga = new Dialog(this, R.style.LoadingDialog);
+            dialogoCarga.setContentView(R.layout.loading_layout);
+            dialogoCarga.setCancelable(false);
+            dialogoCarga.show();
+        }
+    }
+
+    public void ocultarCarga() {
+        if (dialogoCarga != null && dialogoCarga.isShowing()) {
+            dialogoCarga.dismiss();
+            dialogoCarga = null;
+        }
     }
 
 

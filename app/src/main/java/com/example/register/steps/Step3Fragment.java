@@ -1,5 +1,6 @@
 package com.example.register.steps;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -27,6 +28,8 @@ public class Step3Fragment extends Fragment {
     private EditText etTelefono, contrasenya1, contrasenya2;
     private Button btnContinuar, atras;
     private Usuario user;
+    private Dialog dialogoCarga;
+    private boolean isStaff;
 
 
     public Step3Fragment() {
@@ -49,39 +52,44 @@ public class Step3Fragment extends Fragment {
         this.user.setLastName(bundle.getString("apellido"));
         this.user.setEmail(bundle.getString("email"));
         this.user.setGenero(bundle.getString("genero"));
+        this.user.setStaff(bundle.getBoolean("isStaff"));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view=inflater.inflate(R.layout.step3_registro, container, false);
+        View view = inflater.inflate(R.layout.step3_registro, container, false);
+        getComponents(view);
+        initComponents();
+        observeRegistrationSuccess();
+        return view;
+    }
+
+    private void getComponents(View view) {
         this.etTelefono = view.findViewById(R.id.campo_telefono);
         this.contrasenya1 = view.findViewById(R.id.campo_contrasenya1);
         this.contrasenya2 = view.findViewById(R.id.campo_contrasenya2);
         this.atras = view.findViewById(R.id.atras_step3);
-
         this.btnContinuar = view.findViewById(R.id.step3button);
-        initComponents();
-
-        return view;
     }
 
-    private void initComponents(){
-       // btnContinuar.setEnabled(false);
+    private void initComponents() {
+        // btnContinuar.setEnabled(false);
 
         TextWatcher textWatcher = new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 boolean camposLlenos = !TextUtils.isEmpty(etTelefono.getText()) && !TextUtils.isEmpty(contrasenya1.getText()) && !TextUtils.isEmpty(contrasenya2.getText());
                 boolean validPasswd = contrasenya2.getText().toString().equals(contrasenya1.getText().toString());
 
-                if(camposLlenos && !validPasswd) {
+                if (camposLlenos && !validPasswd) {
                     contrasenya2.setError("Las contraseñas deben coincidir");
-                } else if (validPasswd){
+                } else if (validPasswd) {
                     contrasenya2.setError(null);
                 }
 
@@ -89,7 +97,8 @@ public class Step3Fragment extends Fragment {
             }
 
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         };
 
         etTelefono.addTextChangedListener(textWatcher);
@@ -101,6 +110,7 @@ public class Step3Fragment extends Fragment {
             public void onClick(View v) {
                 user.setPhoneNumber(String.valueOf(etTelefono.getText()));
                 user.setPassword(String.valueOf(contrasenya1.getText()));
+                mostrarCarga();
                 ((RegisterActivity) getActivity()).registerUser(user);
             }
         });
@@ -113,7 +123,8 @@ public class Step3Fragment extends Fragment {
         });
     }
 
-    public void onBackPressed(){
+
+    public void onBackPressed() {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         // Verificar si hay fragments en la pila antes de volver al fragment anterior
         if (fragmentManager.getBackStackEntryCount() > 0) {
@@ -123,5 +134,27 @@ public class Step3Fragment extends Fragment {
             // Si no hay fragments en la pila, cerrar la actividad actual
             getActivity().finish();
         }
+    }
+
+    public void mostrarCarga() {
+        if (dialogoCarga == null) {
+            dialogoCarga = new Dialog(this.getContext(), R.style.LoadingDialog);
+            dialogoCarga.setContentView(R.layout.loading_layout);
+            dialogoCarga.setCancelable(false);
+            dialogoCarga.show();
+        }
+    }
+
+    public void ocultarCarga() {
+        if (dialogoCarga != null && dialogoCarga.isShowing()) {
+            dialogoCarga.dismiss();
+            dialogoCarga = null;
+        }
+    }
+
+    private void observeRegistrationSuccess() {
+        ((RegisterActivity) getActivity()).getViewModel().getRegistrationSuccessLiveData().observe(this, registrationSuccess -> {
+            ocultarCarga();
+        });
     }
 }

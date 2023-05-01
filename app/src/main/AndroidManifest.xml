@@ -45,6 +45,12 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBeTzUA2lE5focwIxv_Qo5LoPvKMk_Eno0" />
 
+        <!-- NO ES NECESARIO LA KEY DE PLACES PORQUE YA SE USA LA DE GOOGLE MAPS
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC2QpV2SMcolMB47b53ZtCzhgWXYDtF6NQ" />
+        -->
+
         <activity
             android:name="com.example.dashboard.ui.mapa.MapsActivity"
             android:exported="false"

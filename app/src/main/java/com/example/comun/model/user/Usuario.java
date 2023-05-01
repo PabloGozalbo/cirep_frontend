@@ -43,7 +43,7 @@ public class Usuario {
     @SerializedName("password")
     private String password;
 
-    enum Genero{
+    public enum Genero{
         HOMBRE,
         MUJER,
         NA
