@@ -26,6 +26,6 @@ public class LoginDataSource {
 
     public void logout() {
         UserDataSession userDataSession = UserDataSession.getInstance();
-        userDataSession.deleteToken();
+        userDataSession.deleteData();
     }
 }

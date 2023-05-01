@@ -22,7 +22,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name="com.example.dashboard.Camera"
+            android:name="com.example.dashboard.CameraActivity"
             android:exported="false" />
         <activity
             android:name="com.example.dashboard.ReportarIncidencia"

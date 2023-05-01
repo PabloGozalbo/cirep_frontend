@@ -73,8 +73,15 @@ public class Repository {
                     JSONObject jsonObject = null;
                     try {
                         jsonObject = new JSONObject(jsonResponse);
+
+                        String firstName = jsonObject.getString("first_name");
+                        String lastName = jsonObject.getString("last_name");
+                        String email = jsonObject.getString("email");
+                        String phoneNumber = jsonObject.getString("phone_number");
+                        String city = jsonObject.getString("city");
                         String tokenJWT = jsonObject.getString("token");
-                        userDataSession.setToken(tokenJWT);
+
+                        userDataSession.setData(firstName,lastName,email,phoneNumber, city,tokenJWT);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -100,8 +107,15 @@ public class Repository {
                     JSONObject jsonObject = null;
                     try {
                         jsonObject = new JSONObject(jsonResponse);
+
+                        String firstName = jsonObject.getString("first_name");
+                        String lastName = jsonObject.getString("last_name");
+                        String email = jsonObject.getString("email");
+                        String phoneNumber = jsonObject.getString("phone_number");
+                        String city = jsonObject.getString("city");
                         String tokenJWT = jsonObject.getString("token");
-                        userDataSession.setToken(tokenJWT);
+
+                        userDataSession.setData(firstName,lastName,email,phoneNumber, city,tokenJWT);
                     } catch (JSONException e) {
                         callback.onFailure();
                     }
