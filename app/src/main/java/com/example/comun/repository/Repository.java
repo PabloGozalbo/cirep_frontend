@@ -78,24 +78,9 @@ public class Repository {
                         String apellidos = jsonObject.getString("apellidos");
                         String telefono = jsonObject.getString("telefono");
                         String email = jsonObject.getString("email");
-                        String genero = jsonObject.getString("genero");
+                        String ciudad = jsonObject.getString("ciudad");
 
-                        Usuario.Genero userGenero;
-
-                        switch (genero.charAt(0)){
-                            case 'm':
-                            case 'M':
-                                userGenero = Usuario.Genero.HOMBRE;
-                                break;
-                            case 'h':
-                            case 'H':
-                                userGenero = Usuario.Genero.MUJER;
-                                break;
-                            default:
-                                userGenero = Usuario.Genero.NA;
-                        }
-
-                        UserDataSession.getInstance().setUsuario(new Usuario(nombre, apellidos, email, telefono, false, false, null, userGenero));
+                        UserDataSession.getInstance().setUsuario(new Usuario(nombre, apellidos, email, telefono, false, false, null, Usuario.CapitalesProvincias.valueOf(ciudad)));
 
                         userDataSession.setToken(tokenJWT);
                     } catch (JSONException e) {
@@ -123,8 +108,15 @@ public class Repository {
                     JSONObject jsonObject = null;
                     try {
                         jsonObject = new JSONObject(jsonResponse);
+                        String firstName = jsonObject.getString("first_name");
+                        String lastName = jsonObject.getString("last_name");
+                        String email = jsonObject.getString("email");
+                        String phoneNumber = jsonObject.getString("phone_number");
+                        String city = jsonObject.getString("city");
                         String tokenJWT = jsonObject.getString("token");
+
                         userDataSession.setToken(tokenJWT);
+                        userDataSession.setUsuario(new Usuario(firstName, lastName, email, phoneNumber, false, false, null, Usuario.CapitalesProvincias.valueOf(city)));
                     } catch (JSONException e) {
                         callback.onFailure();
                     }

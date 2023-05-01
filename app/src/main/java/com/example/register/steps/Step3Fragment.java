@@ -51,7 +51,6 @@ public class Step3Fragment extends Fragment {
         this.user.setFirstName(bundle.getString("nombre"));
         this.user.setLastName(bundle.getString("apellido"));
         this.user.setEmail(bundle.getString("email"));
-        this.user.setGenero(bundle.getString("genero"));
         this.user.setStaff(bundle.getBoolean("isStaff"));
     }
 

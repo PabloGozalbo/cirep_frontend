@@ -29,8 +29,8 @@ public class Usuario {
     @SerializedName("incidencias")
     private List<Incidencia> incidencias;
 
-    @SerializedName("genero")
-    private Genero genero;
+    @SerializedName("ciudad")
+    private CapitalesProvincias ciudad;
 
     public String getPassword() {
         return password;
@@ -43,17 +43,11 @@ public class Usuario {
     @SerializedName("password")
     private String password;
 
-    public enum Genero{
-        HOMBRE,
-        MUJER,
-        NA
-    }
-
     public Usuario(){
     }
 
     //Constructor al que se le pueda pasar o no sus incidencias
-    public Usuario(String firstName, String lastName, String email, String phoneNumber, boolean isStaff, boolean isSuperuser, List<Incidencia> incidencias, Genero genero) {
+    public Usuario(String firstName, String lastName, String email, String phoneNumber, boolean isStaff, boolean isSuperuser, List<Incidencia> incidencias, CapitalesProvincias ciudad) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -65,7 +59,7 @@ public class Usuario {
         } else {
             this.incidencias=new ArrayList<>();
         }
-        this.genero = genero;
+        this.ciudad = ciudad;
     }
 
     public String getFirstName() {
@@ -124,23 +118,80 @@ public class Usuario {
         this.incidencias = incidencias;
     }
 
-    public String getGenero() {
-        return genero.name();
+    public CapitalesProvincias getCiudad() {
+        return ciudad;
     }
 
-    public void setGenero(String genero) {
-        if(genero.equalsIgnoreCase("hombre")){
-            this.genero = Genero.MUJER;
-        }
-        if(genero.equalsIgnoreCase("mujer")){
-            this.genero = Genero.HOMBRE;
-        }
-        else{
-            this.genero = Genero.NA;
-        }
+    public void setCiudad(CapitalesProvincias ciudad) {
+        this.ciudad = ciudad;
     }
 
     public void addIncidencia(Incidencia incidencia){
         this.incidencias.add(incidencia);
+    }
+
+    public enum CapitalesProvincias {
+        ALAVA("Vitoria-Gasteiz"),
+        ALBACETE("Albacete"),
+        ALICANTE("Alicante/Alacant"),
+        ALMERIA("Almería"),
+        ASTURIAS("Oviedo/Uviéu"),
+        AVILA("Ávila"),
+        BADAJOZ("Badajoz"),
+        BARCELONA("Barcelona"),
+        BURGOS("Burgos"),
+        CACERES("Cáceres"),
+        CADIZ("Cádiz"),
+        CANTABRIA("Santander"),
+        CASTELLON("Castellón de la Plana/Castelló de la Plana"),
+        CIUDAD_REAL("Ciudad Real"),
+        CORDOBA("Córdoba"),
+        CUENCA("Cuenca"),
+        GERONA_GIRONA("Gerona/Girona"),
+        GRANADA("Granada"),
+        GUADALAJARA("Guadalajara"),
+        GUIPUZCOA_GIPUZKOA("San Sebastián/Donostia"),
+        HUELVA("Huelva"),
+        HUESCA("Huesca"),
+        ISLAS_BALEARES("Palma de Mallorca"),
+        JAEN("Jaén"),
+        LA_CORUNA_A_CORUNA("La Coruña/A Coruña"),
+        LA_RIOJA("Logroño"),
+        LAS_PALMAS("Las Palmas de Gran Canaria"),
+        LEON("León"),
+        LERIDA_LLEIDA("Lérida/Lleida"),
+        LUGO("Lugo"),
+        MADRID("Madrid"),
+        MALAGA("Málaga"),
+        MURCIA("Murcia"),
+        NAVARRA("Pamplona/Iruña"),
+        ORENSE_OURENSE("Orense/Ourense"),
+        PALENCIA("Palencia"),
+        PONTEVEDRA("Pontevedra"),
+        SALAMANCA("Salamanca"),
+        SANTA_CRUZ_DE_TENERIFE("Santa Cruz de Tenerife"),
+        SEGOVIA("Segovia"),
+        SEVILLA("Sevilla"),
+        SORIA("Soria"),
+        TARRAGONA("Tarragona"),
+        TERUEL("Teruel"),
+        TOLEDO("Toledo"),
+        VALENCIA("Valencia/València"),
+        VALLADOLID("Valladolid"),
+        VIZCAYA_BIZKAIA("Bilbao"),
+        ZAMORA("Zamora"),
+        ZARAGOZA("Zaragoza"),
+        CEUTA("Ceuta"),
+        MELILLA("Melilla");
+
+        private String capital;
+
+        CapitalesProvincias(String capital) {
+            this.capital = capital;
+        }
+
+        public String getCapital() {
+            return capital;
+        }
     }
 }
