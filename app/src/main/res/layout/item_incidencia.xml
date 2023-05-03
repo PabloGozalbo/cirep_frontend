@@ -1,33 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_marginTop="10dp"
     android:layout_height="wrap_content"
-    android:background="@drawable/rounded_background"
     android:padding="16dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_background">
+        android:background="@drawable/rounded_background"
+        android:padding="16dp">
 
-        <TextView
-            android:id="@+id/incidencia_titulo"
-            android:layout_width="236dp"
-            android:layout_height="70dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginStart="15dp"
-            android:text=""
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_background">
 
-        <com.example.dashboard.ui.mis_incidencias.IncidenciaComponents.IncidenciaImage
-            android:id="@+id/incidencia_imagen"
-            android:layout_width="144dp"
-            android:layout_height="72dp"
-            android:background="@drawable/rounded_background"
-            android:scaleType="fitXY" />
+            <TextView
+                android:id="@+id/incidencia_titulo"
+                android:layout_width="236dp"
+                android:layout_height="70dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginStart="15dp"
+                android:text=""
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <com.example.dashboard.ui.mis_incidencias.IncidenciaComponents.IncidenciaImage
+                android:id="@+id/incidencia_imagen"
+                android:layout_width="144dp"
+                android:layout_height="72dp"
+                android:background="@drawable/rounded_background"
+                android:scaleType="fitXY" />
+        </RelativeLayout>
+
     </RelativeLayout>
 
 
