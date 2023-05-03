@@ -19,13 +19,11 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.cirep_frontend.R;
 import com.example.cirep_frontend.databinding.ActivityMapsBinding;
-
 import com.example.dashboard.DashboardActivity;
 import com.example.dashboard.ui.mapa.dialogo.DialogoPersonalizado;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -68,26 +66,14 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
 
 
 
-        if(!isLocationEnabled()) {
-            if (ContextCompat.checkSelfPermission(requireActivity(),
-                    Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
 
+            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION);
 
-                requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION);
-                if (isLocationEnabled()) {
-                    showAlertDialog();
-                    // La ubicación está activada, puedes acceder a la ubicación
-                } else {
-                    // La ubicación está desactivada, debes solicitar que el usuario la active
-                    showAlertDialog();
-                }
-
-            } else {
-                showAlertDialog();
-            }
-        }
-        if(map!=null){
+        } else if (!isLocationEnabled()) {
+            showAlertDialog();
+        } else if(map!=null) {
             zoomMap();
         }
 
