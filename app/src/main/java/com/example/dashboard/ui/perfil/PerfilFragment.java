@@ -17,12 +17,14 @@ import com.example.comun.cache.UserDataSession;
 
 public class PerfilFragment extends Fragment {
 
-    TextView nombre, apellidos, email, telefono;
+    TextView nombre, apellidos, email, telefono, psswd, ciudad;
+    PerfilViewModel perfilViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View view = FragmentPerfilBinding.inflate(inflater, container, false).getRoot();
+        perfilViewModel = new PerfilViewModel();
         getComponents(view);
         initView();
         return view;
@@ -35,22 +37,27 @@ public class PerfilFragment extends Fragment {
     }
 
     private void getComponents(View view){
-
         //TextViews
         this.nombre = view.findViewById(R.id.perfil_nombre);
         this.apellidos = view.findViewById(R.id.perfil_apellidos);
         this.email = view.findViewById(R.id.perfil_email);
         this.telefono = view.findViewById(R.id.perfil_telefono);
+        this.psswd = view.findViewById(R.id.perfil_contrasenya);
+        this.ciudad = view.findViewById(R.id.perfil_ciudad);
 
         //
     }
 
     private void initView(){
-        UserDataSession userDataSession = UserDataSession.getInstance();
-
+        this.nombre.setText(perfilViewModel.getNombreUser());
+        this.apellidos.setText(perfilViewModel.getApellidosUser());
+        this.telefono.setText(perfilViewModel.getTelefonoUser());
+        this.email.setText(perfilViewModel.getEmailUser());
+        this.psswd.setText("*******");
+        this.ciudad.setText(perfilViewModel.getCiudadUser());
     }
 
+    private void goToChangeUserAttribute(){
 
-
-
+    }
 }

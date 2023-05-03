@@ -211,12 +211,6 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/edit_icon" />
-
             </LinearLayout>
 
 

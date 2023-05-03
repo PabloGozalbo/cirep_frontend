@@ -32,6 +32,10 @@ public class UserDataSession {//objeto para guardar el token usando in singleton
         UserDataSession.token = token;
     }
 
+    public Usuario getUsuario(){
+        return UserDataSession.usuario;
+    }
+
     public void setUsuario(Usuario usuario){
         UserDataSession.usuario = usuario;
     }
