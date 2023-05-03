@@ -54,6 +54,7 @@
 
 
                 <ImageView
+                    android:id="@+id/editName"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:src="@drawable/edit_icon" />
@@ -107,6 +108,7 @@
 
 
                 <ImageView
+                    android:id="@+id/editLastName"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:src="@drawable/edit_icon" />
@@ -160,6 +162,7 @@
 
 
                 <ImageView
+                    android:id="@+id/editPhone"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:src="@drawable/edit_icon" />
@@ -260,6 +263,7 @@
 
 
                 <ImageView
+                    android:id="@+id/editPsswd"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:src="@drawable/edit_icon" />
@@ -312,6 +316,7 @@
 
 
                 <ImageView
+                    android:id="@+id/editCity"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:src="@drawable/edit_icon" />

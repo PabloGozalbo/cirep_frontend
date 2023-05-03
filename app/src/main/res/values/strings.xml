@@ -27,11 +27,15 @@
     <string name="email">Email</string>
     <string name="direccion">Escribe tu dirección</string>
     <string name="start">Empezar</string>
+    <string name="subtitle_editProfileMasc">Por favor, a continuación confirme el nuevo </string>
+    <string name="subtitle_editProfileFem">Por favor, a continuación confirme la nueva </string>
+    <string name="confirmar">Confirmar</string>
     <string name="volver_intentar">Volver a intentarlo</string>
     <string name="ko_message">"¡Ups, algo ha salido mal!"</string>
     <string name="ok_message">"¡Genial, ya estás registrado!"</string>
 
     <string name="telefono">Teléfono</string>
+    <string name="datos_personales">Datos personales</string>
     <string name="contrasenya">Contraseña</string>
     <string name="ciudad">Ciudad</string>
     <string name="repite_contrasenya">Repite la contraseña</string>
@@ -64,7 +68,7 @@
     <string name="titulo_incidencia_dialogo">¿Añadir incidencia aquí?</string>
 
 
-    <string name="datos_personales">Datos Personales</string>
+    <string name="editProfile">Cambiar </string>
 
     <string name="cargando">Cargando</string>
 

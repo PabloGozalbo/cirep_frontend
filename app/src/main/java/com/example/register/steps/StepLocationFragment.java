@@ -56,7 +56,7 @@ public class StepLocationFragment extends Fragment {
         }
 
         this.confirm = view.findViewById(R.id.confirm_location);
-        this.confirm.setEnabled(false);
+        this.confirm.setEnabled(true);
         this.direccion = view.findViewById(R.id.direccion);
         this.direccionCompleta = view.findViewById(R.id.direccion_completa);
 
@@ -152,7 +152,7 @@ public class StepLocationFragment extends Fragment {
     }
 
     private void configureContinueButton(){
-        this.confirm.setEnabled(!this.direccionCompleta.getText().toString().equals(""));
+        this.confirm.setEnabled(true);//!this.direccionCompleta.getText().toString().equals(""));
     }
 
 }

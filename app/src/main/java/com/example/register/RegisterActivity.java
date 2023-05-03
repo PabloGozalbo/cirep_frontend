@@ -34,7 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
             if (registrationSuccess == null) {
                 goToResultOk();
             } else {
-                goToResultOk();
+                goToResultKo();
             }
         });
     }
