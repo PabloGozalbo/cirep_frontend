@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.cirep_frontend.R;
+import com.example.dashboard.DashboardActivity;
 import com.example.login.ui.login.LoginActivity;
 
 @SuppressLint("CustomSplashScreen")
@@ -34,7 +35,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                goToLogin();
+                goToDashboard();
             }
         }, SPLASH_TIMEOUT);
     }
@@ -55,6 +56,12 @@ public class SplashActivity extends AppCompatActivity {
 
     private void goToLogin() {
         Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void goToDashboard() {
+        Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
         startActivity(intent);
         finish();
     }
