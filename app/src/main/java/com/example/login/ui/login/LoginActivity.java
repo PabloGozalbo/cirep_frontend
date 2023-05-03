@@ -145,8 +145,8 @@ public class LoginActivity extends AppCompatActivity {
                 mostrarCarga();
                 try {
                     UsuarioLogin usuarioLogin = new UsuarioLogin(usernameEditText.getText().toString(), passwordEditText.getText().toString());
-                    //loginViewModel.loginUser(usuarioLogin);
-                    goToDashboard();
+                    loginViewModel.loginUser(usuarioLogin);
+                    //goToDashboard();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

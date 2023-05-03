@@ -33,6 +33,7 @@
 
     <string name="telefono">Teléfono</string>
     <string name="contrasenya">Contraseña</string>
+    <string name="ciudad">Ciudad</string>
     <string name="repite_contrasenya">Repite la contraseña</string>
     <string name="apellidos">Apellidos</string>
     <string name="genero_spinner">Selecciona tu género:</string>

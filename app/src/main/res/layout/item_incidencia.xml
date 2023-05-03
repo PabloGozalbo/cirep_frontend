@@ -6,12 +6,13 @@
     android:background="@drawable/rounded_background"
     android:padding="16dp">
 
-    <ImageView
+    <com.example.dashboard.ui.mis_incidencias.IncidenciaComponents.IncidenciaImage
         android:id="@+id/incidencia_imagen"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="111dp"
+        android:layout_height="78dp"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true" />
+        android:layout_marginLeft="1dp"
+        android:background="@drawable/rounded_background" />
 
     <TextView
         android:id="@+id/incidencia_titulo"
