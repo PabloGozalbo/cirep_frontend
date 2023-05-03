@@ -5,4 +5,14 @@
         <item>Mujer</item>
         <item>Prefiero no decirlo</item>
     </string-array>
+    <string-array name="options_array">
+        <item>Señal Rota</item>
+        <item>Daños en la acera</item>
+        <item>Via en mal estado</item>
+        <item>Basura o suciedad en la via</item>
+        <item>Desperfecto en el parque</item>
+        <item>Alumbrado disfuncional</item>
+        <item>Animal fallecido</item>
+        <item>Estructura pública en mal estado</item>
+    </string-array>
 </resources>
