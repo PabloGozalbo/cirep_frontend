@@ -51,7 +51,6 @@ public class RegisterActivity extends AppCompatActivity {
     private void goToFirstStep(){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.registerFragmentContainerView, new Step1Fragment());
-        transaction.addToBackStack(null);
         transaction.commit();
       //  getSupportFragmentManager().beginTransaction().replace(R.id.registerFragmentContainerView, new Step1Fragment()).commit();
     }
@@ -72,12 +71,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        getSupportFragmentManager().popBackStack();
-        fragmentManager.beginTransaction()
-                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
-                .commit();
     }
 
 }

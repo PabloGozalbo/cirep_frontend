@@ -28,5 +28,7 @@ public interface ApiService {
     @GET("/incidencias/{usuario}")
     Call<JsonObject> getIncidencias(@Path("usuario") String usuario, @Query("email") String email);
 
+    @POST("/accounts/modificar_perfil/{usuario}/")
+    Call<JsonObject> modificarPerfil(@Body String attribute, @Query("email") String email);
 
 }

@@ -14,17 +14,21 @@
         <entry key="..\:/Users/danie/CIREP/app/src/main/res/drawable/rounded_square.xml" value="0.247" />
         <entry key="..\:/Users/danie/CIREP/app/src/main/res/drawable/shape.xml" value="0.2145" />
         <entry key="..\:/Users/danie/CIREP/app/src/main/res/drawable/side_nav_bar.xml" value="0.248" />
+        <entry key="..\:/Users/danie/CIREP/app/src/main/res/layout-v23/fragment_step_location.xml" value="0.24114583333333334" />
+        <entry key="..\:/Users/danie/CIREP/app/src/main/res/layout-v23/fragment_step_type_user.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/danie/CIREP/app/src/main/res/layout-v23/step2_registro.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/danie/CIREP/app/src/main/res/layout-v23/step3_registro.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/danie/CIREP/app/src/main/res/layout/activity_dashboard.xml" value="0.17849462365591398" />
+        <entry key="..\:/Users/danie/CIREP/app/src/main/res/layout/activity_edit_profile.xml" value="0.2421875" />
         <entry key="..\:/Users/danie/CIREP/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/danie/CIREP/app/src/main/res/layout/activity_maps.xml" value="0.2421875" />
-        <entry key="..\:/Users/danie/CIREP/app/src/main/res/layout/activity_register.xml" value="0.2421875" />
+        <entry key="..\:/Users/danie/CIREP/app/src/main/res/layout/activity_register.xml" value="0.1" />
+        <entry key="..\:/Users/danie/CIREP/app/src/main/res/layout/activity_reportar_incidencia.xml" value="0.2421875" />
         <entry key="..\:/Users/danie/CIREP/app/src/main/res/layout/app_bar_dashboard.xml" value="0.2421875" />
         <entry key="..\:/Users/danie/CIREP/app/src/main/res/layout/carga_animation.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/danie/CIREP/app/src/main/res/layout/content_dashboard.xml" value="0.1" />
         <entry key="..\:/Users/danie/CIREP/app/src/main/res/layout/dashboard_main_activity.xml" value="0.2421875" />
-        <entry key="..\:/Users/danie/CIREP/app/src/main/res/layout/fragment_change_attribute.xml" value="0.2" />
+        <entry key="..\:/Users/danie/CIREP/app/src/main/res/layout/fragment_change_attribute.xml" value="0.1" />
         <entry key="..\:/Users/danie/CIREP/app/src/main/res/layout/fragment_custom_map.xml" value="0.2421875" />
         <entry key="..\:/Users/danie/CIREP/app/src/main/res/layout/fragment_dashboard.xml" value="0.2421875" />
         <entry key="..\:/Users/danie/CIREP/app/src/main/res/layout/fragment_gallery.xml" value="0.2421875" />

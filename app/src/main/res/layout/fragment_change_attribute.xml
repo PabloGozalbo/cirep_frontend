@@ -19,7 +19,7 @@
         app:layout_constraintVertical_bias="0.904" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/title_editProfile"
         android:layout_width="238dp"
         android:layout_height="70dp"
         android:layout_marginTop="68dp"
@@ -36,7 +36,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editText_editProfile"
         android:layout_width="316dp"
         android:layout_height="48dp"
         app:layout_constraintBottom_toBottomOf="parent"

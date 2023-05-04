@@ -52,6 +52,11 @@ public class Repository {
         public abstract void onFailure();
     }
 
+    public static abstract class editProfileCallback {
+        public abstract void onSuccess();
+        public abstract void onFailure();
+    }
+
     public static abstract class getIncidenciasUserCallback {
         public abstract void onSuccess(List<Incidencia> incidencias);
         public abstract void onFailure();
@@ -204,7 +209,21 @@ public class Repository {
                 callback.onFailure();
             }
         });
+    }
 
+    public void editProfile(String attribute, String email, editProfileCallback callback) {
+        apiService.modificarPerfil(attribute, email).enqueue(new retrofit2.Callback() {
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
+                if (response.isSuccessful()) {
+                    callback.onSuccess();
+                }
+            }
 
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull Throwable t) {
+                callback.onFailure();
+            }
+        });
     }
 }

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.cirep_frontend.R;
+import com.example.dashboard.ui.perfil.EditProfileActivity;
 import com.example.login.ui.login.LoginActivity;
 
 /**
@@ -81,14 +82,7 @@ public class Step1Fragment extends Fragment {
     }
 
     public void onBackPressed(){
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        // Verificar si hay fragments en la pila antes de volver al fragment anterior
-        if (fragmentManager.getBackStackEntryCount() > 0) {
-            // Si hay fragments en la pila, eliminar el fragment actual del stack de fragments
-            fragmentManager.popBackStack();
-        } else {
-            // Si no hay fragments en la pila, cerrar la actividad actual
-            goToLogin();
-        }
+        Intent intent = new Intent(this.getContext(), LoginActivity.class);
+        startActivity(intent);
     }
 }

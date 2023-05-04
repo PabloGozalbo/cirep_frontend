@@ -6,6 +6,20 @@
     tools:context="com.example.register.steps.StepTypeUserFragment">
 
 
+    <Button
+        android:id="@+id/atras_stepTypeUser"
+        android:layout_width="27dp"
+        android:layout_height="26dp"
+        android:background="#00000000"
+        android:drawableStart="@drawable/atras_boton"
+        android:foreground="@drawable/atras_boton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.045" />
+
     <TextView
         android:layout_width="207dp"
         android:layout_height="51dp"
