@@ -18,6 +18,9 @@ import com.example.cirep_frontend.R;
 import com.example.comun.model.user.Usuario;
 import com.example.register.RegisterActivity;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Step2Fragment#newInstance} factory method to
@@ -61,6 +64,7 @@ public class Step3Fragment extends Fragment {
 
         View view = inflater.inflate(R.layout.step3_registro, container, false);
         getComponents(view);
+        btnContinuar.setEnabled(false);
         initComponents();
         observeRegistrationSuccess();
         return view;
@@ -86,14 +90,23 @@ public class Step3Fragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 boolean camposLlenos = !TextUtils.isEmpty(etTelefono.getText()) && !TextUtils.isEmpty(contrasenya1.getText()) && !TextUtils.isEmpty(contrasenya2.getText());
                 boolean validPasswd = contrasenya2.getText().toString().equals(contrasenya1.getText().toString());
-
+                boolean validPhone = true;
                 if (camposLlenos && !validPasswd) {
                     contrasenya2.setError("Las contraseñas deben coincidir");
                 } else if (validPasswd) {
                     contrasenya2.setError(null);
                 }
 
-                btnContinuar.setEnabled(camposLlenos && validPasswd);
+                Pattern pattern = Pattern.compile("^\\d{9,9}$");
+                Matcher matcher = pattern.matcher(etTelefono.getText().toString());
+                boolean matchFound = matcher.find();
+                if(!matchFound) {
+                    etTelefono.setError("El telefono debe constar de 9 digitos");
+                    validPhone = false;
+                } else {
+                    etTelefono.setError(null);
+                }
+                btnContinuar.setEnabled(camposLlenos && validPasswd && validPhone);
             }
 
             @Override
