@@ -39,6 +39,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -52,10 +55,11 @@ public class CameraActivity extends AppCompatActivity {
     private ExecutorService cameraExecutor;
     private PreviewView mPreviewView;
     private int REQUEST_CODE_PERMISSIONS = 1001;
-    private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA"};
+    private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA", "android.permission.MANAGE_EXTERNAL_STORAGE" ,"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.READ_EXTERNAL_STORAGE"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("EEEE");
         super.onCreate(savedInstanceState);
         viewBinding = ActivityCameraBinding.inflate(getLayoutInflater());
         setContentView(viewBinding.getRoot());
@@ -68,6 +72,7 @@ public class CameraActivity extends AppCompatActivity {
         if (allPermissionsGranted()) {
             startCamera();
         } else {
+
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
         }
         cameraExecutor = Executors.newSingleThreadExecutor();
@@ -127,30 +132,25 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     private void goToReport(Bitmap bitmapImage) {
-        Intent intent = new Intent(this,ReportarIncidencia.class);
-        intent.putExtra("bitmapImage", bitmapImage);
+        File file = new File(getExternalCacheDir(), "imagen.png");
+        try (OutputStream outputStream = new FileOutputStream(file)) {
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Intent intent = new Intent(this, ReportarIncidencia.class);
+        intent.putExtra("imagen", file.getAbsolutePath());
         startActivity(intent);
-        finish();
     }
 
     private boolean allPermissionsGranted() {
         for(String permission : REQUIRED_PERMISSIONS){
             if(ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED){
+                System.out.println("Faltan permiso " + permission);
                 return false;
             }
         }
         return true;
-    }
-
-    public String getBatchDirectoryName() {
-
-        String app_folder_path = "";
-        app_folder_path = Environment.getExternalStorageDirectory().toString() + "/images";
-        File dir = new File(app_folder_path);
-        if (!dir.exists() && !dir.mkdirs()) {
-
-        }
-        return app_folder_path;
     }
 
     @Override
@@ -169,26 +169,11 @@ public class CameraActivity extends AppCompatActivity {
 
     private Bitmap toBitmap(Image image) {
         Image.Plane[] planes = image.getPlanes();
-        ByteBuffer yBuffer = planes[0].getBuffer();
-        ByteBuffer uBuffer = planes[1].getBuffer();
-        ByteBuffer vBuffer = planes[2].getBuffer();
-
-        int ySize = yBuffer.remaining();
-        int uSize = uBuffer.remaining();
-        int vSize = vBuffer.remaining();
-
-        byte[] nv21 = new byte[ySize + uSize + vSize];
-        //U and V are swapped
-        yBuffer.get(nv21, 0, ySize);
-        vBuffer.get(nv21, ySize, vSize);
-        uBuffer.get(nv21, ySize + vSize, uSize);
-
-        YuvImage yuvImage = new YuvImage(nv21, ImageFormat.NV21, image.getWidth(), image.getHeight(), null);
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        yuvImage.compressToJpeg(new Rect(0, 0, yuvImage.getWidth(), yuvImage.getHeight()), 75, out);
-
-        byte[] imageBytes = out.toByteArray();
-        return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+        ByteBuffer buffer = planes[0].getBuffer();
+        byte[] bytes = new byte[buffer.capacity()];
+        buffer.get(bytes);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        return bitmap;
 
     }
 

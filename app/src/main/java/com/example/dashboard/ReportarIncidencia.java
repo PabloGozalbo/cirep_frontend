@@ -5,6 +5,7 @@ import androidx.camera.core.ImageProxy;
 import androidx.camera.core.internal.utils.ImageUtil;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -31,8 +32,6 @@ public class ReportarIncidencia extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         binding = ActivityReportarIncidenciaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -42,9 +41,13 @@ public class ReportarIncidencia extends AppCompatActivity {
         selector.setAdapter(adapter);
 
         comentarios = findViewById(R.id.editTextTextMultiLine);
+
         imagen = findViewById(R.id.imageView2);
-
-
+        if (getIntent().hasExtra("image")){
+            String filePath = getIntent().getStringExtra("imagen");
+            Bitmap bitmapImage = BitmapFactory.decodeFile(filePath);
+            imagen.setImageBitmap(bitmapImage);
+        }
 
     }
 }
