@@ -27,6 +27,8 @@
     <string name="email">Email</string>
     <string name="direccion">Escribe tu dirección</string>
     <string name="start">Empezar</string>
+    <string name="tabTitle1">Mapa</string>
+    <string name="tabTitle2">Incidencias</string>
     <string name="subtitle_editProfileMasc">Por favor, a continuación confirme el nuevo </string>
     <string name="subtitle_editProfileFem">Por favor, a continuación confirme la nueva </string>
     <string name="confirmar">Confirmar</string>
