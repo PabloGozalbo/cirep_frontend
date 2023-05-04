@@ -3,11 +3,13 @@ package com.example.register.steps;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.cirep_frontend.R;
@@ -16,6 +18,7 @@ import com.example.cirep_frontend.R;
 public class StepTypeUserFragment extends Fragment {
 
     ImageView hall, person;
+    Button atras;
 
 
     @Override
@@ -38,6 +41,7 @@ public class StepTypeUserFragment extends Fragment {
     private void initComponents(View view){
         this.hall = view.findViewById(R.id.ayuntamiento);
         this.person = view.findViewById(R.id.ciudadano);
+        this.atras = view.findViewById(R.id.atras_stepTypeUser);
     }
 
     private void initListeners(){
@@ -58,6 +62,13 @@ public class StepTypeUserFragment extends Fragment {
                 goToStep2(bundle);
             }
         });
+
+        this.atras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     private void goToStep2(Bundle bundle){
@@ -71,6 +82,18 @@ public class StepTypeUserFragment extends Fragment {
         transaction.replace(R.id.registerFragmentContainerView, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    public void onBackPressed(){
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        // Verificar si hay fragments en la pila antes de volver al fragment anterior
+        if (fragmentManager.getBackStackEntryCount() > 0) {
+            // Si hay fragments en la pila, eliminar el fragment actual del stack de fragments
+            fragmentManager.popBackStack();
+        } else {
+            // Si no hay fragments en la pila, cerrar la actividad actual
+            getActivity().finish();
+        }
     }
 
 

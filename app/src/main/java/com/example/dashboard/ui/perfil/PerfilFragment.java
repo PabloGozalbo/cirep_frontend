@@ -1,6 +1,7 @@
 package com.example.dashboard.ui.perfil;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -104,14 +105,9 @@ public class PerfilFragment extends Fragment {
     }
 
     private void goToChangeUserAttribute(String attribute){
-        Bundle bundle = new Bundle();
-        bundle.putString("attribute", attribute);
-        ChangeAttributeFragment fragment = new ChangeAttributeFragment();
-        fragment.setArguments(bundle);
-        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
-        transaction.replace(R.id.registerFragmentContainerView, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+
+        Intent intent = new Intent(this.getContext(), EditProfileActivity.class);
+        intent.putExtra("attribute", attribute);
+        startActivity(intent);
     }
 }

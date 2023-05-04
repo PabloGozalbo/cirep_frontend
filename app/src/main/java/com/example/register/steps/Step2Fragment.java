@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.cirep_frontend.R;
+import com.example.register.EmailValidator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -122,7 +123,11 @@ public class Step2Fragment extends Fragment {
         btnContinuar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToStep3();
+                if(EmailValidator.validarEmail(etEmail.getText().toString())){
+                    goToStep3();
+                } else {
+                    etEmail.setError("Por favor, introduce un e-mail válido");
+                }
             }
         });
 

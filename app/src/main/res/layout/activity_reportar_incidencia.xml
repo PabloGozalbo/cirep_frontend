@@ -62,7 +62,7 @@
         app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="#8D8F91" />
+        />
 
     <EditText
         android:id="@+id/editTextTextMultiLine"

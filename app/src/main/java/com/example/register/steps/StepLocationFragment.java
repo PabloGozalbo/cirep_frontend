@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.cirep_frontend.R;
@@ -31,7 +32,7 @@ public class StepLocationFragment extends Fragment {
 
     private AutocompleteSupportFragment autocompleteFragment;
     private TextView direccionOculta;
-    private Button confirm;
+    private Button confirm, atras;
     private AutoCompleteTextView direccion;
     private String address;
     private TextView direccionCompleta;
@@ -56,6 +57,7 @@ public class StepLocationFragment extends Fragment {
         }
 
         this.confirm = view.findViewById(R.id.confirm_location);
+        this.atras = view.findViewById(R.id.atras_stepLocation);
         this.confirm.setEnabled(true);
         this.direccion = view.findViewById(R.id.direccion);
         this.direccionCompleta = view.findViewById(R.id.direccion_completa);
@@ -83,6 +85,13 @@ public class StepLocationFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 showAlertDialog();
+            }
+        });
+
+        atras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
 
@@ -153,6 +162,18 @@ public class StepLocationFragment extends Fragment {
 
     private void configureContinueButton(){
         this.confirm.setEnabled(true);//!this.direccionCompleta.getText().toString().equals(""));
+    }
+
+    public void onBackPressed(){
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        // Verificar si hay fragments en la pila antes de volver al fragment anterior
+        if (fragmentManager.getBackStackEntryCount() > 0) {
+            // Si hay fragments en la pila, eliminar el fragment actual del stack de fragments
+            fragmentManager.popBackStack();
+        } else {
+            // Si no hay fragments en la pila, cerrar la actividad actual
+            getActivity().finish();
+        }
     }
 
 }

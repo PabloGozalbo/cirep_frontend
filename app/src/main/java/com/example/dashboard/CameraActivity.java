@@ -1,7 +1,13 @@
 package com.example.dashboard;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.ImageFormat;
+import android.graphics.Rect;
+import android.graphics.YuvImage;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Environment;
@@ -31,7 +37,12 @@ import com.google.common.util.concurrent.ListenableFuture;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.ByteBuffer;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -44,10 +55,11 @@ public class CameraActivity extends AppCompatActivity {
     private ExecutorService cameraExecutor;
     private PreviewView mPreviewView;
     private int REQUEST_CODE_PERMISSIONS = 1001;
-    private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA"};
+    private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA", "android.permission.MANAGE_EXTERNAL_STORAGE" ,"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.READ_EXTERNAL_STORAGE"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("EEEE");
         super.onCreate(savedInstanceState);
         viewBinding = ActivityCameraBinding.inflate(getLayoutInflater());
         setContentView(viewBinding.getRoot());
@@ -60,6 +72,7 @@ public class CameraActivity extends AppCompatActivity {
         if (allPermissionsGranted()) {
             startCamera();
         } else {
+
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
         }
         cameraExecutor = Executors.newSingleThreadExecutor();
@@ -104,8 +117,9 @@ public class CameraActivity extends AppCompatActivity {
                     public void onCaptureSuccess(@NotNull ImageProxy imageProxy) {
                         @SuppressLint("UnsafeOptInUsageError")
                         Image image = imageProxy.getImage();
-                        // TODO hacer las cosas con la imagen.
+                        Bitmap bitmapImage = toBitmap(image);
                         imageProxy.close();
+                        goToReport(bitmapImage);
                     }
 
                     @Override
@@ -117,24 +131,26 @@ public class CameraActivity extends AppCompatActivity {
         });
     }
 
+    private void goToReport(Bitmap bitmapImage) {
+        File file = new File(getExternalCacheDir(), "imagen.png");
+        try (OutputStream outputStream = new FileOutputStream(file)) {
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Intent intent = new Intent(this, ReportarIncidencia.class);
+        intent.putExtra("imagen", file.getAbsolutePath());
+        startActivity(intent);
+    }
+
     private boolean allPermissionsGranted() {
         for(String permission : REQUIRED_PERMISSIONS){
             if(ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED){
+                System.out.println("Faltan permiso " + permission);
                 return false;
             }
         }
         return true;
-    }
-
-    public String getBatchDirectoryName() {
-
-        String app_folder_path = "";
-        app_folder_path = Environment.getExternalStorageDirectory().toString() + "/images";
-        File dir = new File(app_folder_path);
-        if (!dir.exists() && !dir.mkdirs()) {
-
-        }
-        return app_folder_path;
     }
 
     @Override
@@ -149,6 +165,16 @@ public class CameraActivity extends AppCompatActivity {
                 this.finish();
             }
         }
+    }
+
+    private Bitmap toBitmap(Image image) {
+        Image.Plane[] planes = image.getPlanes();
+        ByteBuffer buffer = planes[0].getBuffer();
+        byte[] bytes = new byte[buffer.capacity()];
+        buffer.get(bytes);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        return bitmap;
+
     }
 
 }
