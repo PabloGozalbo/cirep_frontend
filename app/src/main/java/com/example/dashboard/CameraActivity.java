@@ -1,7 +1,13 @@
 package com.example.dashboard;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.ImageFormat;
+import android.graphics.Rect;
+import android.graphics.YuvImage;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Environment;
@@ -31,7 +37,9 @@ import com.google.common.util.concurrent.ListenableFuture;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.nio.ByteBuffer;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -104,8 +112,9 @@ public class CameraActivity extends AppCompatActivity {
                     public void onCaptureSuccess(@NotNull ImageProxy imageProxy) {
                         @SuppressLint("UnsafeOptInUsageError")
                         Image image = imageProxy.getImage();
-                        // TODO hacer las cosas con la imagen.
+                        Bitmap bitmapImage = toBitmap(image);
                         imageProxy.close();
+                        goToReport(bitmapImage);
                     }
 
                     @Override
@@ -115,6 +124,13 @@ public class CameraActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    private void goToReport(Bitmap bitmapImage) {
+        Intent intent = new Intent(this,ReportarIncidencia.class);
+        intent.putExtra("bitmapImage", bitmapImage);
+        startActivity(intent);
+        finish();
     }
 
     private boolean allPermissionsGranted() {
@@ -149,6 +165,31 @@ public class CameraActivity extends AppCompatActivity {
                 this.finish();
             }
         }
+    }
+
+    private Bitmap toBitmap(Image image) {
+        Image.Plane[] planes = image.getPlanes();
+        ByteBuffer yBuffer = planes[0].getBuffer();
+        ByteBuffer uBuffer = planes[1].getBuffer();
+        ByteBuffer vBuffer = planes[2].getBuffer();
+
+        int ySize = yBuffer.remaining();
+        int uSize = uBuffer.remaining();
+        int vSize = vBuffer.remaining();
+
+        byte[] nv21 = new byte[ySize + uSize + vSize];
+        //U and V are swapped
+        yBuffer.get(nv21, 0, ySize);
+        vBuffer.get(nv21, ySize, vSize);
+        uBuffer.get(nv21, ySize + vSize, uSize);
+
+        YuvImage yuvImage = new YuvImage(nv21, ImageFormat.NV21, image.getWidth(), image.getHeight(), null);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        yuvImage.compressToJpeg(new Rect(0, 0, yuvImage.getWidth(), yuvImage.getHeight()), 75, out);
+
+        byte[] imageBytes = out.toByteArray();
+        return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+
     }
 
 }
