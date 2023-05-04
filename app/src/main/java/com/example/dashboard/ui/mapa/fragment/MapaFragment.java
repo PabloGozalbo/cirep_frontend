@@ -19,8 +19,12 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.cirep_frontend.R;
 import com.example.cirep_frontend.databinding.ActivityMapsBinding;
@@ -31,6 +35,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapaFragment extends Fragment implements OnMapReadyCallback {
 
@@ -39,6 +47,8 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
     private SupportMapFragment mapFragment;
     private LocationManager locationManager;
     private Location lastLocation;
+
+
     public static final int REQUEST_CHECK_SETTINGS = 1001;
 
 
@@ -63,6 +73,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
         mapFragment.getMapAsync(this);
 
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
 
 
 
@@ -177,7 +188,5 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
         super.onDestroyView();
         binding = null;
     }
-
-
 
 }
