@@ -93,6 +93,8 @@ public class Repository {
                     }
                     System.out.println(userDataSession.getToken());
                     callback.onSuccess();
+                }else{
+                    callback.onFailure();
                 }
             }
 

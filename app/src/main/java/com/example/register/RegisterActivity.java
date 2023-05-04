@@ -1,17 +1,15 @@
 package com.example.register;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.cirep_frontend.R;
 import com.example.comun.model.user.Usuario;
 import com.example.comun.result.ResultKoFragment;
 import com.example.comun.result.ResultOkFragment;
 import com.example.register.steps.Step1Fragment;
-import com.example.register.steps.Step3Fragment;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -30,8 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void observeRegistrationSuccess() {
         registerViewModel.getRegistrationSuccessLiveData().observe(this, registrationSuccess -> {
 
-            //TODO: cambiar para que si es nulo se Ko
-            if (registrationSuccess == null) {
+            if (registrationSuccess) {
                 goToResultOk();
             } else {
                 goToResultKo();
