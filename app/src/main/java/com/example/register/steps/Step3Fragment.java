@@ -32,8 +32,6 @@ public class Step3Fragment extends Fragment {
     private Button btnContinuar, atras;
     private Usuario user;
     private Dialog dialogoCarga;
-    private static final String EXPRESION_REGULAR_TELEFONO = "^[67]\\d{8}$";
-
 
     public Step3Fragment() {
     }
@@ -169,9 +167,5 @@ public class Step3Fragment extends Fragment {
         ((RegisterActivity) getActivity()).getViewModel().getRegistrationSuccessLiveData().observe(getViewLifecycleOwner(), registrationSuccess -> {
             ocultarCarga();
         });
-    }
-
-    private boolean checkValidPhone(String phone){
-        return phone.matches(EXPRESION_REGULAR_TELEFONO);
     }
 }
