@@ -9,17 +9,35 @@
         android:id="@+id/nav_mapa"
         android:name="com.example.dashboard.ui.mapa.fragment.TabMapFragment"
         android:label="@string/menu_mapa"
-        tools:layout="@layout/fragment_map" />
+        tools:layout="@layout/fragment_tab_map" >
+        <action
+            android:id="@+id/action_nav_mapa_to_nav_slideshow"
+            app:destination="@id/nav_slideshow" />
+        <action
+            android:id="@+id/action_nav_mapa_to_nav_perfil"
+            app:destination="@id/nav_perfil" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_perfil"
         android:name="com.example.dashboard.ui.perfil.PerfilFragment"
         android:label="@string/menu_perfil"
-        tools:layout="@layout/fragment_perfil" />
+        tools:layout="@layout/fragment_perfil" >
+        <action
+            android:id="@+id/action_nav_perfil_to_nav_mapa"
+            app:destination="@id/nav_mapa" />
+        <action
+            android:id="@+id/action_nav_perfil_to_nav_slideshow"
+            app:destination="@id/nav_slideshow" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.example.dashboard.ui.mis_incidencias.MisIncidenciasFragment"
         android:label="@string/menu_mis_incidencias"
-        tools:layout="@layout/fragment_incidencias" />
+        tools:layout="@layout/fragment_incidencias" >
+        <action
+            android:id="@+id/action_nav_slideshow_to_nav_mapa"
+            app:destination="@id/nav_mapa" />
+    </fragment>
 </navigation>
