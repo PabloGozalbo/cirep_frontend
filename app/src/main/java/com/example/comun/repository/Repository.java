@@ -17,7 +17,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -213,8 +215,10 @@ public class Repository {
         });
     }
 
-    public void editProfile(String attribute, String email, editProfileCallback callback) {
-        apiService.modificarPerfil(attribute, email).enqueue(new retrofit2.Callback() {
+    public void editProfile(String attribute, String value, String email,String token, editProfileCallback callback) {
+        Map<String, String> body =new HashMap<>();
+        body.put(attribute, value);
+        apiService.modificarPerfil(body,email,token).enqueue(new retrofit2.Callback() {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) {
                 if (response.isSuccessful()) {

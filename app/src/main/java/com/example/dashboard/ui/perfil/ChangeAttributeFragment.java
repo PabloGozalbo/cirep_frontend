@@ -1,10 +1,10 @@
 package com.example.dashboard.ui.perfil;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.cirep_frontend.R;
 import com.example.comun.cache.UserDataSession;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ChangeAttributeFragment extends Fragment {
     String attribute;
@@ -22,6 +27,7 @@ public class ChangeAttributeFragment extends Fragment {
     Button confirmar;
     EditText editTextEditProfile;
     PerfilViewModel perfilViewModel;
+    private Dialog dialogoCarga;
 
     private static final String EXPRESION_REGULAR_TELEFONO = "^[67]\\d{8}$";
 
@@ -49,19 +55,29 @@ public class ChangeAttributeFragment extends Fragment {
         this.title = view.findViewById(R.id.title_editProfile);
         this.confirmar = view.findViewById(R.id.confirmEditProfile);
         this.editTextEditProfile = view.findViewById(R.id.editText_editProfile);
-
+        ChangeAttributeFragment fragment = this;
         confirmar.setEnabled(false);
         confirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(attribute.equals("phone")){
+                if(attribute.equals("phone_number")){
                     if(checkValidPhone(editTextEditProfile.getText().toString())){
-                        perfilViewModel.editProfile(attribute, UserDataSession.getInstance().getUsuario().getEmail());
+                        perfilViewModel.editProfile(attribute,
+                                editTextEditProfile.getText().toString(),
+                                UserDataSession.getInstance().getUsuario().getEmail(),
+                                UserDataSession.getInstance().getToken());
+                        actualizarUsuario(editTextEditProfile.getText().toString());
+                        getActivity().onBackPressed();
                     } else {
                         editTextEditProfile.setError("Por favor, indica un número de teléfono válido");
                     }
                 } else {
-                    perfilViewModel.editProfile(attribute, UserDataSession.getInstance().getUsuario().getEmail());
+                    perfilViewModel.editProfile(attribute,
+                            editTextEditProfile.getText().toString(),
+                            UserDataSession.getInstance().getUsuario().getEmail(),
+                            UserDataSession.getInstance().getToken());
+                    actualizarUsuario(editTextEditProfile.getText().toString());
+                    getActivity().onBackPressed();
                 }
             }
         });
@@ -74,7 +90,19 @@ public class ChangeAttributeFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // ignore
+                boolean camposLlenos =  !TextUtils.isEmpty(editTextEditProfile.getText());
+                boolean validPhone = true;
+                if(attribute.equals("phone_number")){
+                    Pattern pattern = Pattern.compile("^\\d{9,9}$");
+                    Matcher matcher = pattern.matcher(editTextEditProfile.getText().toString());
+                    validPhone = matcher.find();
+                    if(!validPhone){
+                        editTextEditProfile.setError("Por favor, indica un número de teléfono válido");
+                    }else{
+                        editTextEditProfile.setError(null);
+                    }
+                }
+                confirmar.setEnabled(camposLlenos && validPhone);
             }
 
             @Override
@@ -82,14 +110,19 @@ public class ChangeAttributeFragment extends Fragment {
                 confirmar.setEnabled(!editTextEditProfile.getText().toString().isEmpty());
             }
         };
-        confirmar.addTextChangedListener(afterTextChangedListener);
+        editTextEditProfile.addTextChangedListener(afterTextChangedListener);
         initView();
         return view;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
     private void initView(){
         switch (attribute){
-            case "name":
+            case "first_name":
                 subtitle.setText("Por favor, a continuación confirme el nuevo nombre");
                 title.setText("Cambiar nombre");
                 break;
@@ -97,22 +130,50 @@ public class ChangeAttributeFragment extends Fragment {
                 subtitle.setText("Por favor, a continuación confirme la nueva ciudad");
                 title.setText("Cambiar ciudad");
                 break;
-            case "lastname":
+            case "last_name":
                 subtitle.setText("Por favor, a continuación confirme los nuevos apellidos");
                 title.setText("Cambiar apellidos");
                 break;
-            case "phone":
+            case "phone_number":
                 subtitle.setText("Por favor, a continuación confirme el nuevo teléfono");
                 title.setText("Cambiar teléfono");
                 break;
-            case "psswd":
+            case "password":
                 subtitle.setText("Por favor, a continuación confirme la nueva contraseña");
                 title.setText("Cambiar contraseña");
                 break;
         }
     }
 
+    private void actualizarUsuario(String value){
+        switch (attribute){
+            case "first_name":
+                perfilViewModel.setNombreUser(value);
+                break;
+            case "city":
+                perfilViewModel.setCiudadUser(value);
+                break;
+            case "last_name":
+                perfilViewModel.setApellidosUser(value);
+                break;
+            case "phone_number":
+                perfilViewModel.setTelefonoUser(value);
+                break;
+            case "password":
+                perfilViewModel.setPassword(value);
+                break;
+        }
+    }
+
+
     private boolean checkValidPhone(String phone){
         return phone.matches(EXPRESION_REGULAR_TELEFONO);
     }
+
+
+    private void goEditProfile(){
+        Intent intent = new Intent(this.getContext(), EditProfileActivity.class);
+        startActivity(intent);
+    }
+
 }
