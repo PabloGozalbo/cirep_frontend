@@ -18,6 +18,9 @@ import androidx.fragment.app.Fragment;
 import com.example.cirep_frontend.R;
 import com.example.comun.cache.UserDataSession;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ChangeAttributeFragment extends Fragment {
     String attribute;
     TextView subtitle, title;
@@ -89,8 +92,10 @@ public class ChangeAttributeFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 boolean camposLlenos =  !TextUtils.isEmpty(editTextEditProfile.getText());
                 boolean validPhone = true;
-                if(attribute.equals("phone")){
-                    validPhone = checkValidPhone(editTextEditProfile.getText().toString());
+                if(attribute.equals("phone_number")){
+                    Pattern pattern = Pattern.compile("^\\d{9,9}$");
+                    Matcher matcher = pattern.matcher(editTextEditProfile.getText().toString());
+                    validPhone = matcher.find();
                     if(!validPhone){
                         editTextEditProfile.setError("Por favor, indica un número de teléfono válido");
                     }else{
