@@ -5,7 +5,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -16,7 +18,9 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.cirep_frontend.R;
 import com.example.cirep_frontend.databinding.ActivityDashboardBinding;
+import com.example.comun.cache.UserDataSession;
 import com.example.dashboard.ui.mapa.dialogo.DialogoPersonalizado;
+import com.example.login.ui.login.LoginActivity;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -29,6 +33,7 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityDashboardBinding binding;
     public static GoogleMap map;
+    public MenuItem logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +46,12 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
         binding.appBarDashboard.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DashboardActivity.this, CameraActivity.class);
-                startActivity(intent);
-                finish();
+                doLogout();
             }
         });
+
+
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
@@ -54,17 +60,31 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
                 R.id.nav_mapa, R.id.nav_perfil, R.id.nav_logout)
                 .setOpenableLayout(drawer)
                 .build();
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_dashboard);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        this.logout = navigationView.getMenu().getItem(3);
+
+        this.logout.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            }
+        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.dashboard, menu);
+
         return true;
     }
+
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -102,6 +122,14 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
     @Override
     public void onCancelarClick() {
         //Por ahora no se hace nada
+    }
+
+    private void doLogout(){
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+        finish();
+        UserDataSession.getInstance().deleteUser();
+        UserDataSession.getInstance().setToken(null);
     }
 
     private void goToReportarIncidencia(){
