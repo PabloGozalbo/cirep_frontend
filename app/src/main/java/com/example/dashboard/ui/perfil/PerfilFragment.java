@@ -11,13 +11,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cirep_frontend.R;
 import com.example.cirep_frontend.databinding.FragmentPerfilBinding;
-import com.example.comun.cache.UserDataSession;
-import com.example.register.steps.Step3Fragment;
 
 public class PerfilFragment extends Fragment {
 
@@ -78,30 +74,37 @@ public class PerfilFragment extends Fragment {
         this.editName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToChangeUserAttribute("name");
+                goToChangeUserAttribute("first_name");
             }
         });
 
         this.editLastName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToChangeUserAttribute("lastname");
+                goToChangeUserAttribute("last_name");
             }
         });
 
         this.editPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToChangeUserAttribute("phone");
+                goToChangeUserAttribute("phone_number");
             }
         });
         this.editPsswd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToChangeUserAttribute("psswd");
+                goToChangeUserAttribute("password");
             }
         });
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // realizar acciones cada vez que el Fragment se muestre
+        initView();
     }
 
     private void goToChangeUserAttribute(String attribute){

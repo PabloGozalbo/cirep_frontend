@@ -1,12 +1,9 @@
 package com.example.dashboard.ui.perfil;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.comun.cache.UserDataSession;
-import com.example.comun.model.user.Usuario;
-import com.example.comun.model.user.UsuarioLogin;
 import com.example.comun.repository.Repository;
 
 public class PerfilViewModel extends ViewModel {
@@ -38,18 +35,56 @@ public class PerfilViewModel extends ViewModel {
         return UserDataSession.getInstance().getUsuario().getEmail();
     }
 
-    public void editProfile(String attribute, String email) { // todo este el bueno
-        repository.editProfile(attribute, email, new Repository.editProfileCallback() {
-            @Override
-            public void onSuccess() {
-                editProfileSuccess.postValue(true);
-            }
+    public void editProfile(String attribute, String value, String email, String token) {
+        if(attribute.equals("password")){
+            repository.editProfile(attribute, value, email,token, new Repository.editProfileCallback() {
+                @Override
+                public void onSuccess() {
+                    editProfileSuccess.postValue(true);
+                }
 
-            @Override
-            public void onFailure() {
-                editProfileSuccess.postValue(false);
-            }
-        });
+                @Override
+                public void onFailure() {
+                    editProfileSuccess.postValue(false);
+                }
+            });
+        }else{
+            repository.editProfile(attribute, value, email,token, new Repository.editProfileCallback() {
+                @Override
+                public void onSuccess() {
+                    editProfileSuccess.postValue(true);
+                }
+
+                @Override
+                public void onFailure() {
+                    editProfileSuccess.postValue(false);
+                }
+            });
+        }
+    }
+
+    public void setNombreUser(String nombre) {
+        UserDataSession.getInstance().getUsuario().setFirstName(nombre);
+    }
+
+    public void setApellidosUser(String apellidos) {
+        UserDataSession.getInstance().getUsuario().setLastName(apellidos);
+    }
+
+    public void setTelefonoUser(String telefono) {
+        UserDataSession.getInstance().getUsuario().setPhoneNumber(telefono);
+    }
+
+    public void setCiudadUser(String ciudad) {
+        UserDataSession.getInstance().getUsuario().setCity(ciudad);
+    }
+
+    public void setEmailUser(String email) {
+        UserDataSession.getInstance().getUsuario().setEmail(email);
+    }
+
+    public void setPassword(String password) {
+        UserDataSession.getInstance().getUsuario().setPassword(password);
     }
 
 
