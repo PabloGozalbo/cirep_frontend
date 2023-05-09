@@ -1,4 +1,4 @@
-package com.example.dashboard.ui.mapa.fragment;
+package com.example.dashboard.ui.AllIncidencias;
 
 import android.os.Bundle;
 

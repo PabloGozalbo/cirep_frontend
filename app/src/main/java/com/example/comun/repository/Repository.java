@@ -172,23 +172,12 @@ public class Repository {
         });
     }
 //todo da error
-    /*public List<Incidencia> getIncidenciasUser(String email, getIncidenciasUserCallback callback) {
+    public void getIncidenciasUser(String email, getIncidenciasUserCallback callback) {
         apiService.getIncidencias(email, email).enqueue(new retrofit2.Callback() {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) {
                 if (response.isSuccessful()) {
-                    UserDataSession userDataSession = UserDataSession.getInstance();
-                    String jsonResponse = response.body().toString();
-                    JSONObject jsonObject = null;
-                    try {
-                        jsonObject = new JSONObject(jsonResponse);
-                        String tokenJWT = jsonObject.getString("token");
-                        userDataSession.setToken(tokenJWT);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println(userDataSession.getToken());
-                    callback.onSuccess();
+                    callback.onSuccess(new ArrayList<>());
                 }
             }
 
@@ -197,7 +186,7 @@ public class Repository {
                 callback.onFailure();
             }
         });
-    }*/
+    }
 
     public void crearIncidencia(String email, Incidencia incidencia, getIncidenciasCallback callback) {
         apiService.crearIncidencia(incidencia, email).enqueue(new retrofit2.Callback() {
