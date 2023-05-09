@@ -24,9 +24,12 @@ public class ReportarIncidencia extends AppCompatActivity {
 
     private Spinner selector;
     private ActivityReportarIncidenciaBinding binding;
+
     private Button reportar;
     private ImageView imagen;
     private EditText comentarios;
+
+    private ImageData imageData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +46,9 @@ public class ReportarIncidencia extends AppCompatActivity {
         comentarios = findViewById(R.id.editTextTextMultiLine);
 
         imagen = findViewById(R.id.imageView2);
-        if (getIntent().hasExtra("image")){
-            String filePath = getIntent().getStringExtra("imagen");
-            Bitmap bitmapImage = BitmapFactory.decodeFile(filePath);
-            imagen.setImageBitmap(bitmapImage);
-        }
+        imageData = ImageData.getInstantce();
+        imagen.setImageBitmap(imageData.getImage());
+
 
     }
 }

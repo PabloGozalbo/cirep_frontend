@@ -55,11 +55,10 @@ public class CameraActivity extends AppCompatActivity {
     private ExecutorService cameraExecutor;
     private PreviewView mPreviewView;
     private int REQUEST_CODE_PERMISSIONS = 1001;
-    private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA", "android.permission.MANAGE_EXTERNAL_STORAGE" ,"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.READ_EXTERNAL_STORAGE"};
+    private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("EEEE");
         super.onCreate(savedInstanceState);
         viewBinding = ActivityCameraBinding.inflate(getLayoutInflater());
         setContentView(viewBinding.getRoot());
@@ -132,14 +131,9 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     private void goToReport(Bitmap bitmapImage) {
-        File file = new File(getExternalCacheDir(), "imagen.png");
-        try (OutputStream outputStream = new FileOutputStream(file)) {
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ImageData imageData = ImageData.getInstantce();
+        imageData.setImage(bitmapImage);
         Intent intent = new Intent(this, ReportarIncidencia.class);
-        intent.putExtra("imagen", file.getAbsolutePath());
         startActivity(intent);
     }
 

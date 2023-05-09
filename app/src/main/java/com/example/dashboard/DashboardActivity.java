@@ -46,7 +46,9 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
         binding.appBarDashboard.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                doLogout();
+                Intent intent = new Intent(DashboardActivity.this, CameraActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
