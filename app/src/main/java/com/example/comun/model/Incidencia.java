@@ -11,10 +11,9 @@ public class Incidencia {
         public static final String DESCARTADA = "D";
 
     }
-    private String id_report;
-    private String title;
-    private Calendar report_date;
+    private String id;
     private String description;
+    private Calendar report_date;
     private byte[] image;
     private String state;
     private double latitude;
@@ -22,19 +21,11 @@ public class Incidencia {
     private String author;
 
     public String getId_report() {
-        return id_report;
+        return id;
     }
 
     public void setId_report(String id_report) {
-        this.id_report = id_report;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+        this.id = id_report;
     }
 
     public Calendar getReport_date() {

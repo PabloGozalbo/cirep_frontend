@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.comun.model.Incidencia;
 import com.example.comun.repository.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class IncidenciasViewModel {
@@ -18,8 +19,8 @@ public class IncidenciasViewModel {
         this.repository = new Repository();
     }
 
-    /*public List<Incidencia> getIncidenciasUsuario(String email){
-        return this.repository.getIncidenciasUser(email, new Repository.getIncidenciasUserCallback() {
+    public void getIncidenciasUsuario(){
+        this.repository.getIncidenciasUser( new Repository.getIncidenciasUserCallback() {
             @Override
             public void onSuccess(List<Incidencia> incidencias) {
                 incidenciasUserSuccess.postValue(incidencias);
@@ -27,10 +28,10 @@ public class IncidenciasViewModel {
 
             @Override
             public void onFailure() {
-
+                incidenciasUserSuccess.postValue(new ArrayList<>());
             }
         });
-    }*/
+    }
 
     public LiveData<List<Incidencia>> getIncidenciasUserSuccess() {
         return incidenciasUserSuccess;
