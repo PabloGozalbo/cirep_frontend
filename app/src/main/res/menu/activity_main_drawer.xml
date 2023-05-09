@@ -12,15 +12,39 @@
             android:id="@+id/nav_mapa"
             android:icon="@drawable/icono_mapa_cirep"
             android:title="@string/menu_mapa" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/mis_incidencias_cirep"
-            android:title="@string/menu_mis_incidencias" />
-        <item
-            android:id="@+id/nav_logout"
-            android:icon="@drawable/cerrar_sesion_cirep"
-            android:title="@string/menu_logout"
-            android:orderInCategory="100"
-            />
     </group>
+
+    <item
+        android:id="@+id/nav_expandable_item"
+        android:title="Reportes"
+        android:icon="@drawable/ic_launcher_background"
+        >
+        <menu>
+            <item
+                android:id="@+id/all_incidencias"
+                android:title="Todas las incidencias"
+                android:icon="@drawable/all_incidencias"
+                />
+            <item
+                android:id="@+id/nav_mis_incidencias"
+                android:icon="@drawable/mis_incidencias_cirep"
+                android:title="@string/menu_mis_incidencias" />
+        </menu>
+    </item>
+
+
+    <item
+        android:id="@+id/nav_logout_group"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/cerrar_sesion_cirep"
+                android:title="@string/menu_logout"
+                android:orderInCategory="100"
+                />
+        </menu>
+    </item>
+
 </menu>

@@ -78,6 +78,7 @@
     <string name="menu_perfil">Mi Perfil</string>
     <string name="menu_mapa">Mapa de incidencias</string>
     <string name="menu_mis_incidencias">Mis incidencias</string>
+    <string name="menu_all_incidencias">Todas las incidencias</string>
     <string name="menu_logout">Cerrar sesión</string>
     <string name="title_activity_maps">MapsActivity</string>
     <!-- TODO: Remove or change this placeholder text -->

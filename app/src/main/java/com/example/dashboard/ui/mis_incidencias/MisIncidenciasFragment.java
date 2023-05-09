@@ -1,24 +1,22 @@
 package com.example.dashboard.ui.mis_incidencias;
 
+import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.lifecycle.Observer;
 
 import com.example.cirep_frontend.R;
-import com.example.cirep_frontend.databinding.FragmentIncidenciasBinding;
 import com.example.comun.model.Incidencia;
 
 import java.io.ByteArrayOutputStream;
@@ -30,6 +28,7 @@ public class MisIncidenciasFragment extends Fragment {
 
     private IncidenciasViewModel viewModel;
     private final int NUM_INCIDENCIAS_FALSAS = 10;
+    private Dialog dialogoCarga;
 
     @Override
     public void onDestroyView() {
@@ -40,7 +39,16 @@ public class MisIncidenciasFragment extends Fragment {
    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
        View view = inflater.inflate(R.layout.fragment_incidencias, container, false);
-       loadIncidencias(view, getFalsasIncidencias());
+       mostrarCarga();
+       viewModel = new IncidenciasViewModel();
+       viewModel.getIncidenciasUserSuccess().observe(getViewLifecycleOwner(), new Observer<List<Incidencia>>() {
+           @Override
+           public void onChanged(List<Incidencia> incidencias) {
+               loadIncidencias(view, incidencias);
+               ocultarCarga();
+           }
+       });
+       viewModel.getIncidenciasUsuario();//UserDataSession.getInstance().getUsuario().getEmail());
        return view;
    }
 
@@ -59,9 +67,7 @@ public class MisIncidenciasFragment extends Fragment {
            tituloIncidencia.setText(incidencia.getTitle());
            incidenciasContainer.addView(incidenciaView);
        }
-       // ...
 
-       // Añadir la vista al contenedor
    }
 
    private List<Incidencia> getFalsasIncidencias(){
@@ -84,4 +90,20 @@ public class MisIncidenciasFragment extends Fragment {
        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
        return stream.toByteArray();
    }
+
+    public void mostrarCarga() {
+        if (dialogoCarga == null) {
+            dialogoCarga = new Dialog(this.getContext(), R.style.LoadingDialog);
+            dialogoCarga.setContentView(R.layout.loading_layout);
+            dialogoCarga.setCancelable(false);
+            dialogoCarga.show();
+        }
+    }
+
+    public void ocultarCarga() {
+        if (dialogoCarga != null && dialogoCarga.isShowing()) {
+            dialogoCarga.dismiss();
+            dialogoCarga = null;
+        }
+    }
 }
