@@ -171,9 +171,8 @@ public class Repository {
             }
         });
     }
-//todo da error
-    public void getIncidenciasUser(String email, getIncidenciasUserCallback callback) {
-        apiService.getIncidencias(email, email).enqueue(new retrofit2.Callback() {
+    public void getIncidenciasUser(getIncidenciasUserCallback callback) {
+        apiService.getIncidenciasUser(UserDataSession.getInstance().getToken()).enqueue(new retrofit2.Callback() {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) {
                 if (response.isSuccessful()) {

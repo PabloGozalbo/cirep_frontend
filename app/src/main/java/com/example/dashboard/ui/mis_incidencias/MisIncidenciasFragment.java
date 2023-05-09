@@ -53,7 +53,7 @@ public class MisIncidenciasFragment extends Fragment {
                ocultarCarga();
            }
        });
-       viewModel.getIncidenciasUsuario("hola@ihah.es");//UserDataSession.getInstance().getUsuario().getEmail());
+       viewModel.getIncidenciasUsuario();//UserDataSession.getInstance().getUsuario().getEmail());
        return view;
    }
 

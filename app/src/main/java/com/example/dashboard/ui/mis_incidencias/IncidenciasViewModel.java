@@ -19,8 +19,8 @@ public class IncidenciasViewModel {
         this.repository = new Repository();
     }
 
-    public void getIncidenciasUsuario(String email){
-        this.repository.getIncidenciasUser(email, new Repository.getIncidenciasUserCallback() {
+    public void getIncidenciasUsuario(){
+        this.repository.getIncidenciasUser( new Repository.getIncidenciasUserCallback() {
             @Override
             public void onSuccess(List<Incidencia> incidencias) {
                 incidenciasUserSuccess.postValue(incidencias);

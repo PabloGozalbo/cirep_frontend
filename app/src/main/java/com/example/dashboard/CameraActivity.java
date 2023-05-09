@@ -55,7 +55,7 @@ public class CameraActivity extends AppCompatActivity {
     private ExecutorService cameraExecutor;
     private PreviewView mPreviewView;
     private int REQUEST_CODE_PERMISSIONS = 1001;
-    private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA", "android.permission.MANAGE_EXTERNAL_STORAGE" ,"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.READ_EXTERNAL_STORAGE"};
+    private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

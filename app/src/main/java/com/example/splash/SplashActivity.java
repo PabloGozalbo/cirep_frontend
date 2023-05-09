@@ -32,7 +32,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                goToDashboard();
+                goToLogin();
             }
         }, SPLASH_TIMEOUT);
     }
