@@ -19,8 +19,8 @@ public class Incidencia {
     private String description;
     private byte[] image;
     private Estado state;
-    private int latitude;
-    private int longitude;
+    private double latitude;
+    private double longitude;
     private String author;
 
     public String getId_report() {
@@ -71,19 +71,19 @@ public class Incidencia {
         this.state = state;
     }
 
-    public int getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(int latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public int getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(int longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
