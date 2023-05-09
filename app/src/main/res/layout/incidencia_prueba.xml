@@ -1,0 +1,65 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="130dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="1dp"
+        android:background="@drawable/incidencia_prueba"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:outlineProvider="background"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:id="@+id/linear_imagen_incidencia"
+            android:layout_width="100dp"
+
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/incidencia_imagen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/sioque"
+                android:clipToOutline="true"
+                android:scaleType="fitCenter"
+
+                android:src="@drawable/mia_khalifa" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/textLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_toEndOf="@+id/linear_imagen_incidencia"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/incidencia_titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Título"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/descriptionTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descripción"
+                android:textColor="#ffffff"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</RelativeLayout>
