@@ -14,11 +14,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.example.cirep_frontend.R;
-import com.example.cirep_frontend.databinding.ActivityLoginBinding;
 import com.example.cirep_frontend.databinding.ActivityReportarIncidenciaBinding;
-import com.example.comun.cache.UserDataSession;
 import com.example.comun.model.Incidencia;
-import com.example.comun.repository.Repository;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,7 +27,6 @@ public class ReportarIncidencia extends AppCompatActivity {
 
     private Spinner selector;
     private ActivityReportarIncidenciaBinding binding;
-
     private Button reportar;
     private ImageView imagen;
     private EditText comentarios;
@@ -82,15 +78,10 @@ public class ReportarIncidencia extends AppCompatActivity {
                 reportar();
             }
         });
-
-
-
     }
 
     private void reportar() {
         Incidencia incidencia = new Incidencia();
-
-        incidencia.setAuthor(UserDataSession.getInstance().getUsuario().getEmail());
 
         incidencia.setDescription(comentarios.getText().toString());
 
@@ -107,8 +98,7 @@ public class ReportarIncidencia extends AppCompatActivity {
 
         incidencia.setReport_type(selector.getPrompt().toString());
 
-
-
+        incidencia.setState(Incidencia.Estado.PENDIENTE_REVISION);
 
     }
 }

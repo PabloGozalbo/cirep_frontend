@@ -1,7 +1,5 @@
 package com.example.comun.model;
 
-import android.media.Image;
-
 import java.util.Calendar;
 
 public class Incidencia {
@@ -18,7 +16,7 @@ public class Incidencia {
     private Calendar report_date;
     private String description;
     private byte[] image;
-    private Estado state;
+    private String state;
     private double latitude;
     private double longitude;
     private String author;
@@ -63,11 +61,11 @@ public class Incidencia {
         this.image = image;
     }
 
-    public Estado getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(Estado state) {
+    public void setState(String state) {
         this.state = state;
     }
 
