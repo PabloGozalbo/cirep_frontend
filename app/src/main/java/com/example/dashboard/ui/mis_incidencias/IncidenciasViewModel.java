@@ -37,4 +37,18 @@ public class IncidenciasViewModel {
         return incidenciasUserSuccess;
     }
 
+    public void newIncidencia( Incidencia incidencia, String token){
+        this.repository.crearIncidencia( incidencia, token, new Repository.createIncidenciasUserCallback() {
+
+            @Override
+            public void onSuccess(List<Incidencia> incidencias) {
+                incidenciasUserSuccess.postValue(incidencias);
+            }
+            @Override
+            public void onFailure() {
+                incidenciasUserSuccess.postValue(new ArrayList<>());
+            }
+        });
+    }
+
 }

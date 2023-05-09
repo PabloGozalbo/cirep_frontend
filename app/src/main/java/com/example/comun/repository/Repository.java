@@ -65,7 +65,7 @@ public class Repository {
     }
 
     public static abstract class createIncidenciasUserCallback {
-        public abstract void onSuccess();
+        public abstract void onSuccess(List<Incidencia> incidencias);
         public abstract void onFailure();
     }
 
@@ -187,8 +187,8 @@ public class Repository {
         });
     }
 
-    public void crearIncidencia(String email, Incidencia incidencia, getIncidenciasCallback callback) {
-        apiService.crearIncidencia(incidencia, email).enqueue(new retrofit2.Callback() {
+    public void crearIncidencia( Incidencia incidencia, String token, createIncidenciasUserCallback callback) {
+        apiService.crearIncidencia(token, incidencia).enqueue(new retrofit2.Callback() {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) {
                 if (response.isSuccessful()) {

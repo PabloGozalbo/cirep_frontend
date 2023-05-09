@@ -13,7 +13,7 @@ public class Incidencia {
     }
     private String id;
     private String description;
-    private Calendar report_date;
+    private String report_date;
     private byte[] image;
     private String state;
     private double latitude;
@@ -28,11 +28,11 @@ public class Incidencia {
         this.id = id_report;
     }
 
-    public Calendar getReport_date() {
+    public String getReport_date() {
         return report_date;
     }
 
-    public void setReport_date(Calendar report_date) {
+    public void setReport_date(String report_date) {
         this.report_date = report_date;
     }
 

@@ -3,6 +3,7 @@ package com.example.dashboard;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.os.Bundle;
@@ -15,16 +16,21 @@ import android.widget.Spinner;
 
 import com.example.cirep_frontend.R;
 import com.example.cirep_frontend.databinding.ActivityReportarIncidenciaBinding;
+import com.example.comun.cache.UserDataSession;
 import com.example.comun.model.Incidencia;
+import com.example.dashboard.ui.mis_incidencias.IncidenciasViewModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class ReportarIncidencia extends AppCompatActivity {
 
+    private IncidenciasViewModel viewModel;
     private Spinner selector;
     private ActivityReportarIncidenciaBinding binding;
     private Button reportar;
@@ -54,6 +60,8 @@ public class ReportarIncidencia extends AppCompatActivity {
                 }
             }
         });
+
+        viewModel = new IncidenciasViewModel();
 
         binding = ActivityReportarIncidenciaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -94,11 +102,24 @@ public class ReportarIncidencia extends AppCompatActivity {
         incidencia.setLatitude(latitud);
         incidencia.setLongitude(longitud);
 
-        incidencia.setReport_date(Calendar.getInstance());
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String strDate = formatter.format(date);
+        incidencia.setReport_date(strDate);
 
-        incidencia.setReport_type(selector.getPrompt().toString());
+        incidencia.setReport_type(selector.getSelectedItem().toString());
 
         incidencia.setState(Incidencia.Estado.PENDIENTE_REVISION);
 
+        viewModel.newIncidencia(incidencia, UserDataSession.getInstance().getToken());
+
+        goToDashboard();
+
+    }
+
+    private void goToDashboard(){
+        Intent intent = new Intent(this, DashboardActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

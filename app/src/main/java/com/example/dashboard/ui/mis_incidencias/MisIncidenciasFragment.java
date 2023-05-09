@@ -69,7 +69,6 @@ public class MisIncidenciasFragment extends Fragment {
            ImageView imagenIncidencia = incidenciaView.findViewById(R.id.incidencia_imagen);
            TextView tituloIncidencia = incidenciaView.findViewById(R.id.incidencia_titulo);
            imagenIncidencia.setImageBitmap(BitmapFactory.decodeByteArray(incidencia.getImage(), 0, incidencia.getImage().length));
-           tituloIncidencia.setText(incidencia.getTitle());
            incidenciasContainer.addView(incidenciaView);
        }
        // ...
@@ -81,7 +80,6 @@ public class MisIncidenciasFragment extends Fragment {
         List<Incidencia> incidencias = new ArrayList<>();
         for(int i=0; i<NUM_INCIDENCIAS_FALSAS; i++) {
             Incidencia incidencia = new Incidencia();
-            incidencia.setTitle("HOLA ESTO ES UNA PRUEBA "+i);
             incidencia.setImage(decodeImage(R.drawable.mia_khalifa));
             incidencias.add(incidencia);
         }
