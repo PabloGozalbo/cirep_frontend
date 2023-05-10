@@ -19,6 +19,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.cirep_frontend.R;
 import com.example.cirep_frontend.databinding.ActivityDashboardBinding;
 import com.example.comun.cache.UserDataSession;
+import com.example.comun.model.Incidencia;
 import com.example.dashboard.ui.mapa.dialogo.DialogoPersonalizado;
 import com.example.login.ui.login.LoginActivity;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,6 +28,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.List;
 
 public class DashboardActivity extends AppCompatActivity implements DialogoPersonalizado.OnMiDialogoPersonalizadoListener {
 
@@ -71,9 +74,7 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
         this.logout.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
-                finish();
+                doLogout();
                 return true;
             }
         });
@@ -118,12 +119,19 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
     @Override
     public void onAceptarClick(LatLng latLng) {
         addMarker(latLng);
-        goToReportarIncidencia();
+       // goToReportarIncidencia();
     }
 
     @Override
     public void onCancelarClick() {
         //Por ahora no se hace nada
+    }
+
+    public void fillMap(List<Incidencia> incidencias) {
+        for (Incidencia incidencia : incidencias) {
+            LatLng latLng = new LatLng(incidencia.getLatitude(), incidencia.getLongitude());
+            addMarker(latLng);
+        }
     }
 
     private void doLogout(){

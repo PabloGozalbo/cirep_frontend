@@ -28,6 +28,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.cirep_frontend.R;
 import com.example.cirep_frontend.databinding.ActivityMapsBinding;
+import com.example.comun.model.Incidencia;
 import com.example.dashboard.DashboardActivity;
 import com.example.dashboard.ui.mapa.dialogo.DialogoPersonalizado;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -187,5 +188,6 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
     public void onDestroyView() {
         super.onDestroyView();
     }
+
 
 }

@@ -35,7 +35,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap map;
     private ActivityMapsBinding binding;
-    private MapaViewModel mapaViewModel;
     private static final int REQUEST_CODE_LOCATION = 1;
     private LocationManager locationManager;
 
@@ -89,7 +88,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         map = googleMap;
         this.map.setOnMapClickListener(this::onMapClick);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        fillMap(mapaViewModel.getIncidencias());
        // transaction.add(R.id.map, new CustomMapFragment());
         transaction.commit();
     }

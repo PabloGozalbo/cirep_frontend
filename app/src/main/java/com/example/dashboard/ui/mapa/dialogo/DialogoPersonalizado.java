@@ -77,15 +77,15 @@ public class DialogoPersonalizado extends DialogFragment {
             @Override
             public void onClick(View v) {
                 listener.onAceptarClick(latLng);
-                goToReportarIncidencia();
+               // goToReportarIncidencia();
             }
         });
 
         return builder.create();
     }
-
+/*
     private void goToReportarIncidencia(){
         Intent intent = new Intent(this.getContext(), ReportarIncidencia.class);
         startActivity(intent);
-    }
+    }*/
 }
