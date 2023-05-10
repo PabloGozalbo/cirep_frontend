@@ -50,7 +50,7 @@ public class Repository {
     }
 
     public static abstract class getIncidenciasCallback {
-        public abstract List<Incidencia> onSuccess(List<Incidencia> incidencias);
+        public abstract void onSuccess(List<Incidencia> incidencias);
         public abstract void onFailure();
     }
 

@@ -43,7 +43,7 @@ import java.util.List;
 public class MapaFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap map;
-    private ActivityMapsBinding binding;
+
     private SupportMapFragment mapFragment;
     private LocationManager locationManager;
     private Location lastLocation;
@@ -186,7 +186,6 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
     }
 
 }

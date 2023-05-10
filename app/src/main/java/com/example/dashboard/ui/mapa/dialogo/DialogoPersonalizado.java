@@ -3,6 +3,7 @@ package com.example.dashboard.ui.mapa.dialogo;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.cirep_frontend.R;
+import com.example.dashboard.DashboardActivity;
+import com.example.dashboard.ReportarIncidencia;
 import com.google.android.gms.maps.model.LatLng;
 
 public class DialogoPersonalizado extends DialogFragment {
@@ -74,10 +77,15 @@ public class DialogoPersonalizado extends DialogFragment {
             @Override
             public void onClick(View v) {
                 listener.onAceptarClick(latLng);
-                dismiss();
+                goToReportarIncidencia();
             }
         });
 
         return builder.create();
+    }
+
+    private void goToReportarIncidencia(){
+        Intent intent = new Intent(this.getContext(), ReportarIncidencia.class);
+        startActivity(intent);
     }
 }
