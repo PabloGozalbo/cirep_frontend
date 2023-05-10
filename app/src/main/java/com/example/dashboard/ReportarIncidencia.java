@@ -113,13 +113,13 @@ public class ReportarIncidencia extends AppCompatActivity {
 
         viewModel.newIncidencia(incidencia, UserDataSession.getInstance().getToken());
 
-      //  goToDashboard();
+        goToDashboard();
 
     }
 
-/*    private void goToDashboard(){
+    private void goToDashboard(){
         Intent intent = new Intent(this, DashboardActivity.class);
         startActivity(intent);
         finish();
-    }*/
+    }
 }
