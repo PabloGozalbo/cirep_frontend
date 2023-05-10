@@ -14,6 +14,7 @@ public class IncidenciasViewModel {
     Repository repository;
     private MutableLiveData<List<Incidencia>> incidenciasUserSuccess = new MutableLiveData<>();
     private MutableLiveData<List<Incidencia>> incidenciasSuccess = new MutableLiveData<>();
+    private MutableLiveData<Incidencia> incidenciaPorIdSuccess = new MutableLiveData<>();
 
 
     public IncidenciasViewModel(){
@@ -56,6 +57,9 @@ public class IncidenciasViewModel {
         return incidenciasSuccess;
     }
 
+    public LiveData<Incidencia> getIncidenciaPorIdCallback() {
+        return incidenciaPorIdSuccess;
+    }
 
     public void newIncidencia( Incidencia incidencia, String token){
         this.repository.crearIncidencia( incidencia, token, new Repository.createIncidenciasUserCallback() {
@@ -67,6 +71,20 @@ public class IncidenciasViewModel {
             @Override
             public void onFailure() {
                 incidenciasUserSuccess.postValue(new ArrayList<>());
+            }
+        });
+    }
+
+    public void getIncidenciaPorId(String token, int id){
+        this.repository.getIncidenciaPorId(token, id, new Repository.getIncidenciaPorIdCallback() {
+            @Override
+            public void onSuccess(Incidencia incidencia) {
+                incidenciaPorIdSuccess.postValue(incidencia);
+            }
+
+            @Override
+            public void onFailure() {
+                incidenciaPorIdSuccess.postValue(null);
             }
         });
     }

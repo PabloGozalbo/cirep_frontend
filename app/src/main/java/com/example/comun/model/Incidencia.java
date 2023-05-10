@@ -19,6 +19,7 @@ public class Incidencia {
     private double latitude;
     private double longitude;
     private String author;
+    private String report_type;
 
     public String getId_report() {
         return id;
@@ -91,8 +92,6 @@ public class Incidencia {
     public void setReport_type(String report_type) {
         this.report_type = report_type;
     }
-
-    private String report_type;
 
 
 
