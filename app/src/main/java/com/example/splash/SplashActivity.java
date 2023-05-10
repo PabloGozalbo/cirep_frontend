@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.cirep_frontend.R;
+import com.example.comun.MyNotificationService;
 import com.example.dashboard.DashboardActivity;
 import com.example.login.ui.login.LoginActivity;
 
@@ -22,6 +23,7 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.splash_activity);
@@ -32,6 +34,8 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                Intent intent = new Intent(getApplicationContext(), MyNotificationService.class);
+                startService(intent);
                 goToLogin();
             }
         }, SPLASH_TIMEOUT);

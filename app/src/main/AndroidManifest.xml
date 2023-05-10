@@ -11,6 +11,8 @@
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -78,6 +80,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.login.ui.login.LoginActivity" />
+        <service android:name="com.example.comun.MyNotificationService" />
     </application>
 
 </manifest>
