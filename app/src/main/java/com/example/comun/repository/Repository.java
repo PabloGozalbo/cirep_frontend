@@ -200,16 +200,7 @@ public class Repository {
                         incidencia.setReport_date(jsonObject.getString("report_date"));
                         incidencia.setId_report(jsonObject.getInt("id"));
 
-                        String imageString = jsonObject.getString("image");
-                        InputStream inputStream = new ByteArrayInputStream(imageString.getBytes());
-                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-
-                        byte[] buffer = new byte[1024];
-                        int len;
-                        while ((len = inputStream.read(buffer)) != -1) {
-                            outputStream.write(buffer, 0, len);
-                        }
-                        incidencia.setImage(outputStream.toByteArray());
+                        incidencia.setImage(jsonObject.getString("image"));
 
                         callback.onSuccess(incidencia);
                     } catch (Exception e){
@@ -262,21 +253,12 @@ public class Repository {
         JsonObject fieldsObject = issueObject.getAsJsonObject("fields");
         String report_date = fieldsObject.get("report_date").getAsString();
         String description = fieldsObject.get("description").getAsString();
-        String imagestr = fieldsObject.get("image").getAsString();
+        String image = fieldsObject.get("image").getAsString();
         String state = fieldsObject.get("report_date").getAsString();
         double latitude = fieldsObject.get("latitude").getAsDouble();
         double longitude = fieldsObject.get("longitude").getAsDouble();
         String author = fieldsObject.get("author").getAsString();
         String report_type = fieldsObject.get("report_type").getAsString();
-        InputStream inputStream = new ByteArrayInputStream(imagestr.getBytes());
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        int longBuffer = imagestr.getBytes().length;
-        byte[] buffer = new byte[longBuffer];
-        int len;
-        while ((len = inputStream.read(buffer)) != -1) {
-            outputStream.write(buffer, 0, len);
-        }
-        byte[] image = outputStream.toByteArray();
 
         Incidencia incidencia = new Incidencia(idIncidencia, description, report_date, image, state, latitude, longitude, author, report_type);
         return incidencia;

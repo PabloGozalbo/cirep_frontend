@@ -12,7 +12,7 @@ public class Incidencia {
     private int id;
     private String description;
     private String report_date;
-    private byte[] image;
+    private String image;
     private String state;
     private double latitude;
     private double longitude;
@@ -21,7 +21,7 @@ public class Incidencia {
 
     public Incidencia(){}
 
-    public Incidencia(int id, String description, String report_date, byte[] image, String state, double latitude, double longitude, String author, String report_type) {
+    public Incidencia(int id, String description, String report_date, String image, String state, double latitude, double longitude, String author, String report_type) {
         this.id = id;
         this.description = description;
         this.report_date = report_date;
@@ -57,11 +57,11 @@ public class Incidencia {
         this.description = description;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

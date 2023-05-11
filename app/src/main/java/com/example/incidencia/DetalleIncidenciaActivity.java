@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -63,7 +64,8 @@ public class DetalleIncidenciaActivity extends AppCompatActivity {
     }
 
     private void loadIncidenciaOnView(Incidencia incidencia) {
-        byte[] imageBytes = incidencia.getImage();
+        String imageB64 = incidencia.getImage();
+        byte[] imageBytes = Base64.decode(imageB64, Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
         imageView.setImageBitmap(bitmap);
 

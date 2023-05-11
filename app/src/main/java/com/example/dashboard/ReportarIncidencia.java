@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -76,6 +77,7 @@ public class ReportarIncidencia extends AppCompatActivity {
         imagen = findViewById(R.id.imageView2);
         imageData = ImageData.getInstantce();
         imagen.setImageBitmap(imageData.getImage());
+        imagen.setRotation(90);
 
         comentarios = findViewById(R.id.editTextTextMultiLine);
 
@@ -97,7 +99,8 @@ public class ReportarIncidencia extends AppCompatActivity {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageInByte = baos.toByteArray();
-        incidencia.setImage(imageInByte);
+        String base64Image = Base64.encodeToString(imageInByte, Base64.DEFAULT);
+        incidencia.setImage(base64Image);
 
         incidencia.setLatitude(latitud);
         incidencia.setLongitude(longitud);

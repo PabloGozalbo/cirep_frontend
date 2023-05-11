@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +66,7 @@ public class MisIncidenciasFragment extends Fragment {
            TextView tituloIncidencia = incidenciaView.findViewById(R.id.incidencia_titulo);
            TextView descripcionIncidencia = incidenciaView.findViewById(R.id.incidencia_descripcion);
            tituloIncidencia.setText(incidencia.getReport_type());
-           Bitmap bitmap = BitmapFactory.decodeByteArray(incidencia.getImage(), 0, incidencia.getImage().length);
+           Bitmap bitmap = BitmapFactory.decodeByteArray(Base64.decode(incidencia.getImage(), Base64.DEFAULT), 0,Base64.decode(incidencia.getImage(), Base64.DEFAULT).length);
            imagenIncidencia.setImageBitmap(bitmap);
            descripcionIncidencia.setText(incidencia.getDescription());
            incidenciasContainer.addView(incidenciaView);
@@ -79,7 +80,7 @@ public class MisIncidenciasFragment extends Fragment {
         List<Incidencia> incidencias = new ArrayList<>();
         for(int i=0; i<NUM_INCIDENCIAS_FALSAS; i++) {
             Incidencia incidencia = new Incidencia();
-            incidencia.setImage(decodeImage(R.drawable.mia_khalifa));
+            incidencia.setImage(Base64.encodeToString(decodeImage(R.drawable.mia_khalifa), Base64.DEFAULT));//TODO cambiar foto pls
             incidencias.add(incidencia);
         }
         return incidencias;

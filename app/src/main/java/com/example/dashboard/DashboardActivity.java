@@ -21,6 +21,7 @@ import com.example.cirep_frontend.databinding.ActivityDashboardBinding;
 import com.example.comun.cache.UserDataSession;
 import com.example.comun.model.Incidencia;
 import com.example.dashboard.ui.mapa.dialogo.DialogoPersonalizado;
+import com.example.incidencia.DetalleIncidenciaActivity;
 import com.example.login.ui.login.LoginActivity;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
@@ -49,6 +50,8 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
         binding.appBarDashboard.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+               /* Intent intent = new Intent(DashboardActivity.this, DetalleIncidenciaActivity.class);
+                intent.putExtra("incidencia", 2);*/
                 Intent intent = new Intent(DashboardActivity.this, CameraActivity.class);
                 startActivity(intent);
             }
