@@ -49,7 +49,6 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
     private LocationManager locationManager;
     private Location lastLocation;
 
-
     public static final int REQUEST_CHECK_SETTINGS = 1001;
 
 

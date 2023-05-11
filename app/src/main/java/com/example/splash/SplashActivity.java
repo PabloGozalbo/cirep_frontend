@@ -36,7 +36,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 Intent intent = new Intent(getApplicationContext(), MyNotificationService.class);
                 startService(intent);
-                goToLogin();
+                goToDashboard();
             }
         }, SPLASH_TIMEOUT);
     }

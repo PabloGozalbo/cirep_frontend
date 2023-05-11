@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.Observer;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -20,6 +21,7 @@ import com.example.cirep_frontend.R;
 import com.example.cirep_frontend.databinding.ActivityDashboardBinding;
 import com.example.comun.cache.UserDataSession;
 import com.example.comun.model.Incidencia;
+import com.example.dashboard.ui.mapa.MapaViewModel;
 import com.example.dashboard.ui.mapa.dialogo.DialogoPersonalizado;
 import com.example.incidencia.DetalleIncidenciaActivity;
 import com.example.login.ui.login.LoginActivity;
@@ -38,6 +40,8 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
     private ActivityDashboardBinding binding;
     public static GoogleMap map;
     public MenuItem logout;
+    private MapaViewModel mapaViewModel;
+    private List<Incidencia> listaIncidencias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,18 +50,24 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
         binding = ActivityDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        mapaViewModel = new MapaViewModel();
+
         setSupportActionBar(binding.appBarDashboard.toolbar);
         binding.appBarDashboard.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* Intent intent = new Intent(DashboardActivity.this, DetalleIncidenciaActivity.class);
-                intent.putExtra("incidencia", 2);*/
                 Intent intent = new Intent(DashboardActivity.this, CameraActivity.class);
                 startActivity(intent);
             }
         });
 
-
+        mapaViewModel.getIncidenciasSuccess().observe(this, new Observer<List<Incidencia>>() {
+            @Override
+            public void onChanged(List<Incidencia> incidencias) {
+                listaIncidencias = incidencias;
+            }
+        });
+        mapaViewModel.getIncidencias();
 
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
@@ -80,6 +90,8 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
                 return true;
             }
         });
+
+        fillMap();
     }
 
     @Override
@@ -129,8 +141,8 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
         //Por ahora no se hace nada
     }
 
-    public void fillMap(List<Incidencia> incidencias) {
-        for (Incidencia incidencia : incidencias) {
+    public void fillMap() {
+        for (Incidencia incidencia : listaIncidencias) {
             LatLng latLng = new LatLng(incidencia.getLatitude(), incidencia.getLongitude());
             addMarker(latLng);
         }
