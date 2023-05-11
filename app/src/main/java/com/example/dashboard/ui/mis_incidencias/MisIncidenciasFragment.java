@@ -3,25 +3,20 @@ package com.example.dashboard.ui.mis_incidencias;
 import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cirep_frontend.R;
-import com.example.cirep_frontend.databinding.FragmentIncidenciasBinding;
-import com.example.comun.cache.UserDataSession;
 import com.example.comun.model.Incidencia;
 
 import java.io.ByteArrayOutputStream;
@@ -68,7 +63,11 @@ public class MisIncidenciasFragment extends Fragment {
            // Configurar la vista con los datos de la incidencia
            ImageView imagenIncidencia = incidenciaView.findViewById(R.id.incidencia_imagen);
            TextView tituloIncidencia = incidenciaView.findViewById(R.id.incidencia_titulo);
-           imagenIncidencia.setImageBitmap(BitmapFactory.decodeByteArray(incidencia.getImage(), 0, incidencia.getImage().length));
+           TextView descripcionIncidencia = incidenciaView.findViewById(R.id.incidencia_descripcion);
+           tituloIncidencia.setText(incidencia.getReport_type());
+           Bitmap bitmap = BitmapFactory.decodeByteArray(incidencia.getImage(), 0, incidencia.getImage().length);
+           imagenIncidencia.setImageBitmap(bitmap);
+           descripcionIncidencia.setText(incidencia.getDescription());
            incidenciasContainer.addView(incidenciaView);
        }
        // ...

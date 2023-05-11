@@ -1,7 +1,5 @@
 package com.example.comun.model;
 
-import java.util.Calendar;
-
 public class Incidencia {
 
     public class Estado{
@@ -11,7 +9,7 @@ public class Incidencia {
         public static final String DESCARTADA = "D";
 
     }
-    private String id;
+    private int id;
     private String description;
     private String report_date;
     private byte[] image;
@@ -19,12 +17,28 @@ public class Incidencia {
     private double latitude;
     private double longitude;
     private String author;
+    private String report_type;
 
-    public String getId_report() {
+    public Incidencia(){
+
+    }
+    public Incidencia(int id, String description, String report_date, byte[] image, String state, double latitude, double longitude, String author, String report_type) {
+        this.id = id;
+        this.description = description;
+        this.report_date = report_date;
+        this.image = image;
+        this.state = state;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.author = author;
+        this.report_type = report_type;
+    }
+
+    public int getId_report() {
         return id;
     }
 
-    public void setId_report(String id_report) {
+    public void setId_report(int id_report) {
         this.id = id_report;
     }
 
@@ -92,7 +106,6 @@ public class Incidencia {
         this.report_type = report_type;
     }
 
-    private String report_type;
 
 
 

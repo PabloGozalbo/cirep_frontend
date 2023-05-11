@@ -23,8 +23,8 @@ public interface ApiService {
     @POST("/accounts/login/")
     Call<JsonObject> loginUser(@Body UsuarioLogin user);
 
-    @GET("/reports")
-    Call<JsonObject> getIncidencias();
+    @GET("/reports/get_all_reports/")
+    Call<JsonArray> getIncidencias();
 
     @POST("/reports/create_report/")
     Call<JsonObject> crearIncidencia(@Header("token") String token,@Body Incidencia incidencias);
