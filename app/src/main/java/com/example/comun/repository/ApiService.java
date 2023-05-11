@@ -26,6 +26,9 @@ public interface ApiService {
     @GET("/reports/get_all_reports/")
     Call<JsonArray> getIncidencias();
 
+    @GET("/reports/get_report/{reportId}")
+    Call<JsonObject> getIncidenciaPorId(@Header("token") String token, @Path("reportId") int reportId);
+
     @POST("/reports/create_report/")
     Call<JsonObject> crearIncidencia(@Header("token") String token,@Body Incidencia incidencias);
 

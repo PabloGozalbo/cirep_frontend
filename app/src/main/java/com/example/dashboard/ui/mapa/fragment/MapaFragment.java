@@ -28,6 +28,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.cirep_frontend.R;
 import com.example.cirep_frontend.databinding.ActivityMapsBinding;
+import com.example.comun.model.Incidencia;
 import com.example.dashboard.DashboardActivity;
 import com.example.dashboard.ui.mapa.dialogo.DialogoPersonalizado;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -43,7 +44,7 @@ import java.util.List;
 public class MapaFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap map;
-    private ActivityMapsBinding binding;
+
     private SupportMapFragment mapFragment;
     private LocationManager locationManager;
     private Location lastLocation;
@@ -186,7 +187,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
     }
+
 
 }

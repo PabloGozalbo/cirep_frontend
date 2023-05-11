@@ -21,14 +21,12 @@ import com.example.comun.model.Incidencia;
 import com.example.dashboard.ui.mis_incidencias.IncidenciasViewModel;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class AllIncidenciasFragment extends Fragment {
 
     private IncidenciasViewModel viewModel;
-    private final int NUM_INCIDENCIAS_FALSAS = 10;
     private Dialog dialogoCarga;
 
     @Override
@@ -71,19 +69,8 @@ public class AllIncidenciasFragment extends Fragment {
             descripcionIncidencia.setText(incidencia.getDescription());
             incidenciasContainer.addView(incidenciaView);
         }
-        // ...
 
         // Añadir la vista al contenedor
-    }
-
-    private List<Incidencia> getFalsasIncidencias(){
-        List<Incidencia> incidencias = new ArrayList<>();
-        for(int i=0; i<NUM_INCIDENCIAS_FALSAS; i++) {
-            Incidencia incidencia = new Incidencia();
-            incidencia.setImage(decodeImage(R.drawable.mia_khalifa));
-            incidencias.add(incidencia);
-        }
-        return incidencias;
     }
 
     private byte[] decodeImage(int idImagen){

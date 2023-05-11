@@ -20,7 +20,6 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,6 +56,11 @@ public class Repository {
 
     public static abstract class getIncidenciasCallback {
         public abstract void onSuccess(List<Incidencia> incidencias);
+        public abstract void onFailure();
+    }
+
+    public static abstract class getIncidenciaPorIdCallback {
+        public abstract void onSuccess(Incidencia incidencia);
         public abstract void onFailure();
     }
 
@@ -165,6 +169,49 @@ public class Repository {
                         }
                         callback.onSuccess(incidencias);
                     }catch (Exception e){
+                        e.printStackTrace();
+                        callback.onFailure();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull Throwable t) {
+                callback.onFailure();
+            }
+        });
+    }
+    public void getIncidenciaPorId(String token, int reportId, getIncidenciaPorIdCallback callback) {
+        apiService.getIncidenciaPorId(token, reportId).enqueue(new retrofit2.Callback() {
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
+                if (response.isSuccessful()) {
+                    try {
+                        String jsonResponse = response.body().toString();
+                        JSONObject jsonObject = new JSONObject(jsonResponse);
+
+                        Incidencia incidencia = new Incidencia();
+                        incidencia.setReport_type(jsonObject.getString("report_type"));
+                        incidencia.setAuthor(jsonObject.getString("author"));
+                        incidencia.setLongitude(jsonObject.getDouble("longitude"));
+                        incidencia.setLatitude(jsonObject.getDouble("latitude"));
+                        incidencia.setState(jsonObject.getString("state"));
+                        incidencia.setDescription(jsonObject.getString("description"));
+                        incidencia.setReport_date(jsonObject.getString("report_date"));
+                        incidencia.setId_report(jsonObject.getInt("id"));
+
+                        String imageString = jsonObject.getString("image");
+                        InputStream inputStream = new ByteArrayInputStream(imageString.getBytes());
+                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+                        byte[] buffer = new byte[1024];
+                        int len;
+                        while ((len = inputStream.read(buffer)) != -1) {
+                            outputStream.write(buffer, 0, len);
+                        }
+                        incidencia.setImage(outputStream.toByteArray());
+
+                        callback.onSuccess(incidencia);
+                    } catch (Exception e){
                         e.printStackTrace();
                         callback.onFailure();
                     }

@@ -19,9 +19,8 @@ public class Incidencia {
     private String author;
     private String report_type;
 
-    public Incidencia(){
+    public Incidencia(){}
 
-    }
     public Incidencia(int id, String description, String report_date, byte[] image, String state, double latitude, double longitude, String author, String report_type) {
         this.id = id;
         this.description = description;
@@ -105,8 +104,4 @@ public class Incidencia {
     public void setReport_type(String report_type) {
         this.report_type = report_type;
     }
-
-
-
-
 }
