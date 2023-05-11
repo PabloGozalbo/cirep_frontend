@@ -1,6 +1,7 @@
 package com.example.incidencia;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,6 +15,8 @@ import com.example.comun.cache.UserDataSession;
 import com.example.comun.model.Incidencia;
 import com.example.dashboard.DashboardActivity;
 import com.example.dashboard.ui.mis_incidencias.IncidenciasViewModel;
+
+import java.util.List;
 
 public class DetalleIncidenciaActivity extends AppCompatActivity {
 
@@ -50,25 +53,27 @@ public class DetalleIncidenciaActivity extends AppCompatActivity {
             goToDashboard();
             finish();
         }
+        viewModel.getIncidenciaPorIdCallback().observe(this, new Observer<Incidencia>() {
+            @Override
+            public void onChanged(Incidencia incidencia) {
+                loadIncidenciaOnView(incidencia);
+            }
+        });
         viewModel.getIncidenciaPorId(UserDataSession.getInstance().getToken(),idIncidencia);
-        Incidencia incident = viewModel.getIncidenciaPorIdCallback().getValue();
-        System.out.println(incident);
+    }
 
-        // Muestra los datos de la incidencia en la vista
-        if (incident != null) {
-            // Muestra la imagen de la incidencia
-            byte[] imageBytes = incident.getImage();
-            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-            imageView.setImageBitmap(bitmap);
+    private void loadIncidenciaOnView(Incidencia incidencia) {
+        byte[] imageBytes = incidencia.getImage();
+        Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+        imageView.setImageBitmap(bitmap);
 
-            descriptionTextView.setText(incident.getDescription());
-            reportDateTextView.setText(incident.getReport_date());
-            stateTextView.setText(incident.getState());
-            incidentTypeTextView.setText(incident.getReport_type());
-            latitudeTextView.setText(String.valueOf(incident.getLatitude()));
-            longitudeTextView.setText(String.valueOf(incident.getLongitude()));
-            authorTextView.setText(incident.getAuthor());
-        }
+        descriptionTextView.setText(incidencia.getDescription());
+        reportDateTextView.setText(incidencia.getReport_date());
+        stateTextView.setText(incidencia.getState());
+        incidentTypeTextView.setText(incidencia.getReport_type());
+        latitudeTextView.setText(String.valueOf(incidencia.getLatitude()));
+        longitudeTextView.setText(String.valueOf(incidencia.getLongitude()));
+        authorTextView.setText(incidencia.getAuthor());
     }
 
     private void goToDashboard(){
