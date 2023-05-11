@@ -142,9 +142,11 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
     }
 
     public void fillMap() {
-        for (Incidencia incidencia : listaIncidencias) {
-            LatLng latLng = new LatLng(incidencia.getLatitude(), incidencia.getLongitude());
-            addMarker(latLng);
+        if(this.listaIncidencias != null) {
+            for (Incidencia incidencia : listaIncidencias) {
+                LatLng latLng = new LatLng(incidencia.getLatitude(), incidencia.getLongitude());
+                addMarker(latLng);
+            }
         }
     }
 
