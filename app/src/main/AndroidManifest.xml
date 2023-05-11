@@ -27,7 +27,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".DetalleIncidenciaActivity"
+            android:name="com.example.incidencia.DetalleIncidenciaActivity"
             android:exported="false" />
         <activity
             android:name=".EditProfileActivity"

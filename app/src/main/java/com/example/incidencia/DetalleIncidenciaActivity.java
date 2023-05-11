@@ -50,8 +50,9 @@ public class DetalleIncidenciaActivity extends AppCompatActivity {
             goToDashboard();
             finish();
         }
-        viewModel.getIncidenciaPorId(UserDataSession.getInstance().getToken(),idIncidencia);//TODO llamada
-        viewModel.getIncidenciaPorIdCallback().observe();
+        viewModel.getIncidenciaPorId(UserDataSession.getInstance().getToken(),idIncidencia);
+        Incidencia incident = viewModel.getIncidenciaPorIdCallback().getValue();
+        System.out.println(incident);
 
         // Muestra los datos de la incidencia en la vista
         if (incident != null) {
