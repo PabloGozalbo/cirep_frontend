@@ -33,6 +33,7 @@ import androidx.lifecycle.LifecycleOwner;
 
 import com.example.cirep_frontend.R;
 import com.example.cirep_frontend.databinding.ActivityCameraBinding;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import org.jetbrains.annotations.NotNull;
@@ -56,10 +57,15 @@ public class CameraActivity extends AppCompatActivity {
     private PreviewView mPreviewView;
     private int REQUEST_CODE_PERMISSIONS = 1001;
     private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA"};
+    private LatLng latLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getIntent().getExtras() != null){
+            latLng = (LatLng) getIntent().getExtras().get("latLng");
+        }
+
         viewBinding = ActivityCameraBinding.inflate(getLayoutInflater());
         setContentView(viewBinding.getRoot());
 
@@ -134,6 +140,9 @@ public class CameraActivity extends AppCompatActivity {
         ImageData imageData = ImageData.getInstantce();
         imageData.setImage(bitmapImage);
         Intent intent = new Intent(this, ReportarIncidencia.class);
+        if (latLng != null) {
+            intent.putExtra("latLng", latLng);
+        }
         startActivity(intent);
     }
 

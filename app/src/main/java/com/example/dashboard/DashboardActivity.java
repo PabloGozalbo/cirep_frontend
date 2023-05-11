@@ -56,8 +56,10 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
         binding.appBarDashboard.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DashboardActivity.this, CameraActivity.class);
+                Intent intent = new Intent(DashboardActivity.this, DetalleIncidenciaActivity.class);
+                intent.putExtra("incidencia", 1);
                 startActivity(intent);
+                //goToReportarIncidencia();
             }
         });
 
@@ -65,6 +67,7 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
             @Override
             public void onChanged(List<Incidencia> incidencias) {
                 listaIncidencias = incidencias;
+                fillMap();
             }
         });
         mapaViewModel.getIncidencias();
@@ -91,7 +94,6 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
             }
         });
 
-        fillMap();
     }
 
     @Override
@@ -111,7 +113,7 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
     }
 
 
-    public void addMarker(LatLng latLng){
+    public void addMarker(LatLng latLng, Incidencia incidencia){
         // Crear un icono personalizado en un archivo XML vectorial
         BitmapDescriptor iconoPersonalizado = BitmapDescriptorFactory.fromBitmap(
                 Bitmap.createScaledBitmap(
@@ -124,7 +126,7 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
         MarkerOptions marcadorPersonalizado = new MarkerOptions()
                 .position(latLng)
                 .title("Mi marcador personalizado")
-                .snippet("Este es un marcador personalizado en Google Maps")
+                .snippet("Este es un marcador personalizado en Google Maps")//TODO tipo + algo
                 .icon(iconoPersonalizado);
 
         map.addMarker(marcadorPersonalizado);
@@ -132,8 +134,7 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
 
     @Override
     public void onAceptarClick(LatLng latLng) {
-        addMarker(latLng);
-       // goToReportarIncidencia();
+        goToReportarIncidencia(latLng);
     }
 
     @Override
@@ -145,7 +146,7 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
         if(this.listaIncidencias != null) {
             for (Incidencia incidencia : listaIncidencias) {
                 LatLng latLng = new LatLng(incidencia.getLatitude(), incidencia.getLongitude());
-                addMarker(latLng);
+                addMarker(latLng, incidencia);
             }
         }
     }
@@ -158,7 +159,9 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
         UserDataSession.getInstance().setToken(null);
     }
 
-    private void goToReportarIncidencia(){
-
+    private void goToReportarIncidencia(LatLng latLng){
+        Intent intent = new Intent(DashboardActivity.this, CameraActivity.class);
+        intent.putExtra("latLng", latLng);
+        startActivity(intent);
     }
 }

@@ -80,6 +80,16 @@ public class Repository {
         public abstract void onFailure();
     }
 
+    public static abstract class getTiposDeReportesCallback  {
+        public abstract void onSuccess(List<String> reportes);
+        public abstract void onFailure();
+    }
+
+    public static abstract class desacreditarIncidenciaCallback {
+        public abstract void onSuccess();
+        public abstract void onFailure();
+    }
+
 
     public void registerUser(Usuario user, LoginCallback callback) {
         apiService.registerUser(user).enqueue(new retrofit2.Callback() {
@@ -284,6 +294,38 @@ public class Repository {
         Map<String, String> body =new HashMap<>();
         body.put(attribute, value);
         apiService.modificarPerfil(body,email,token).enqueue(new retrofit2.Callback() {
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
+                if (response.isSuccessful()) {
+                    callback.onSuccess();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull Throwable t) {
+                callback.onFailure();
+            }
+        });
+    }
+
+    public void getTiposDeReportes(String token, getTiposDeReportesCallback callback) {
+        apiService.getTiposDeReportes(token).enqueue(new retrofit2.Callback() {
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
+                if (response.isSuccessful()) {
+                    callback.onSuccess(new ArrayList<>());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull Throwable t) {
+                callback.onFailure();
+            }
+        });
+    }
+
+    public void desacreditarIncidencia(String token,int idIncidencia, desacreditarIncidenciaCallback callback) {
+        apiService.desacreditarIncidencia(token, idIncidencia).enqueue(new retrofit2.Callback() {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) {
                 if (response.isSuccessful()) {

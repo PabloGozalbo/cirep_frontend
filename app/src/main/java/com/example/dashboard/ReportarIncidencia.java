@@ -22,6 +22,7 @@ import com.example.comun.model.Incidencia;
 import com.example.dashboard.ui.mis_incidencias.IncidenciasViewModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.io.ByteArrayOutputStream;
@@ -48,19 +49,27 @@ public class ReportarIncidencia extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        fusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null){
-                    longitud = location.getLongitude();
-                    latitud = location.getLatitude();
+        if (getIntent().getExtras() != null){
+            LatLng latLng = (LatLng) getIntent().getExtras().get("latLng");
+            latitud = latLng.latitude;
+            longitud = latLng.longitude;
+        }else {
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+            fusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    if (location != null){
+                        longitud = location.getLongitude();
+                        latitud = location.getLatitude();
+                    }
+                    else {
+                        //TODO crear un aviso para que enchufe el gps
+                    }
                 }
-                else {
-                    //TODO crear un aviso para que enchufe el gps
-                }
-            }
-        });
+            });
+        }
+
+
 
         viewModel = new IncidenciasViewModel();
 

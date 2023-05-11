@@ -26,8 +26,14 @@ public interface ApiService {
     @GET("/reports/get_all_reports/")
     Call<JsonArray> getIncidencias();
 
-    @GET("/reports/get_report/{reportId}")
+    @GET("/reports/get_report/{reportId}")//TODO cambiar endopoint cuando esté hecho en back
     Call<JsonObject> getIncidenciaPorId(@Header("token") String token, @Path("reportId") int reportId);
+
+    @GET("/reports/get_report_types/")
+    Call<JsonObject> getTiposDeReportes(@Header("token") String token);
+
+    @GET("/reports/desacreditar_report/{reportId}")//TODO cambiar endpoint cuando esté hecho en back
+    Call<JsonObject> desacreditarIncidencia(@Header("token") String token, @Path("reportId") int reportId);
 
     @POST("/reports/create_report/")
     Call<JsonObject> crearIncidencia(@Header("token") String token,@Body Incidencia incidencias);
