@@ -68,6 +68,7 @@ public class MisIncidenciasFragment extends Fragment {
            tituloIncidencia.setText(incidencia.getReport_type());
            Bitmap bitmap = BitmapFactory.decodeByteArray(Base64.decode(incidencia.getImage(), Base64.DEFAULT), 0,Base64.decode(incidencia.getImage(), Base64.DEFAULT).length);
            imagenIncidencia.setImageBitmap(bitmap);
+           imagenIncidencia.setRotation(90);
            descripcionIncidencia.setText(incidencia.getDescription());
            incidenciasContainer.addView(incidenciaView);
        }
