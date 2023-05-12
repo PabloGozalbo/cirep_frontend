@@ -1,6 +1,7 @@
 package com.example.dashboard.ui.AllIncidencias;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ import androidx.lifecycle.Observer;
 import com.example.cirep_frontend.R;
 import com.example.comun.model.Incidencia;
 import com.example.dashboard.ui.mis_incidencias.IncidenciasViewModel;
+import com.example.incidencia.DetalleIncidenciaActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.util.List;
@@ -70,9 +73,23 @@ public class AllIncidenciasFragment extends Fragment {
             imagenIncidencia.setRotation(90);
             descripcionIncidencia.setText(incidencia.getDescription());
             incidenciasContainer.addView(incidenciaView);
+
+            Button botonIncidencia = incidenciaView.findViewById(R.id.botondetalle);
+            botonIncidencia.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    goToDetalleIncidencia(incidencia.getId_report());
+                }
+            });
         }
 
         // Añadir la vista al contenedor
+    }
+
+    private void goToDetalleIncidencia(int idIncidencia) {
+        Intent intent = new Intent(this.getContext(), DetalleIncidenciaActivity.class);
+        intent.putExtra("incidencia", idIncidencia);
+        startActivity(intent);
     }
 
     private byte[] decodeImage(int idImagen){

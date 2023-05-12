@@ -85,6 +85,11 @@ public class Repository {
         public abstract void onFailure();
     }
 
+    public static abstract class getEstadosDeReportesCallback  {
+        public abstract void onSuccess(List<String> estados);
+        public abstract void onFailure();
+    }
+
     public static abstract class desacreditarIncidenciaCallback {
         public abstract void onSuccess();
         public abstract void onFailure();
@@ -301,6 +306,21 @@ public class Repository {
                 }
             }
 
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull Throwable t) {
+                callback.onFailure();
+            }
+        });
+    }
+
+    private void getEstadosDeReportes(String token, getEstadosDeReportesCallback callback ) {
+        apiService.getEstadosDeReportes(token).enqueue(new retrofit2.Callback() {
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
+                if (response.isSuccessful()) {
+                    callback.onSuccess(new ArrayList<>());
+                }
+            }
             @Override
             public void onFailure(@NonNull Call call, @NonNull Throwable t) {
                 callback.onFailure();

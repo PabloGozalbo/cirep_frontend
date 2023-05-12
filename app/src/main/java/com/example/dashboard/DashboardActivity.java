@@ -56,10 +56,8 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
         binding.appBarDashboard.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DashboardActivity.this, DetalleIncidenciaActivity.class);
-                intent.putExtra("incidencia", 1);
+                Intent intent = new Intent(DashboardActivity.this, CameraActivity.class);
                 startActivity(intent);
-                //goToReportarIncidencia();
             }
         });
 

@@ -20,6 +20,7 @@ import com.example.dashboard.DashboardActivity;
 import com.example.dashboard.ui.mis_incidencias.IncidenciasViewModel;
 
 import java.util.List;
+import java.util.Objects;
 
 public class DetalleIncidenciaActivity extends AppCompatActivity {
 
@@ -71,6 +72,9 @@ public class DetalleIncidenciaActivity extends AppCompatActivity {
             public void onChanged(Incidencia nuevaincidencia) {
                 incidencia = nuevaincidencia;
                 loadIncidenciaOnView(nuevaincidencia);
+                if (Objects.equals(incidencia.getAuthor(), UserDataSession.getInstance().getUsuario().getEmail())){
+                    desacreditarButton.setVisibility(View.INVISIBLE);
+                }
             }
         });
         viewModel.getIncidenciaPorId(UserDataSession.getInstance().getToken(),idIncidencia);
@@ -78,7 +82,7 @@ public class DetalleIncidenciaActivity extends AppCompatActivity {
 
     private void desacreditarIncidencia() {
         if (incidencia != null){
-
+            viewModel.desacreditarIncidencia(UserDataSession.getInstance().getToken(), incidencia.getId_report());
         }
     }
 
