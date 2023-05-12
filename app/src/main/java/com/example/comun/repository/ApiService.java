@@ -35,7 +35,7 @@ public interface ApiService {
     @GET("/reports/get_report_types/")
     Call<JsonObject> getTiposDeReportes(@Header("token") String token);
 
-    @POST("/reports/discredit/{reportId}/")
+    @GET("/reports/discredit/{reportId}/")
     Call<JsonObject> desacreditarIncidencia(@Header("token") String token, @Path("reportId") int reportId);
 
     @POST("/reports/create_report/")
