@@ -8,12 +8,15 @@ import com.example.comun.repository.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class IncidenciasViewModel {
 
     Repository repository;
     private MutableLiveData<List<Incidencia>> incidenciasUserSuccess = new MutableLiveData<>();
     private MutableLiveData<List<Incidencia>> incidenciasSuccess = new MutableLiveData<>();
+    private MutableLiveData<List<Incidencia>> incidenciasCercaSuccess = new MutableLiveData<>();
+    private MutableLiveData<List<Incidencia>> incidenciasEstadoSuccess = new MutableLiveData<>();
     private MutableLiveData<Incidencia> incidenciaPorIdSuccess = new MutableLiveData<>();
 
 
@@ -49,12 +52,48 @@ public class IncidenciasViewModel {
         });
     }
 
+    public void getIncidenciasCerca(Map<String,Double> location){
+        this.repository.getIncidenciasCerca(location ,new Repository.getIncidenciasCercaCallback() {
+            @Override
+            public void onSuccess(List<Incidencia> incidencias) {
+                incidenciasCercaSuccess.postValue(incidencias);
+            }
+
+            @Override
+            public void onFailure() {
+                incidenciasCercaSuccess.postValue(new ArrayList<>());
+            }
+        });
+    }
+
+    public void getIncidenciasEstado(){
+        this.repository.getIncidenciasEstado( new Repository.getIncidenciasEstadoCallback() {
+            @Override
+            public void onSuccess(List<Incidencia> incidencias) {
+                incidenciasEstadoSuccess.postValue(incidencias);
+            }
+
+            @Override
+            public void onFailure() {
+                incidenciasEstadoSuccess.postValue(new ArrayList<>());
+            }
+        });
+    }
+
     public LiveData<List<Incidencia>> getIncidenciasUserSuccess() {
         return incidenciasUserSuccess;
     }
 
     public LiveData<List<Incidencia>> getIncidenciasSuccess() {
         return incidenciasSuccess;
+    }
+
+    public LiveData<List<Incidencia>> getIncidenciasCercaSuccess() {
+        return incidenciasCercaSuccess;
+    }
+
+    public LiveData<List<Incidencia>> getIncidenciasEstadoSuccess() {
+        return incidenciasEstadoSuccess;
     }
 
     public LiveData<Incidencia> getIncidenciaPorIdCallback() {
@@ -68,11 +107,15 @@ public class IncidenciasViewModel {
             public void onSuccess(List<Incidencia> incidencias) {
                 incidenciasUserSuccess.postValue(incidencias);
                 incidenciasSuccess.postValue(incidencias);
+                incidenciasCercaSuccess.postValue(incidencias);
+                incidenciasEstadoSuccess.postValue(incidencias);
             }
             @Override
             public void onFailure() {
                 incidenciasUserSuccess.postValue(new ArrayList<>());
                 incidenciasSuccess.postValue(new ArrayList<>());
+                incidenciasCercaSuccess.postValue(new ArrayList<>());
+                incidenciasEstadoSuccess.postValue(new ArrayList<>());
             }
         });
     }

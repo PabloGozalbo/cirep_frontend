@@ -129,4 +129,16 @@ public class Usuario {
     public void addIncidencia(Incidencia incidencia){
         this.incidencias.add(incidencia);
     }
+
+    public String getNombreCompleto() {
+        // Obtener el nombre completo concatenando el nombre y apellido
+        String fullName = firstName + " " + lastName;
+
+        // Convertir la primera letra a mayúscula y concatenar con el resto de la cadena
+        String firstLetter = fullName.substring(0, 1).toUpperCase();
+        String restOfName = fullName.substring(1);
+
+        return firstLetter + restOfName;
+    }
+
 }

@@ -13,6 +13,9 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -36,6 +39,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -45,9 +49,17 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap map;
 
+    private static final String TODAS = "TODAS";
+    private static final String EN_REPARACION = "EN REPARACIÓN";
+    private static final String PENDIENTE_REVISION = "PENDIENTE REVISIÓN";
+    private static final String ARREGLADA = "ARREGLADA";
+    private static final String DESCARTADA = "DESCARTADA";
+
+
     private SupportMapFragment mapFragment;
     private LocationManager locationManager;
     private Location lastLocation;
+
 
     public static final int REQUEST_CHECK_SETTINGS = 1001;
 
@@ -75,7 +87,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
 
-
+        configureSpinner(view);
 
         if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -188,5 +200,26 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
         super.onDestroyView();
     }
 
+    public void configureSpinner(View view){
+        Spinner spinner = view.findViewById(R.id.filtro_incidencias);
+        String[] opciones = {TODAS, EN_REPARACION, ARREGLADA, PENDIENTE_REVISION, DESCARTADA};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item, opciones);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String opcionSeleccionada = parent.getItemAtPosition(position).toString();
+
+                ((DashboardActivity) getActivity()).filtrarIncidenciaPorTipo(opcionSeleccionada);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // No se seleccionó nada
+            }
+        });
+    }
 
 }

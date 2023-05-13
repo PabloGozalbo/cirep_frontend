@@ -44,6 +44,12 @@ public interface ApiService {
     @GET("/reports/get_user_reports/")
     Call<JsonArray> getIncidenciasUser(@Header("token") String token);
 
+    @POST("/reports/get_nearby_reports/")
+    Call<JsonArray> getIncidenciasCerca(@Body Map<String, Double> datos, @Header("token") String token);
+
+    @GET("/reports/get_notifications_state/")
+    Call<JsonArray> getNotificacionesEstadoIncidencias(@Header("token") String token);
+
     @POST("/accounts/modificar_perfil/{email}/")
     Call<JsonObject> modificarPerfil(@Body Map<String, String> datos, @Path("email") String email, @Header("token") String token);
 

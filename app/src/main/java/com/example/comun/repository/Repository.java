@@ -18,10 +18,7 @@ import com.google.gson.JsonObject;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,6 +68,16 @@ public class Repository {
     }
 
     public static abstract class getIncidenciasUserCallback {
+        public abstract void onSuccess(List<Incidencia> incidencias);
+        public abstract void onFailure();
+    }
+
+    public static abstract class getIncidenciasCercaCallback {
+        public abstract void onSuccess(List<Incidencia> incidencias);
+        public abstract void onFailure();
+    }
+
+    public static abstract class getIncidenciasEstadoCallback {
         public abstract void onSuccess(List<Incidencia> incidencias);
         public abstract void onFailure();
     }
@@ -261,6 +268,67 @@ public class Repository {
             }
         });
     }
+
+    public void getIncidenciasCerca(Map<String,Double> location,getIncidenciasCercaCallback callback) {
+        apiService.getIncidenciasCerca(location,UserDataSession.getInstance().getToken()).enqueue(new retrofit2.Callback() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
+                if (response.isSuccessful()) {
+                    try {
+                        Gson gson = new Gson();
+                        JsonArray jsonArray = gson.fromJson(response.body().toString(), JsonArray.class);
+                        ArrayList<Incidencia> incidencias = new ArrayList<>();
+                        for (int i = 0; i < jsonArray.size(); i++) {
+                            JsonObject issueObject = (JsonObject) jsonArray.get(i);
+                            Incidencia incidencia = incidenciaFromJsonObject(issueObject);
+                            incidencias.add(incidencia);
+                        }
+                        callback.onSuccess(incidencias);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        callback.onFailure();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull Throwable t) {
+                callback.onFailure();
+            }
+        });
+    }
+
+    public void getIncidenciasEstado(getIncidenciasEstadoCallback callback) {
+        apiService.getNotificacionesEstadoIncidencias(UserDataSession.getInstance().getToken()).enqueue(new retrofit2.Callback() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
+                if (response.isSuccessful()) {
+                    try {
+                        Gson gson = new Gson();
+                        JsonArray jsonArray = gson.fromJson(response.body().toString(), JsonArray.class);
+                        ArrayList<Incidencia> incidencias = new ArrayList<>();
+                        for (int i = 0; i < jsonArray.size(); i++) {
+                            JsonObject issueObject = (JsonObject) jsonArray.get(i);
+                            Incidencia incidencia = incidenciaFromJsonObject(issueObject);
+                            incidencias.add(incidencia);
+                        }
+                        callback.onSuccess(incidencias);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        callback.onFailure();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull Throwable t) {
+                callback.onFailure();
+            }
+        });
+    }
+
 
     @NonNull
     private Incidencia incidenciaFromJsonObject(JsonObject issueObject) throws IOException {
