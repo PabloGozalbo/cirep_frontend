@@ -33,6 +33,8 @@ import com.example.dashboard.ui.mapa.dialogo.DialogoPersonalizado;
 import com.example.incidencia.DetalleIncidenciaActivity;
 import com.example.login.ui.login.LoginActivity;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -43,7 +45,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DashboardActivity extends AppCompatActivity implements DialogoPersonalizado.OnMiDialogoPersonalizadoListener {
+public class DashboardActivity extends AppCompatActivity implements DialogoPersonalizado.OnMiDialogoPersonalizadoListener, OnMapReadyCallback {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityDashboardBinding binding;
@@ -114,15 +116,11 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
                 return true;
             }
         });
-
-        /*map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(@NonNull Marker marker) {
-                Incidencia incidencia = (Incidencia) marker.getTag();
-                goToDetalleIncidencia(incidencia.getId_report());
-                return true;
-            }
-        });*/
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(this);
+        }// TODO mapFragment no deberia ser null, pero lo és
 
     }
 
@@ -269,4 +267,20 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
             fillMap();
         }
     }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        map = googleMap;
+
+        // Configurar el listener de los marcadores aquí
+        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(@NonNull Marker marker) {
+                Incidencia incidencia = (Incidencia) marker.getTag();
+                goToDetalleIncidencia(incidencia.getId_report());
+                return true;
+            }
+        });
+    }
+
 }

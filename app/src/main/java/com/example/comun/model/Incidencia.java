@@ -112,7 +112,7 @@ public class Incidencia {
             case EstadoIncidencia.DESCARTADA:
                 return "ESTADO: DESCARTADA";
             default:
-                break;
+                return "";
         }
     }
 
