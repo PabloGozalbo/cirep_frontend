@@ -8,6 +8,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +20,7 @@ import com.example.dashboard.DashboardActivity;
 import com.example.dashboard.ui.mis_incidencias.IncidenciasViewModel;
 
 import java.util.List;
+import java.util.Objects;
 
 public class DetalleIncidenciaActivity extends AppCompatActivity {
 
@@ -30,6 +33,8 @@ public class DetalleIncidenciaActivity extends AppCompatActivity {
     private TextView longitudeTextView;
     private TextView authorTextView;
     private IncidenciasViewModel viewModel;
+    private Button desacreditarButton;
+    private Incidencia incidencia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,14 @@ public class DetalleIncidenciaActivity extends AppCompatActivity {
         latitudeTextView = findViewById(R.id.latitudeTextView);
         longitudeTextView = findViewById(R.id.longitudeTextView);
         authorTextView = findViewById(R.id.authorTextView);
+        desacreditarButton = findViewById(R.id.btnDesacreditar);
+
+        desacreditarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                desacreditarIncidencia();
+            }
+        });
 
         // Obtiene la incidencia de la actividad anterior
         int idIncidencia = getIntent().getIntExtra("incidencia", 0);
@@ -56,11 +69,21 @@ public class DetalleIncidenciaActivity extends AppCompatActivity {
         }
         viewModel.getIncidenciaPorIdCallback().observe(this, new Observer<Incidencia>() {
             @Override
-            public void onChanged(Incidencia incidencia) {
-                loadIncidenciaOnView(incidencia);
+            public void onChanged(Incidencia nuevaincidencia) {
+                incidencia = nuevaincidencia;
+                loadIncidenciaOnView(nuevaincidencia);
+                if (Objects.equals(incidencia.getAuthor(), UserDataSession.getInstance().getUsuario().getEmail())){
+                    desacreditarButton.setVisibility(View.INVISIBLE);
+                }
             }
         });
         viewModel.getIncidenciaPorId(UserDataSession.getInstance().getToken(),idIncidencia);
+    }
+
+    private void desacreditarIncidencia() {
+        if (incidencia != null){
+            viewModel.desacreditarIncidencia(UserDataSession.getInstance().getToken(), incidencia.getId_report());
+        }
     }
 
     private void loadIncidenciaOnView(Incidencia incidencia) {

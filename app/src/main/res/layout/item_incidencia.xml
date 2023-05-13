@@ -17,6 +17,14 @@
         android:outlineProvider="background"
         android:padding="16dp">
 
+        <Button
+            android:id="@+id/botondetalle"
+            android:layout_width="341dp"
+            android:layout_height="118dp"
+            android:background="#00FFFFFF"
+            android:enabled="true"
+            android:visibility="visible" />
+
         <LinearLayout
             android:id="@+id/linear_imagen_incidencia"
             android:layout_width="100dp"

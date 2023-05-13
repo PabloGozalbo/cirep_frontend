@@ -134,4 +134,18 @@ public class IncidenciasViewModel {
         });
     }
 
+    public void desacreditarIncidencia(String token, int id ){
+        this.repository.desacreditarIncidencia(token, id, new Repository.desacreditarIncidenciaCallback() {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
+    }
+
 }
