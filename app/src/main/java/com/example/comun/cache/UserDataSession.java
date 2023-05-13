@@ -36,6 +36,10 @@ public class UserDataSession {//objeto para guardar el token usando in singleton
         return UserDataSession.usuario;
     }
 
+    public String getNombreCompleto(){
+        return getInstance().getUsuario().getNombreCompleto();
+    }
+
     public void setUsuario(Usuario usuario){
         UserDataSession.usuario = usuario;
     }

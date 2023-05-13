@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -29,9 +31,11 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardActivity extends AppCompatActivity implements DialogoPersonalizado.OnMiDialogoPersonalizadoListener {
@@ -42,6 +46,11 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
     public MenuItem logout;
     private MapaViewModel mapaViewModel;
     private List<Incidencia> listaIncidencias;
+    private List<Marker> marcadores;
+    private static final String EN_REPARACION = "EN REPARACIÓN";
+    private static final String PENDIENTE_REVISION = "PENDIENTE REVISIÓN";
+    private static final String ARREGLADA = "ARREGLADA";
+    private static final String DESCARTADA = "DESCARTADA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +58,15 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
 
         binding = ActivityDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        marcadores = new ArrayList<>();
+
+        NavigationView navigation = findViewById(R.id.nav_view);
+        View headerView = navigation.getHeaderView(0);
+
+        TextView nombreMenuLateral = headerView.findViewById(R.id.nombreMenuLateral);
+        TextView emailMenuLateral = headerView.findViewById(R.id.emailMenuLateral);
+        nombreMenuLateral.setText(UserDataSession.getInstance().getNombreCompleto());
+        emailMenuLateral.setText(UserDataSession.getInstance().getUsuario().getEmail());
 
         mapaViewModel = new MapaViewModel();
 
@@ -123,12 +141,15 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
         // Crear un marcador personalizado en un mapa
         MarkerOptions marcadorPersonalizado = new MarkerOptions()
                 .position(latLng)
-                .title("Mi marcador personalizado")
-                .snippet("Este es un marcador personalizado en Google Maps")//TODO tipo + algo
+                .title(incidencia.getStateToString())
+                .snippet(incidencia.getDescription())//TODO tipo + algo
                 .icon(iconoPersonalizado);
 
-        map.addMarker(marcadorPersonalizado);
+        Marker nuevoMarcador= map.addMarker(marcadorPersonalizado);
+        marcadores.add(nuevoMarcador);
     }
+
+
 
     @Override
     public void onAceptarClick(LatLng latLng) {
@@ -161,5 +182,36 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
         Intent intent = new Intent(DashboardActivity.this, CameraActivity.class);
         intent.putExtra("latLng", latLng);
         startActivity(intent);
+    }
+
+    public void filtrarIncidenciaPorTipo(String tipo){
+        String estadoIncidencia = "";
+        switch (tipo){
+            case EN_REPARACION:
+                estadoIncidencia = Incidencia.EstadoIncidencia.EN_PROCESO;
+                break;
+            case PENDIENTE_REVISION:
+                estadoIncidencia = Incidencia.EstadoIncidencia.PENDIENTE_REVISION;
+                break;
+            case ARREGLADA:
+                estadoIncidencia = Incidencia.EstadoIncidencia.ARREGLADA;
+                break;
+            case DESCARTADA:
+                estadoIncidencia = Incidencia.EstadoIncidencia.DESCARTADA;
+                break;
+            default:
+                break;
+        }
+
+
+        if(estadoIncidencia.length() > 0) { //se ha seleccionado un filtro distinto a TODAS
+            for (int i = 0; i < marcadores.size(); i++) {
+                if (!listaIncidencias.get(i).getState().equals(estadoIncidencia)) {
+                    marcadores.get(i).remove();
+                }
+            }
+        } else { //se activan todos los marcadores
+            fillMap();
+        }
     }
 }

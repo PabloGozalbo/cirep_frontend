@@ -27,7 +27,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class ReportarIncidencia extends AppCompatActivity {
@@ -121,7 +120,7 @@ public class ReportarIncidencia extends AppCompatActivity {
 
         incidencia.setReport_type(selector.getSelectedItem().toString());
 
-        incidencia.setState(Incidencia.Estado.PENDIENTE_REVISION);
+        incidencia.setState(Incidencia.EstadoIncidencia.PENDIENTE_REVISION);
 
         viewModel.newIncidencia(incidencia, UserDataSession.getInstance().getToken());
 

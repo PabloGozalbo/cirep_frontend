@@ -37,8 +37,9 @@ public class MyNotificationService extends Service {
     private double latitud;
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        return 0;
         // Inicia el temporizador
-        mTimer = new Timer();
+     /*   mTimer = new Timer();
         mTimer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -56,6 +57,8 @@ public class MyNotificationService extends Service {
                     NotificationChannel channel = new NotificationChannel("channel_id", "Nombre del canal", NotificationManager.IMPORTANCE_DEFAULT);
                     NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                     notificationManager.createNotificationChannel(channel);
+
+
 
 
                 // Si el método devuelve true, crea la notificación
@@ -88,7 +91,7 @@ public class MyNotificationService extends Service {
             }
         }, 0, 1 * 60 * 1000); // Programa la ejecución cada 1 minuto
 
-        return START_STICKY;
+        return START_STICKY;*/
     }
 
     @Override
@@ -96,9 +99,9 @@ public class MyNotificationService extends Service {
         super.onDestroy();
 
         // Detiene el temporizador
-        mTimer.cancel();
-        mTimer.purge();
-        mTimer = null;
+//        mTimer.cancel();
+//        mTimer.purge();
+  //      mTimer = null;
     }
 
     @Override
