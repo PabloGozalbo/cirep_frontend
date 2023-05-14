@@ -1,6 +1,8 @@
 package com.example.dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -124,13 +126,14 @@ public class ReportarIncidencia extends AppCompatActivity {
 
         viewModel.newIncidencia(incidencia, UserDataSession.getInstance().getToken());
 
-        goToDashboard();
+        goToResult();
 
     }
 
-    private void goToDashboard(){
-        Intent intent = new Intent(this, DashboardActivity.class);
+    private void goToResult(){
+        Intent intent = new Intent(this, ResultReportActivity.class);
         startActivity(intent);
         finish();
     }
+
 }

@@ -29,7 +29,6 @@ public class PerfilFragment extends Fragment {
         getComponents(view);
         initView();
         return view;
-
     }
 
     @Override
@@ -103,12 +102,10 @@ public class PerfilFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        // realizar acciones cada vez que el Fragment se muestre
         initView();
     }
 
     private void goToChangeUserAttribute(String attribute){
-
         Intent intent = new Intent(this.getContext(), EditProfileActivity.class);
         intent.putExtra("attribute", attribute);
         startActivity(intent);

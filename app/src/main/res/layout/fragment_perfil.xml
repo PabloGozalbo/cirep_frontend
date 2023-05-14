@@ -8,7 +8,8 @@
     android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/color_background_perfil">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -24,7 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.254">
+            app:layout_constraintVertical_bias="0.23">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -328,6 +329,7 @@
 
 
         <TextView
+            android:background="@drawable/rounded_background"
             android:id="@+id/textView2"
             android:layout_width="238dp"
             android:layout_height="70dp"
@@ -338,8 +340,10 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/cardView"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.21" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
