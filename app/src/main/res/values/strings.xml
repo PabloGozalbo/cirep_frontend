@@ -65,6 +65,10 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
 
+    <string name="descripcion">Descripción</string>
+    <string name="result_report">¡Gracias por colaborar en el mantenimiento de la ciudad!</string>
+    <string name="go_to_map">Ir al mapa</string>
+
     <string name="aceptar">Aceptar</string>
     <string name="cancelar">Cancelar</string>
     <string name="titulo_incidencia_dialogo">¿Añadir incidencia aquí?</string>

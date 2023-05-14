@@ -27,18 +27,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ResultReportActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ResultadoReportActivity"
-            android:exported="false"
-            android:label="@string/title_activity_resultado_report"
-            android:theme="@style/Theme.Cirep.Light.NoActionBar" />
-        <activity
             android:name="com.example.incidencia.DetalleIncidenciaActivity"
             android:exported="false" />
         <activity
             android:name=".EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ResultReportActivity"
             android:exported="false" />
         <activity
             android:name=".CameraActivity"
