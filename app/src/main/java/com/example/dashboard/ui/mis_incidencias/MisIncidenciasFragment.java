@@ -1,6 +1,5 @@
 package com.example.dashboard.ui.mis_incidencias;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -22,11 +21,9 @@ import androidx.lifecycle.Observer;
 
 import com.example.cirep_frontend.R;
 import com.example.comun.model.Incidencia;
-import com.example.dashboard.DashboardActivity;
 import com.example.incidencia.DetalleIncidenciaActivity;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -97,16 +94,6 @@ public class MisIncidenciasFragment extends Fragment {
         intent.putExtra("incidencia", idIncidencia);
         startActivity(intent);
     }
-
-    private List<Incidencia> getFalsasIncidencias(){
-        List<Incidencia> incidencias = new ArrayList<>();
-        for(int i=0; i<NUM_INCIDENCIAS_FALSAS; i++) {
-            Incidencia incidencia = new Incidencia();
-            incidencia.setImage(Base64.encodeToString(decodeImage(R.drawable.mia_khalifa), Base64.DEFAULT));//TODO cambiar foto pls
-            incidencias.add(incidencia);
-        }
-        return incidencias;
-   }
 
    private byte[] decodeImage(int idImagen){
        // Convierte la imagen en formato Bitmap

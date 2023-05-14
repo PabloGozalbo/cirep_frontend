@@ -32,7 +32,7 @@ import java.util.concurrent.Executors;
 
 public class MyNotificationService extends Service {
     private Handler mHandler = new Handler();
-    private Timer mTimer = null;
+    private Timer mTimer = new Timer();
     private IncidenciasViewModel viewModel = new IncidenciasViewModel();
     private FusedLocationProviderClient fusedLocationClient;
     private double longitud;
@@ -121,7 +121,6 @@ public class MyNotificationService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-
         // Detiene el temporizador
         mTimer.cancel();
         mTimer.purge();
