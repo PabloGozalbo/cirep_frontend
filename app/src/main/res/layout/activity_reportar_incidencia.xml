@@ -17,7 +17,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="9dp"
         android:layout_marginBottom="5dp"
-        android:background="#BDCDD6"
+        android:background="#93BFCF"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         app:cardPreventCornerOverlap="false"
@@ -30,15 +30,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFFFFF"
+            android:background="#93BFCF"
             android:orientation="vertical">
 
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="13dp"
-                android:background="#FFFFFF"
+                android:layout_marginLeft="5sp"
+                android:layout_marginTop="5sp"
+                android:layout_marginRight="5sp"
+                android:layout_marginBottom="5sp"
+                android:background="@drawable/edit_text_background"
                 android:entries="@array/options_array" />
         </LinearLayout>
 
@@ -49,14 +52,19 @@
         android:id="@+id/button"
         android:layout_width="144dp"
         android:layout_height="36dp"
-        android:layout_marginBottom="8dp"
-        android:background="#93BFCF"
+        android:layout_marginBottom="8sp"
+        android:background="#6096B4"
+        android:backgroundTint="#6096B4"
         android:text="Reportar"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:iconTint="#6096B4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        app:rippleColor="#6096B4" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -93,12 +101,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFFFFF"
+            android:background="#93BFCF"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5sp"
+                android:layout_marginTop="2sp"
                 android:text="@string/descripci_n"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -107,9 +117,11 @@
                 android:id="@+id/editTextTextMultiLine"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="7dp"
-                android:background="#FFFFFF"
+                android:layout_marginLeft="5sp"
+                android:layout_marginTop="2sp"
+                android:layout_marginRight="5sp"
+                android:layout_marginBottom="7sp"
+                android:background="@drawable/edit_text_background"
                 android:ems="10"
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
