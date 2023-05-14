@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#EEE9DA"
     tools:context="com.example.register.steps.Step3Fragment">
 
     <TextView
@@ -56,7 +57,8 @@
         app:layout_constraintHorizontal_bias="0.352"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contrasenyaPregunta"
-        app:layout_constraintVertical_bias="0.018" />
+        app:layout_constraintVertical_bias="0.018"
+        android:inputType="textPassword"/>
 
     <EditText
         android:id="@+id/campo_contrasenya2"
@@ -68,7 +70,8 @@
         app:layout_constraintHorizontal_bias="0.352"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/campo_contrasenya1"
-        app:layout_constraintVertical_bias="0.034" />
+        app:layout_constraintVertical_bias="0.034"
+        android:inputType="textPassword"/>
 
     <Button
         android:id="@+id/atras_step3"

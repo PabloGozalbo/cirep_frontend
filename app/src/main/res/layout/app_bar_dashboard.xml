@@ -29,6 +29,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
+        app:backgroundTint="#6096B4"
         app:srcCompat="@drawable/icono_camara" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
