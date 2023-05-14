@@ -99,6 +99,7 @@ public class DetalleIncidenciaActivity extends AppCompatActivity {
         latitudeTextView.setText(String.valueOf(incidencia.getLatitude()));
         longitudeTextView.setText(String.valueOf(incidencia.getLongitude()));
         authorTextView.setText(incidencia.getAuthor());
+        imageView.setRotation(90);
     }
 
     private void goToDashboard(){

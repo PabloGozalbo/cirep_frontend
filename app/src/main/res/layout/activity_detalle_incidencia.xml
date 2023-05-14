@@ -2,13 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#EEE9DA"
     android:padding="16dp">
 
     <ScrollView
-        android:layout_width="374dp"
-        android:layout_height="630dp"
+        android:layout_width="395sp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btnDesacreditar"
         android:layout_marginTop="12sp"
         android:fillViewport="true">
 
@@ -351,7 +352,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16sp"
         android:background="#6096B4"
         android:backgroundTint="#6096B4"
         android:drawableTint="#6096B4"
