@@ -8,11 +8,9 @@ import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -215,6 +213,10 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
     }
 
     public void fillMap() {
+        for (int i = 0; i < marcadores.size(); i++) {
+            marcadores.get(i).remove();
+            marcadores.remove(i);
+        }
         if(this.listaIncidencias != null) {
             for (Incidencia incidencia : listaIncidencias) {
                 LatLng latLng = new LatLng(incidencia.getLatitude(), incidencia.getLongitude());
@@ -261,6 +263,7 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
             for (int i = 0; i < marcadores.size(); i++) {
                 if (!listaIncidencias.get(i).getState().equals(estadoIncidencia)) {
                     marcadores.get(i).remove();
+                    marcadores.remove(i);
                 }
             }
         } else { //se activan todos los marcadores
