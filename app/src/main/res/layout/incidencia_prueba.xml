@@ -30,7 +30,7 @@
                 android:clipToOutline="true"
                 android:scaleType="fitCenter"
 
-                android:src="@drawable/mia_khalifa" />
+                />
         </LinearLayout>
 
 
