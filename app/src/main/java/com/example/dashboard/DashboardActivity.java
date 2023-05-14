@@ -158,8 +158,8 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
         BitmapDescriptor iconoPersonalizado = BitmapDescriptorFactory.fromBitmap(
                 Bitmap.createScaledBitmap(
                         BitmapFactory.decodeResource(getResources(), R.drawable.icono_incidencia),
-                        50, // ancho deseado en píxeles
-                        50, // alto deseado en píxeles
+                        80, // ancho deseado en píxeles
+                        80, // alto deseado en píxeles
                         false)); // sin filtrado de escala
 
         // Crear un marcador personalizado en un mapa
