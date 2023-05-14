@@ -11,7 +11,6 @@
         android:layout_marginTop="3dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="1dp"
-        android:background="@drawable/incidencia_prueba"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:outlineProvider="background"
