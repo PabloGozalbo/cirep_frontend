@@ -64,9 +64,6 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="descripcion">Descripción</string>
-    <string name="result_report">¡Gracias por colaborar en el mantenimiento de la ciudad!</string>
-    <string name="go_to_map">Ir al mapa</string>
 
     <string name="aceptar">Aceptar</string>
     <string name="cancelar">Cancelar</string>
@@ -86,6 +83,11 @@
     <string name="title_activity_maps">MapsActivity</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_resultado_report">ResultadoReportActivity</string>
 
+    <string name="take_photo">Take Photo</string>
+    <string name="start_capture">Start Capture</string>
+    <string name="stop_capture">Stop Capture</string>
+    <string name="capture">Foto</string>
+    <string name="preview_area">Area Preview</string>
+    <string name="descripci_n">Descripción</string>
 </resources>

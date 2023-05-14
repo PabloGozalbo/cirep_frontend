@@ -3,6 +3,7 @@ package com.example.comun;
 import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import androidx.core.app.NotificationCompat;
 import com.example.cirep_frontend.R;
 import com.example.comun.model.Incidencia;
 import com.example.dashboard.ui.mis_incidencias.IncidenciasViewModel;
+import com.example.incidencia.DetalleIncidenciaActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -37,17 +39,51 @@ public class MyNotificationService extends Service {
     private double latitud;
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        return 0;
         // Inicia el temporizador
-     /*   mTimer = new Timer();
+        mTimer = new Timer();
         mTimer.schedule(new TimerTask() {
             @Override
             public void run() {
                 // Llama al método que quieres ejecutar cada 5 minutos
                 List<Incidencia> incidenciasCerca = new ArrayList<>();
-                List<Incidencia> incidenciasEstado = new ArrayList<>();
                 try {
                     incidenciasCerca = getIncidenciasCerca();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    NotificationChannel channel = new NotificationChannel("channel_id", "Nombre del canal", NotificationManager.IMPORTANCE_DEFAULT);
+                    NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                    notificationManager.createNotificationChannel(channel);
+
+
+                // Si el método devuelve true, crea la notificación
+                 for (Incidencia incidencia:incidenciasCerca) {
+                     Intent intent = new Intent(getApplicationContext(), DetalleIncidenciaActivity.class);
+                     intent.putExtra("incidencia", incidencia.getId_report());
+                     PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), incidencia.hashCode(), intent, PendingIntent.FLAG_MUTABLE);
+
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(MyNotificationService.this, "channel_id")
+                            .setSmallIcon(R.drawable.icono_incidencia)
+                            .setContentTitle(incidencia.getReport_type()+" cerca de ti")
+                            .setContentText("Haz click aquí para ver los detalles")
+                            .setContentIntent(pendingIntent)
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                            .setAutoCancel(true);
+
+                    notificationManager.notify(incidencia.hashCode(), builder.build());
+                    }
+                }
+            }
+        }, 0, 2 * 60 * 1000); // Programa la ejecución cada 1 minuto
+
+        mTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                // Llama al método que quieres ejecutar cada 5 minutos
+                List<Incidencia> incidenciasEstado = new ArrayList<>();
+                try {
                     incidenciasEstado = getIncidenciasEstado();
                 }catch (Exception e){
                     e.printStackTrace();
@@ -59,49 +95,37 @@ public class MyNotificationService extends Service {
                     notificationManager.createNotificationChannel(channel);
 
 
-
-
-                // Si el método devuelve true, crea la notificación
-                int id = 0;
-                 for (Incidencia incidencia:incidenciasCerca) {
-
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(MyNotificationService.this, "channel_id")
-                            .setSmallIcon(R.drawable.icono_incidencia)
-                            .setContentTitle(incidencia.getReport_type()+" cerca de ti")
-                            .setContentText("Haz click aquí para ver los detalles")
-                            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-                    notificationManager.notify(id, builder.build());
-                     id+=1;
-                    }
-
-
+                    // Si el método devuelve true, crea la notificación
                     for (Incidencia incidencia:incidenciasEstado) {
+                        Intent intent = new Intent(getApplicationContext(), DetalleIncidenciaActivity.class);
+                        intent.putExtra("incidencia", incidencia.getId_report());
+                        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), incidencia.hashCode(), intent, PendingIntent.FLAG_MUTABLE);
 
                         NotificationCompat.Builder builder = new NotificationCompat.Builder(MyNotificationService.this, "channel_id")
                                 .setSmallIcon(R.drawable.icono_incidencia)
                                 .setContentTitle("Se ha actulizado el estado de la incidencia "+ incidencia.getReport_type())
                                 .setContentText("Haz click aquí para ver los detalles")
-                                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                                .setContentIntent(pendingIntent)
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                .setAutoCancel(true);
 
-                        notificationManager.notify(id, builder.build());
-                        id+=1;
+                        notificationManager.notify(incidencia.hashCode(), builder.build());
                     }
                 }
             }
-        }, 0, 1 * 60 * 1000); // Programa la ejecución cada 1 minuto
-
-        return START_STICKY;*/
+        }, 0, 2 * 60 * 1000); // Programa la ejecución cada 1 minuto
+        return START_STICKY;
     }
+
 
     @Override
     public void onDestroy() {
         super.onDestroy();
 
         // Detiene el temporizador
-//        mTimer.cancel();
-//        mTimer.purge();
-  //      mTimer = null;
+        mTimer.cancel();
+        mTimer.purge();
+        mTimer = null;
     }
 
     @Override
@@ -136,7 +160,7 @@ public class MyNotificationService extends Service {
     private List<Incidencia> getIncidenciasEstado() {
         // Call the method to fetch the list of incidencias
         viewModel.getIncidenciasEstado();
-        return viewModel.getIncidenciasEstadoSuccess().getValue();
+        return viewModel.getIncidenciasEstadoSuccess().getValue()!=null?viewModel.getIncidenciasEstadoSuccess().getValue():new ArrayList<>();
     }
 }
 
