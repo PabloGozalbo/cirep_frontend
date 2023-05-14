@@ -9,15 +9,15 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="354dp"
-        android:layout_height="68dp"
+        android:layout_width="399dp"
+        android:layout_height="74dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="9dp"
         android:layout_marginBottom="5dp"
-        android:background="#BDCDD6"
+        android:background="#93BFCF"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         app:cardPreventCornerOverlap="false"
@@ -30,15 +30,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFFFFF"
+            android:background="#93BFCF"
             android:orientation="vertical">
 
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="13dp"
-                android:background="#FFFFFF"
+                android:layout_marginLeft="5sp"
+                android:layout_marginTop="5sp"
+                android:layout_marginRight="5sp"
+                android:layout_marginBottom="5sp"
+                android:background="@drawable/edit_text_background"
                 android:entries="@array/options_array" />
         </LinearLayout>
 
@@ -49,19 +52,25 @@
         android:id="@+id/button"
         android:layout_width="144dp"
         android:layout_height="36dp"
-        android:background="#93BFCF"
+        android:layout_marginBottom="8sp"
+        android:background="#6096B4"
+        android:backgroundTint="#6096B4"
         android:text="Reportar"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:iconTint="#6096B4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        app:rippleColor="#6096B4" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="312sp"
-        android:layout_height="330sp"
-        android:layout_marginBottom="1sp"
+        android:layout_width="410dp"
+        android:layout_height="448dp"
+        android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
@@ -71,34 +80,35 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
-        android:layout_width="360sp"
-        android:layout_height="103sp"
-        android:layout_marginHorizontal="16sp"
-        android:layout_marginVertical="8sp"
-        android:layout_marginStart="8sp"
-        android:layout_marginTop="23sp"
-        android:layout_marginEnd="9sp"
-        android:layout_marginBottom="5sp"
+        android:layout_width="401dp"
+        android:layout_height="137dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="5dp"
         android:background="#BDCDD6"
-        app:cardCornerRadius="8sp"
-        app:cardElevation="4sp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
         app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.588"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView">
 
         <LinearLayout
-            android:layout_width="392sp"
-            android:layout_height="108sp"
-            android:background="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#93BFCF"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5sp"
+                android:layout_marginTop="2sp"
                 android:text="@string/descripci_n"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -107,9 +117,11 @@
                 android:id="@+id/editTextTextMultiLine"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="5sp"
                 android:layout_marginTop="2sp"
+                android:layout_marginRight="5sp"
                 android:layout_marginBottom="7sp"
-                android:background="#FFFFFF"
+                android:background="@drawable/edit_text_background"
                 android:ems="10"
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
