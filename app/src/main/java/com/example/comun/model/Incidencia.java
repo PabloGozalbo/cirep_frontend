@@ -2,7 +2,7 @@ package com.example.comun.model;
 
 public class Incidencia {
 
-    public class Estado{
+    public class EstadoIncidencia {
         public static final String EN_PROCESO = "P";
         public static final String ARREGLADA = "A";
         public static final String PENDIENTE_REVISION = "PR";
@@ -99,6 +99,21 @@ public class Incidencia {
 
     public String getReport_type() {
         return report_type;
+    }
+
+    public String getStateToString(){
+        switch (getState()){
+            case EstadoIncidencia.EN_PROCESO:
+                return "ESTADO: EN PROCESO";
+            case EstadoIncidencia.PENDIENTE_REVISION:
+                return "ESTADO: PENDIENTE DE REVISIÓN";
+            case EstadoIncidencia.ARREGLADA:
+                return "ESTADO: ACABADA";
+            case EstadoIncidencia.DESCARTADA:
+                return "ESTADO: DESCARTADA";
+            default:
+                return "";
+        }
     }
 
     public void setReport_type(String report_type) {
