@@ -88,7 +88,11 @@ public class DashboardActivity extends AppCompatActivity implements DialogoPerso
             @Override
             public void onChanged(List<Incidencia> incidencias) {
                 listaIncidencias = incidencias;
-                fillMap();
+                try{
+                    fillMap();
+                }catch (Exception e){
+
+                }
             }
         });
         mapaViewModel.getIncidencias();
